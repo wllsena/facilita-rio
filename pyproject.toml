@@ -3,6 +3,7 @@ name = "facilita-rio"
 version = "0.1.0"
 description = "Public Services Discovery System — hybrid search + recommendation"
 requires-python = ">=3.11"
+license = {text = "MIT"}
 dependencies = [
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
@@ -27,6 +28,7 @@ dependencies = [
 test = [
     "pytest>=8.0",
     "pytest-asyncio>=0.24",
+    "pytest-timeout>=2.3",
     "hypothesis>=6.100",
     "asgi-lifespan>=2.1",
 ]
@@ -37,6 +39,7 @@ dev = [
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+timeout = 120
 
 [tool.ruff]
 target-version = "py311"
@@ -45,3 +48,6 @@ line-length = 100
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM"]
 ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"

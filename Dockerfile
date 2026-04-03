@@ -20,10 +20,14 @@ RUN python -c "from sentence_transformers import SentenceTransformer, CrossEncod
     SentenceTransformer('intfloat/multilingual-e5-small'); \
     CrossEncoder('cross-encoder/mmarco-mMiniLMv2-L12-H384-v1')"
 
+# Non-root user
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+USER appuser
+
 # Copy application code (changes here don't invalidate model cache)
-COPY servicos_selecionados.json .
-COPY app/ app/
-COPY evaluation/ evaluation/
+COPY --chown=appuser:appuser servicos_selecionados.json .
+COPY --chown=appuser:appuser app/ app/
+COPY --chown=appuser:appuser evaluation/ evaluation/
 
 EXPOSE 8000
 
