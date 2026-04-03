@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -e ".[test,dev]"
+          pip install ".[test,dev]"
           python -c "import nltk; nltk.download('rslp', quiet=True)"
 
       - name: Lint
