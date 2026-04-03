@@ -1,0 +1,805 @@
+{
+  "description": "500 consultas exemplo (10 por serviço) escritas como uma pessoa comum de pouca escolaridade faria. Linguagem coloquial, com erros de digitação, gírias e descrições de problemas em vez de nomes de serviços.",
+  "queries": [
+    {
+      "service_id": "mensagens-de-alerta-da-defesa-civil-d074809e",
+      "service_name": "Mensagens de alerta da Defesa Civil",
+      "queries": [
+        "vai chover forte hoje to com medo",
+        "como faz pra receber aviso de chuva no celular",
+        "quero receber alerta de temporal no zap",
+        "ta chovendo muito e tenho medo de deslizamento",
+        "como cadastrar meu numero pra receber sms da defesa civil",
+        "moro no morro e quero saber quando vai chover",
+        "tem como receber aviso de alagamento no telefone",
+        "quero saber se vai ter chuva forte hoje no rio",
+        "como faz pra sirene tocar quando chove muito",
+        "recebi um alerta no celular sobre temporal o que faco"
+      ]
+    },
+    {
+      "service_id": "beneficio-de-prestacao-continuada-bpc-529f647a",
+      "service_name": "Benefício de Prestação Continuada – BPC",
+      "queries": [
+        "sou idosa e nao consigo trabalhar preciso de ajuda",
+        "meu pai tem 70 anos e nao tem aposentadoria",
+        "como pedir beneficio de um salario minimo pra idoso",
+        "meu filho é deficiente e precisa de dinheiro do governo",
+        "beneficio pra quem nao pode trabalhar",
+        "como pedir o loas",
+        "tenho deficiencia e nao consigo emprego quero beneficio",
+        "minha mae é velha e nao tem renda nenhuma",
+        "preciso do bpc como faz",
+        "beneficio assistencial pra idoso pobre"
+      ]
+    },
+    {
+      "service_id": "atendimento-para-pessoas-vitimas-de-violencia-2edbfc24",
+      "service_name": "Atendimento para pessoas vítimas de violência",
+      "queries": [
+        "meu marido me bateu o que eu faço",
+        "sofri violencia domestica preciso de ajuda",
+        "meu vizinho bate na esposa toda noite",
+        "to apanhando em casa e nao sei pra onde ir",
+        "crianca sendo maltratada no predio",
+        "onde denuncio violencia contra idoso",
+        "minha filha apanha do namorado",
+        "preciso de ajuda to sofrendo agressao",
+        "como denunciar maus tratos contra crianca",
+        "fui agredida e preciso de atendimento"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-o-programa-bolsa-familia-4547c2ba",
+      "service_name": "Informações sobre o Programa Bolsa Família",
+      "queries": [
+        "como faço pra receber o bolsa familia",
+        "quero me cadastrar no bolsa familia",
+        "perdi o bolsa familia como recupero",
+        "quanto ta o valor do bolsa familia agora",
+        "minha familia é pobre quero receber bolsa familia",
+        "onde faz o cadastro do bolsa familia",
+        "preciso atualizar meu bolsa familia",
+        "quem tem direito ao bolsa familia",
+        "meu bolsa familia foi cortado o que faco",
+        "como saber se tenho direito ao bolsa familia"
+      ]
+    },
+    {
+      "service_id": "inclusao-de-pessoas-com-deficiencia-no-mercado-de-2b6c31d8",
+      "service_name": "Inclusão de pessoas com deficiência no mercado de trabalho",
+      "queries": [
+        "meu filho é deficiente e quer trabalhar",
+        "vaga de emprego pra deficiente",
+        "sou pcd e to procurando trabalho",
+        "empresa tem que contratar deficiente ne",
+        "onde achar emprego pra quem tem deficiencia",
+        "meu irmao usa cadeira de rodas e quer emprego",
+        "trabalho pra pessoa com deficiencia no rio",
+        "como arrumar emprego sendo deficiente",
+        "programa de emprego pra pcd",
+        "quero ajuda pra conseguir trabalho sou deficiente auditivo"
+      ]
+    },
+    {
+      "service_id": "vistoria-tecnica-em-local-onde-ha-maus-tratos-de-235db3c2",
+      "service_name": "Vistoria técnica em local onde há maus tratos de animais domésticos",
+      "queries": [
+        "vizinho bate no cachorro todo dia",
+        "tem um cachorro preso sem comida no terreno",
+        "gato abandonado trancado dentro de casa",
+        "quero denunciar maus tratos de animal",
+        "cachorro apanhando do dono",
+        "animal preso no sol sem agua",
+        "onde denuncio quem maltrata cachorro",
+        "vizinha tem 20 gatos tudo doente",
+        "cachorro magro e amarrado no quintal do vizinho",
+        "como faco pra denunciar judiacao de animal"
+      ]
+    },
+    {
+      "service_id": "cadastro-de-animais-no-sisbicho-b5ad2d27",
+      "service_name": "Cadastro de animais no Sisbicho",
+      "queries": [
+        "como cadastrar meu cachorro na prefeitura",
+        "quero registrar meu gato",
+        "tem que cadastrar animal de estimacao",
+        "como faz o registro do meu cachorro",
+        "onde cadastrar meu pet",
+        "preciso de documento pro meu cachorro",
+        "como colocar chip no meu cachorro",
+        "registro de animal domestico como faz",
+        "quero identidade pro meu gato",
+        "cadastro de pet no rio de janeiro"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-o-programa-bolsa-familia-5e7c3de3",
+      "service_name": "Informações sobre o Programa Bolsa Família (duplicado)",
+      "queries": [
+        "onde fica o cras pra fazer bolsa familia",
+        "que documento precisa pro bolsa familia",
+        "bolsa familia como se inscrever",
+        "tenho 3 filhos pequenos quero bolsa familia",
+        "calendario de pagamento do bolsa familia",
+        "to com cadastro unico desatualizado",
+        "como atualizar cadunico pro bolsa familia",
+        "meu bolsa familia ta bloqueado",
+        "valor do bolsa familia por filho",
+        "posso receber bolsa familia morando de aluguel"
+      ]
+    },
+    {
+      "service_id": "consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6",
+      "service_name": "Consulta e encaminhamento para vagas de emprego",
+      "queries": [
+        "to desempregado faz 6 meses",
+        "preciso de emprego urgente",
+        "onde achar vaga de trabalho no rio",
+        "quero trabalhar nao acho emprego",
+        "tem vaga de emprego na prefeitura",
+        "como fazer pra conseguir um trabalho",
+        "sine do rio de janeiro onde fica",
+        "quero me cadastrar pra receber vaga de emprego",
+        "procurando emprego na area de servicos gerais",
+        "nao tenho experiencia mas preciso trabalhar"
+      ]
+    },
+    {
+      "service_id": "cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69",
+      "service_name": "Cadastro para acesso às Cozinhas Comunitárias",
+      "queries": [
+        "to com fome e sem dinheiro",
+        "onde posso comer de graça no rio",
+        "tem restaurante popular perto de mim",
+        "cozinha comunitaria como funciona",
+        "quero me cadastrar pra comer de graca",
+        "nao tenho dinheiro pra comprar comida",
+        "onde tem refeicao barata ou de graca",
+        "restaurante da prefeitura onde fica",
+        "preciso de alimentacao nao tenho condicoes",
+        "como faz pra almocar na cozinha comunitaria"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a",
+      "service_name": "Informações sobre ações de acolhimento a pessoas em situação de rua",
+      "queries": [
+        "tem gente morando debaixo do viaduto",
+        "pessoa dormindo na rua precisa de ajuda",
+        "como ajudar morador de rua",
+        "to na rua e nao tenho onde dormir",
+        "abrigo pra quem ta morando na rua",
+        "centro de acolhimento pra sem teto",
+        "meu tio ta morando na rua como ajudo",
+        "quero denunciar pessoa morando na calcada",
+        "onde tem abrigo pro frio no rio",
+        "pessoa em situacao de rua passando mal"
+      ]
+    },
+    {
+      "service_id": "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910",
+      "service_name": "Atendimento em unidades de Atenção Primária em Saúde",
+      "queries": [
+        "posto de saude perto de mim",
+        "preciso ir no medico mas nao tenho plano",
+        "onde tem clinica da familia no rio",
+        "quero marcar consulta no postinho",
+        "atendimento medico gratuito onde tem",
+        "preciso de um medico e nao tenho dinheiro",
+        "clinica da familia mais proxima",
+        "como marcar consulta no sus",
+        "posto de saude ta funcionando hoje",
+        "quero fazer exame de sangue no posto"
+      ]
+    },
+    {
+      "service_id": "inscricao-em-programa-de-tratamento-antitabagismo-00116adc",
+      "service_name": "Inscrição em Programa de Tratamento Antitabagismo",
+      "queries": [
+        "quero parar de fumar de vez",
+        "tem tratamento gratuito pra largar o cigarro",
+        "programa pra parar de fumar no rio",
+        "fumo ha 20 anos e quero parar",
+        "onde pego adesivo de nicotina de graca",
+        "tratamento antitabagismo no sus como funciona",
+        "to viciado em cigarro preciso de ajuda",
+        "tem remedio de graca pra parar de fumar",
+        "grupo de apoio pra quem quer largar o cigarro",
+        "meu marido fuma muito como faço pra ele parar"
+      ]
+    },
+    {
+      "service_id": "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f",
+      "service_name": "Castração gratuita de cães e gatos - Programa Bicho Rio",
+      "queries": [
+        "quero castrar minha cachorra de graça",
+        "castracao gratuita de gato onde tem",
+        "minha gata ta no cio quero castrar",
+        "como agendar castracao de cachorro gratis",
+        "programa bicho rio como funciona",
+        "castrar cachorro de graca no rio",
+        "meu cachorro precisa castrar onde levo",
+        "castracao de animal gratuita como faz",
+        "quero operar minha cadela pra nao ter filhote",
+        "tem mutirao de castracao de gato"
+      ]
+    },
+    {
+      "service_id": "atendimento-clinico-em-animais-8c9a32e8",
+      "service_name": "Atendimento clínico em animais",
+      "queries": [
+        "meu cachorro ta doente preciso de veterinario",
+        "meu gato ta vomitando muito",
+        "veterinario de graca no rio onde tem",
+        "meu cachorro ta mancando e nao come",
+        "hospital veterinario publico onde fica",
+        "meu gato ta com ferida preciso de atendimento",
+        "cachorro atropelado onde levo",
+        "veterinario do sus pra animais",
+        "meu cachorro ta com carrapato e anemia",
+        "consulta veterinaria barata ou gratis"
+      ]
+    },
+    {
+      "service_id": "atendimento-em-maternidades-cffe0736",
+      "service_name": "Atendimento em maternidades",
+      "queries": [
+        "to gravida e nao sei pra onde ir",
+        "maternidade publica no rio de janeiro",
+        "to com dor e acho que o bebe vai nascer",
+        "onde fazer pre natal de graca",
+        "quero ter meu filho no hospital publico",
+        "maternidade mais perto de mim",
+        "to gravida de 9 meses e preciso de hospital",
+        "onde tem maternidade do sus no rio",
+        "acho que to em trabalho de parto",
+        "preciso de acompanhamento de gravidez gratis"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-bailes-populares-e-baile-da-011ce275",
+      "service_name": "Informações sobre Bailes Populares e Baile da Cinelândia",
+      "queries": [
+        "quero ir no baile de carnaval da cinelandia",
+        "quando tem baile popular no rio",
+        "baile da cinelandia é de graca",
+        "onde tem baile funk da prefeitura",
+        "baile popular no centro do rio quando é",
+        "tem festa de graca no rio esse fim de semana",
+        "quero saber dos bailes da prefeitura",
+        "baile da terceira idade quando tem",
+        "onde tem forró de graca no rio",
+        "eventos gratuitos de danca no rio"
+      ]
+    },
+    {
+      "service_id": "distribuicao-de-kit-enxoval-do-bebe-77f09458",
+      "service_name": "Distribuição de kit enxoval do bebê",
+      "queries": [
+        "meu bebe vai nascer e nao tenho nada",
+        "como ganhar enxoval de bebe gratis",
+        "kit bebe da prefeitura como pegar",
+        "to gravida e nao tenho roupa pro bebe",
+        "onde pegar enxoval de graca no rio",
+        "prefeitura da kit pra gestante onde",
+        "sou gestante e nao tenho condicoes de comprar enxoval",
+        "distribuicao de enxoval pra bebe quando tem",
+        "como me cadastrar pra receber kit bebe",
+        "roupinha de bebe gratis da prefeitura"
+      ]
+    },
+    {
+      "service_id": "reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e",
+      "service_name": "Reparo de buraco, deformação ou afundamento na pista",
+      "queries": [
+        "tem um buraco enorme na minha rua",
+        "a rua aqui ta toda esburacada",
+        "buraco no asfalto quase quebrei o carro",
+        "como pedir pra prefeitura tapar buraco",
+        "a pista afundou na frente da minha casa",
+        "rua cheia de buraco quero reclamar",
+        "o asfalto ta todo quebrado aqui no bairro",
+        "onde reclamo de buraco na rua",
+        "quero pedir pra arrumar a rua",
+        "tem um buraco perigoso na avenida"
+      ]
+    },
+    {
+      "service_id": "vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab",
+      "service_name": "Vistoria em ameaça de deslizamento de barreira, encosta e talude",
+      "queries": [
+        "a parede do morro ta rachando",
+        "morro ta deslizando perto da minha casa",
+        "tenho medo da barreira cair",
+        "a encosta ta cedendo depois da chuva",
+        "barranco perto de casa ta caindo",
+        "risco de deslizamento no meu bairro",
+        "como pedir vistoria de barreira",
+        "muro de contenção ta rachado",
+        "terra do morro ta descendo",
+        "a ladeira ta toda rachada com risco de desabar"
+      ]
+    },
+    {
+      "service_id": "vistoria-em-foco-de-aedes-aegypti-dengue-d2b9b06d",
+      "service_name": "Vistoria em foco de Aedes aegypti (Dengue, Chikungunya e Zika)",
+      "queries": [
+        "tem mosquito da dengue aqui no terreno baldio",
+        "muito mosquito no bairro acho que é dengue",
+        "vizinho tem piscina suja cheia de larva",
+        "quero denunciar foco de dengue",
+        "lote vazio cheio de agua parada e mosquito",
+        "como chamar o pessoal da dengue",
+        "ta todo mundo pegando dengue aqui no bairro",
+        "tem agua parada no terreno do vizinho",
+        "quero que venham fazer fumace aqui",
+        "muita larva de mosquito na caixa dagua do predio"
+      ]
+    },
+    {
+      "service_id": "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4",
+      "service_name": "Parcelamento de débitos em Dívida Ativa",
+      "queries": [
+        "to devendo imposto como parcelo",
+        "divida ativa da prefeitura como pagar",
+        "quero parcelar minha divida com a prefeitura",
+        "meu nome ta na divida ativa como resolvo",
+        "devo iptu atrasado posso parcelar",
+        "como negociar divida com a prefeitura do rio",
+        "parcelamento de imposto atrasado",
+        "to devendo muito imposto quero um acordo",
+        "como tirar meu nome da divida ativa",
+        "posso parcelar multa da prefeitura"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b",
+      "service_name": "Informações sobre Educação de Jovens e Adultos (EJA)",
+      "queries": [
+        "nao terminei o ensino medio quero voltar a estudar",
+        "onde tem aula pra adulto a noite",
+        "quero terminar os estudos ja sou velho",
+        "escola pra quem nao terminou o fundamental",
+        "eja no rio de janeiro onde tem",
+        "tenho 40 anos e quero estudar de novo",
+        "curso supletivo no rio onde faco",
+        "quero tirar diploma do ensino medio",
+        "escola noturna pra adulto onde tem",
+        "como terminar o colegio sendo adulto"
+      ]
+    },
+    {
+      "service_id": "cartao-de-estacionamento-para-idosos-20239153",
+      "service_name": "Cartão de estacionamento para idosos",
+      "queries": [
+        "sou idoso preciso de vaga especial pra estacionar",
+        "como pedir cartao de estacionamento pra idoso",
+        "vaga de idoso no shopping preciso de cartao",
+        "cartao pra estacionar na vaga de idoso",
+        "meu pai é velho e precisa da vaga especial",
+        "onde tiro cartao de idoso pro carro",
+        "como fazer carteirinha de estacionamento de idoso",
+        "tenho mais de 60 anos quero vaga especial",
+        "como renovar cartao de estacionamento de idoso",
+        "documento pra usar vaga de idoso"
+      ]
+    },
+    {
+      "service_id": "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b",
+      "service_name": "IPTU - Consulta a pagamentos e débito automático",
+      "queries": [
+        "quero ver se to em dia com o iptu",
+        "como consultar pagamento do iptu",
+        "quero saber se meu iptu ta pago",
+        "como colocar iptu no debito automatico",
+        "consulta de iptu pelo cpf",
+        "quero ver quanto paguei de iptu",
+        "meu iptu ta em dia ou nao",
+        "onde consulto debito de iptu",
+        "como verificar pagamento do iptu online",
+        "quero recibo de pagamento do iptu"
+      ]
+    },
+    {
+      "service_id": "emissao-de-2-via-do-iptu-ce2b748c",
+      "service_name": "Emissão de 2ª via do IPTU",
+      "queries": [
+        "perdi o boleto do iptu",
+        "preciso de segunda via do iptu",
+        "como tirar outro boleto do iptu",
+        "boleto do iptu nao chegou",
+        "onde imprimo a guia do iptu",
+        "quero pagar o iptu mas perdi o carnê",
+        "segunda via iptu rio de janeiro",
+        "como gerar boleto do iptu pela internet",
+        "meu iptu nao veio pelo correio",
+        "preciso do codigo de barras do iptu"
+      ]
+    },
+    {
+      "service_id": "certidao-de-habite-se-aceitacao-df83d300",
+      "service_name": "Certidão de Habite-se/Aceitação",
+      "queries": [
+        "como pego o habite-se do meu apartamento",
+        "preciso de habite-se pra vender meu imovel",
+        "o que é habite-se e como conseguir",
+        "certidao de aceitacao de obra como pedir",
+        "meu predio nao tem habite-se como regularizo",
+        "onde tiro habite-se no rio",
+        "quanto custa o habite-se",
+        "preciso de habite-se pra financiamento",
+        "como saber se meu predio tem habite-se",
+        "documento que prova que a obra ta regular"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-cadastro-no-programa-minha-casa-401628a4",
+      "service_name": "Informações sobre cadastro no Programa Minha Casa, Minha Vida",
+      "queries": [
+        "quero me inscrever no minha casa minha vida",
+        "como consigo casa popular da prefeitura",
+        "minha casa minha vida como se cadastrar",
+        "quero comprar apartamento com subsidio do governo",
+        "moradia popular do governo como funciona",
+        "onde faz inscricao do minha casa minha vida",
+        "tenho direito ao minha casa minha vida",
+        "quero sair do aluguel e ter minha casa",
+        "programa habitacional do governo como participar",
+        "quanto precisa ganhar pra ter direito ao mcmv"
+      ]
+    },
+    {
+      "service_id": "programa-cadeira-cativa-ingressos-gratuitos-db108a0c",
+      "service_name": "Programa Cadeira Cativa - Ingressos gratuitos",
+      "queries": [
+        "como pego ingresso gratis pro maracana",
+        "ingresso de graca pra jogo no rio",
+        "cadeira cativa como funciona",
+        "quero assistir jogo de graca",
+        "entrada gratis no maracana como consigo",
+        "programa de ingresso gratis da prefeitura",
+        "como se cadastrar pra ingresso gratis",
+        "quero levar meu filho no jogo de graca",
+        "ingresso gratuito pra eventos no rio",
+        "como ganhar entrada pro estadio"
+      ]
+    },
+    {
+      "service_id": "limpeza-de-praias-99817f98",
+      "service_name": "Limpeza de praias",
+      "queries": [
+        "a praia ta cheia de lixo",
+        "quero reclamar da sujeira na praia",
+        "praia de copacabana ta imunda",
+        "tem lixo na areia da praia do meu bairro",
+        "a prefeitura nao limpa a praia",
+        "quando passam pra limpar a praia",
+        "esgoto na praia quero denunciar",
+        "praia suja de oleo quero reclamar",
+        "lixo na beira do mar como denuncio",
+        "a areia da praia ta cheia de caco de vidro"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-matricula-na-rede-municipal-2026-6c635361",
+      "service_name": "Informações sobre matrícula na rede municipal - 2026",
+      "queries": [
+        "quero matricular meu filho na escola publica",
+        "quando abre matricula na escola municipal",
+        "como fazer matricula na escola da prefeitura",
+        "meu filho vai fazer 6 anos preciso de escola",
+        "vaga em escola publica como consigo",
+        "matricula escolar 2026 quando começa",
+        "quero trocar meu filho de escola publica",
+        "como transferir matricula de escola",
+        "nao consegui vaga na escola o que faco",
+        "escola municipal perto de mim como matricular"
+      ]
+    },
+    {
+      "service_id": "distribuicao-de-insumos-para-tratamento-de-7e3ea1a4",
+      "service_name": "Distribuição de insumos para tratamento de diabetes com insulina",
+      "queries": [
+        "preciso de insulina pro meu pai",
+        "onde pego insulina de graca no rio",
+        "minha mae é diabetica e precisa de insulina",
+        "como conseguir fita de glicemia gratis",
+        "aparelho de medir diabetes onde pego gratis",
+        "distribuicao de insulina no posto de saude",
+        "preciso de agulha e seringa pra insulina",
+        "meu remedio de diabetes acabou onde pego",
+        "insumos pra diabetes onde consigo de graca",
+        "sou diabetico e nao tenho dinheiro pra comprar insulina"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-transporte-publico-b42ba94d",
+      "service_name": "Informações sobre transporte público",
+      "queries": [
+        "como funciona o brt no rio",
+        "qual onibus pego pra ir pra copacabana",
+        "horario do onibus na minha rua",
+        "bilhete unico como faco",
+        "metro do rio ta funcionando hoje",
+        "como recarregar meu cartao do onibus",
+        "transporte publico no rio de janeiro informacoes",
+        "vlt do centro ta rodando",
+        "preco da passagem de onibus no rio",
+        "como ir de brt pra barra da tijuca"
+      ]
+    },
+    {
+      "service_id": "iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c",
+      "service_name": "ISS - Emissão de nota fiscal eletrônica - Nota Carioca",
+      "queries": [
+        "preciso emitir nota fiscal de servico",
+        "como faco pra tirar nota carioca",
+        "nota fiscal eletronica do rio como emitir",
+        "sou autonomo e preciso dar nota fiscal",
+        "como me cadastrar na nota carioca",
+        "quero emitir nfe de servico",
+        "nota carioca como funciona",
+        "preciso de nota fiscal pra prestar servico",
+        "site da nota carioca qual é",
+        "iss nota fiscal como faz"
+      ]
+    },
+    {
+      "service_id": "certidao-negativa-de-debito-nada-consta-439306e1",
+      "service_name": "Certidão Negativa de Débito (Nada Consta)",
+      "queries": [
+        "quero uma certidao que nao devo nada",
+        "certidao negativa de debito como tiro",
+        "preciso de nada consta da prefeitura",
+        "como provar que nao tenho divida com a prefeitura",
+        "certidao negativa pra licitacao como pego",
+        "onde tiro certidao de debito do rio",
+        "preciso comprovar que to em dia com a prefeitura",
+        "certidao negativa online como faz",
+        "nada consta de tributos municipais",
+        "certidao pra participar de concurso onde tiro"
+      ]
+    },
+    {
+      "service_id": "limpeza-de-pracas-e-parques-0ecf3e30",
+      "service_name": "Limpeza de praças e parques",
+      "queries": [
+        "a praça do bairro ta toda suja",
+        "parque cheio de mato e lixo quero reclamar",
+        "ninguem limpa a praça perto da minha casa",
+        "banco da praca ta quebrado e sujo",
+        "quero pedir limpeza do parque do bairro",
+        "praca abandonada cheia de entulho",
+        "como reclamar que a praça ta suja",
+        "jardim da praca ta todo morrendo",
+        "a prefeitura nao cuida do parque",
+        "lixo jogado na praça do meu bairro"
+      ]
+    },
+    {
+      "service_id": "multa-de-transito-consulta-de-multa-1d76fc90",
+      "service_name": "Multa de trânsito - Consulta de multa",
+      "queries": [
+        "quero ver minhas multas de transito",
+        "como consultar multa pelo numero da placa",
+        "sera que tenho multa nao sei",
+        "onde vejo multa de transito no rio",
+        "consulta de multa online como faz",
+        "quero saber se meu carro tem multa",
+        "como ver pontos na carteira de motorista",
+        "multa de radar como consulto",
+        "recebi notificacao de multa como vejo",
+        "site pra consultar multa de carro"
+      ]
+    },
+    {
+      "service_id": "multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4",
+      "service_name": "Multa de Trânsito - Defesa Prévia de Autuação",
+      "queries": [
+        "tomei uma multa que nao era minha",
+        "quero recorrer de uma multa de transito",
+        "como contestar multa injusta",
+        "multa errada como faco pra cancelar",
+        "defesa de multa de transito como funciona",
+        "prazo pra recorrer de multa",
+        "nao fui eu que cometeu a infracao",
+        "quero indicar o verdadeiro condutor",
+        "recurso de multa de transito onde faco",
+        "tomei multa mas nao concordo como recorro"
+      ]
+    },
+    {
+      "service_id": "atendimento-em-hospitais-de-emergencia-e-pronto-78384051",
+      "service_name": "Atendimento em Hospitais de Emergência e Pronto Atendimento",
+      "queries": [
+        "to com dor no peito preciso de hospital",
+        "hospital de emergencia mais perto",
+        "meu pai passou mal preciso de pronto socorro",
+        "onde tem hospital publico aberto agora",
+        "acidente de moto preciso de hospital",
+        "emergencia medica pra onde levo",
+        "hospital do sus que atende emergencia",
+        "to sangrando muito preciso de hospital",
+        "meu filho caiu e bateu a cabeca",
+        "pronto socorro no rio aberto 24 horas"
+      ]
+    },
+    {
+      "service_id": "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2",
+      "service_name": "Atendimento em Unidades de Pronto Atendimento (UPA 24 Horas)",
+      "queries": [
+        "upa mais perto de mim",
+        "upa 24 horas que ta funcionando",
+        "preciso de atendimento urgente mas nao é emergencia",
+        "meu filho ta com febre alta pra onde levo",
+        "upa atende no fim de semana",
+        "nao consigo vaga no hospital posso ir na upa",
+        "to passando mal mas nao é grave quero ir na upa",
+        "upa do meu bairro ta aberta",
+        "pronto atendimento 24 horas onde tem",
+        "dor de barriga forte pra onde vou"
+      ]
+    },
+    {
+      "service_id": "resgate-de-animais-silvestres-8d94d14c",
+      "service_name": "Resgate de animais silvestres",
+      "queries": [
+        "achei um papagaio machucado na rua",
+        "tem uma cobra no meu quintal",
+        "encontrei um bicho silvestre o que faco",
+        "macaco apareceu no telhado da minha casa",
+        "coruja machucada no jardim do predio",
+        "jacaré apareceu perto da minha casa",
+        "gambá entrou na minha casa",
+        "passaro exotico caiu no meu quintal",
+        "lagarto grande apareceu na garagem",
+        "achei um tucano com asa quebrada"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-vacinacao-humana-728a6848",
+      "service_name": "Informações sobre vacinação humana",
+      "queries": [
+        "onde posso tomar vacina de gripe",
+        "quero me vacinar onde vou",
+        "vacina do covid ta tendo ainda",
+        "calendario de vacinacao infantil",
+        "meu filho precisa tomar vacina onde levo",
+        "campanha de vacinacao no rio",
+        "posto de vacinacao perto de mim",
+        "quero tomar vacina de febre amarela",
+        "caderneta de vacinacao do bebe onde atualizo",
+        "vacinacao de idoso contra gripe quando tem"
+      ]
+    },
+    {
+      "service_id": "cartao-de-estacionamento-para-pessoas-com-0f8fbe95",
+      "service_name": "Cartão de estacionamento para pessoas com deficiência - PCD",
+      "queries": [
+        "minha mae usa cadeira de rodas preciso de vaga",
+        "cartao de estacionamento pra deficiente como pego",
+        "vaga pcd como solicitar o cartao",
+        "sou deficiente e preciso de vaga especial",
+        "como tirar cartao de estacionamento pra pcd",
+        "meu pai é deficiente fisico precisa do cartao",
+        "carteira pra estacionar na vaga de deficiente",
+        "onde faco cartao pcd pro carro",
+        "documento pra usar vaga de deficiente",
+        "como renovar cartao de estacionamento pcd"
+      ]
+    },
+    {
+      "service_id": "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e",
+      "service_name": "Inclusão de aluno para acompanhamento escolar",
+      "queries": [
+        "meu filho tem dificuldade na escola",
+        "crianca com problema de aprendizado precisa de ajuda",
+        "meu filho reprovou varias vezes precisa de reforco",
+        "escola nao ta ajudando meu filho que tem deficit de atencao",
+        "como pedir acompanhamento especial na escola",
+        "meu filho precisa de professor auxiliar",
+        "crianca autista na escola precisa de apoio",
+        "meu filho ta muito atrasado nos estudos",
+        "quero reforco escolar pro meu filho",
+        "meu neto nao consegue acompanhar a turma"
+      ]
+    },
+    {
+      "service_id": "informacoes-sobre-merenda-escolar-146237e8",
+      "service_name": "Informações sobre merenda escolar",
+      "queries": [
+        "a merenda da escola do meu filho ta ruim",
+        "quero saber o cardapio da merenda escolar",
+        "merenda da escola tem alergia o que faco",
+        "crianca nao gosta da comida da escola",
+        "escola nao ta dando merenda o que faco",
+        "quero reclamar da qualidade da merenda",
+        "meu filho é alergico a leite a escola tem opcao",
+        "cardapio da alimentacao escolar onde vejo",
+        "merenda escolar é de graca ne",
+        "a comida da escola ta causando dor de barriga"
+      ]
+    },
+    {
+      "service_id": "remocao-de-arvore-em-vias-publicas-54b06fd3",
+      "service_name": "Remoção de árvore em vias públicas",
+      "queries": [
+        "tem uma arvore caida na rua bloqueando",
+        "arvore caiu com a chuva e ta bloqueando a rua",
+        "arvore morta na calcada vai cair",
+        "quero pedir pra tirar arvore da rua",
+        "tronco de arvore na pista atrapalhando",
+        "arvore caiu no fio de luz",
+        "raiz de arvore ta destruindo a calcada",
+        "arvore perigosa na rua como faco pra tirar",
+        "galho enorme caiu na rua",
+        "arvore podre prestes a cair na rua"
+      ]
+    },
+    {
+      "service_id": "autorizacao-para-plantio-voluntario-de-arvore-em-87f4b222",
+      "service_name": "Autorização para plantio voluntário de árvore em área pública",
+      "queries": [
+        "quero plantar arvore na calcada",
+        "posso plantar arvore na frente da minha casa",
+        "preciso de autorizacao pra plantar arvore na rua",
+        "quero ajudar a plantar arvore no bairro",
+        "como conseguir permissao pra plantar arvore",
+        "plantio voluntario de arvore como faco",
+        "quero plantar uma muda na calcada",
+        "posso plantar arvore frutífera na rua",
+        "quero arborizar minha rua como faco",
+        "autorizacao da prefeitura pra plantar arvore"
+      ]
+    },
+    {
+      "service_id": "autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e",
+      "service_name": "Autorização de poda ou remoção de árvore em área particular",
+      "queries": [
+        "a arvore do vizinho ta caindo pro meu terreno",
+        "quero cortar arvore no meu quintal preciso de autorizacao",
+        "arvore do meu terreno ta muito grande posso cortar",
+        "raiz de arvore ta quebrando meu muro",
+        "preciso derrubar arvore na minha propriedade",
+        "autorizacao pra podar arvore no meu terreno",
+        "a arvore ta encostando na fiacao do meu lote",
+        "posso podar arvore que ta no meu quintal",
+        "arvore do vizinho ta jogando folha na minha casa",
+        "como pedir autorizacao pra cortar arvore particular"
+      ]
+    },
+    {
+      "service_id": "poda-de-arvore-em-vias-publicas-6aa2fb75",
+      "service_name": "Poda de árvore em vias públicas",
+      "queries": [
+        "a prefeitura pode podar essa arvore na rua",
+        "arvore da rua ta muito grande e escura",
+        "galho de arvore encostando no fio de luz",
+        "arvore tampando o poste de luz da rua",
+        "quero pedir poda de arvore na calcada",
+        "galhos da arvore entrando na minha janela",
+        "arvore da rua ta quebrando a calcada",
+        "quando a prefeitura vem podar as arvores",
+        "arvore muito alta perto da rede eletrica",
+        "como solicitar poda de arvore na rua"
+      ]
+    },
+    {
+      "service_id": "solicitacao-de-plantio-de-arvore-em-area-publica-7b6c060b",
+      "service_name": "Solicitação de plantio de árvore em área pública",
+      "queries": [
+        "quero plantar uma arvore no parque",
+        "como pedir pra prefeitura plantar arvore na minha rua",
+        "minha rua nao tem nenhuma arvore",
+        "quero mais sombra na rua da minha casa",
+        "solicitar plantio de arvore na praca",
+        "a calcada nao tem arvore nenhuma ta muito quente",
+        "como pedir muda de arvore pra prefeitura",
+        "quero que plantem arvore na escola do meu filho",
+        "rua sem nenhuma arvore muito calor",
+        "pedido de arvore pra area publica"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+[project]
+name = "facilita-rio"
+version = "0.1.0"
+description = "Public Services Discovery System — hybrid search + recommendation"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "jinja2>=3.1",
+    "python-multipart>=0.0.9",
+    "rank-bm25>=0.2.2",
+    "faiss-cpu>=1.8",
+    "sentence-transformers>=3.0",
+    "scikit-learn>=1.5",
+    "openai>=1.40",
+    "structlog>=24.1",
+    "prometheus-fastapi-instrumentator>=7.0",
+    "unidecode>=1.3",
+    "nltk>=3.9",
+    "numpy>=1.26",
+    "cachetools>=7.0",
+    "httpx>=0.27",
+    "ranx>=0.3.20",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "hypothesis>=6.100",
+    "asgi-lifespan>=2.1",
+]
+dev = [
+    "ruff>=0.5",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = ["E501"]

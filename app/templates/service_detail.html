@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}{{ service.nome }} — Facilita Rio{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="/" class="text-sm text-blue-600 hover:text-blue-800">&larr; Voltar à busca</a>
+</div>
+
+<div class="bg-white rounded-lg border border-gray-200 p-6 mb-8">
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">{{ service.nome }}</h1>
+
+    <div class="flex flex-wrap gap-2 mb-4">
+        <span class="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full">
+            {{ service.tema }}
+        </span>
+        {% if service.custo %}
+        <span class="inline-block px-3 py-1 bg-green-50 text-green-700 text-sm rounded-full">
+            {{ service.custo }}
+        </span>
+        {% endif %}
+        {% for p in service.publico %}
+        <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">
+            {{ p }}
+        </span>
+        {% endfor %}
+    </div>
+
+    {% if service.resumo %}
+    <div class="mb-6">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase mb-1">Resumo</h2>
+        <p class="text-gray-700">{{ service.resumo }}</p>
+    </div>
+    {% endif %}
+
+    {% if service.descricao_completa %}
+    <div class="mb-6">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase mb-1">Descrição Completa</h2>
+        <div class="text-gray-700 text-sm whitespace-pre-line">{{ service.descricao_completa }}</div>
+    </div>
+    {% endif %}
+
+    {% if service.instrucoes %}
+    <div class="mb-6">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase mb-1">Como Solicitar</h2>
+        <div class="text-gray-700 text-sm whitespace-pre-line">{{ service.instrucoes }}</div>
+    </div>
+    {% endif %}
+
+    {% if service.resultado %}
+    <div class="mb-6">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase mb-1">Resultado da Solicitação</h2>
+        <div class="text-gray-700 text-sm whitespace-pre-line">{{ service.resultado }}</div>
+    </div>
+    {% endif %}
+
+    {% if service.tempo_atendimento %}
+    <div class="mb-4">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase mb-1">Tempo de Atendimento</h2>
+        <p class="text-gray-700 text-sm">{{ service.tempo_atendimento }}</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Recommendations -->
+{% if recommendations %}
+<div class="border-t border-gray-200 pt-6">
+    <h2 class="text-lg font-semibold text-gray-700 mb-4">Serviços Relacionados</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for rec in recommendations %}
+        <div class="card bg-white rounded-lg border border-gray-200 p-4">
+            <a href="/service/{{ rec.service.id }}" class="text-sm font-semibold text-blue-700 hover:text-blue-900 hover:underline">
+                {{ rec.service.nome }}
+            </a>
+            <span class="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded mt-1">
+                {{ rec.service.tema }}
+            </span>
+            <p class="text-gray-500 text-xs mt-2 line-clamp-2">{{ rec.service.resumo[:150] }}...</p>
+            <p class="text-xs text-blue-500 mt-2 italic">{{ rec.reason }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

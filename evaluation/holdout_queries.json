@@ -1,0 +1,23 @@
+{
+  "description": "Holdout test queries — NEVER used during system development or tuning. Created after all synonym expansions, weight tuning, and pipeline optimizations were finalized. Purpose: validate that evaluation metrics generalize to unseen queries and are not inflated by iterative tuning on the main evaluation set.",
+  "created_after_tuning": true,
+  "queries": [
+    {"id": "h01", "category": "natural", "query": "não consigo pagar meus impostos atrasados", "relevant": {"parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 3, "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2}},
+    {"id": "h02", "category": "natural", "query": "quero castrar minha cadela de graça", "relevant": {"castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 3, "cadastro-de-animais-no-sisbicho-b5ad2d27": 1}},
+    {"id": "h03", "category": "natural", "query": "minha mãe idosa precisa de benefício do governo", "relevant": {"beneficio-de-prestacao-continuada-bpc-529f647a": 3, "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 2}},
+    {"id": "h04", "category": "natural", "query": "criança fora da escola como matricular", "relevant": {"informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": 3, "informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b": 1}},
+    {"id": "h05", "category": "natural", "query": "rua cheia de lixo e mato alto no terreno", "relevant": {"limpeza-de-pracas-e-parques-0ecf3e30": 2, "reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e": 1}},
+    {"id": "h06", "category": "natural", "query": "preciso de ajuda pra parar de beber e fumar", "relevant": {"inscricao-em-programa-de-tratamento-antitabagismo-00116adc": 3}},
+    {"id": "h07", "category": "natural", "query": "meu gato precisa de consulta no veterinário", "relevant": {"atendimento-clinico-em-animais-8c9a32e8": 3, "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 1}},
+    {"id": "h08", "category": "synonym", "query": "comprovante de que não devo nada pra prefeitura", "relevant": {"certidao-negativa-de-debito-nada-consta-439306e1": 3}},
+    {"id": "h09", "category": "synonym", "query": "inscrever no programa de habitação do governo", "relevant": {"informacoes-sobre-cadastro-no-programa-minha-casa-401628a4": 3}},
+    {"id": "h10", "category": "synonym", "query": "tirar nota fiscal de serviço prestado", "relevant": {"iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 3}},
+    {"id": "h11", "category": "edge", "query": "galho de árvore pode cair na cabeça de alguém", "relevant": {"poda-de-arvore-em-vias-publicas-6aa2fb75": 3, "remocao-de-arvore-em-vias-publicas-54b06fd3": 2}},
+    {"id": "h12", "category": "edge", "query": "cobra no quintal socorro", "relevant": {"resgate-de-animais-silvestres-8d94d14c": 3}},
+    {"id": "h13", "category": "edge", "query": "tô passando fome e não tenho dinheiro", "relevant": {"cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69": 3, "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 1}},
+    {"id": "h14", "category": "ambiguous", "query": "saúde pública", "relevant": {"atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 2, "atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 2, "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2": 2, "informacoes-sobre-vacinacao-humana-728a6848": 1}},
+    {"id": "h15", "category": "ambiguous", "query": "meio ambiente", "relevant": {"solicitacao-de-plantio-de-arvore-em-area-publica-7b6c060b": 2, "poda-de-arvore-em-vias-publicas-6aa2fb75": 2, "remocao-de-arvore-em-vias-publicas-54b06fd3": 1, "autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e": 1, "limpeza-de-praias-99817f98": 1}},
+    {"id": "h_neg01", "category": "negative", "query": "resultado do jogo do vasco ontem", "relevant": {}},
+    {"id": "h_neg02", "category": "negative", "query": "como fazer bolo de cenoura", "relevant": {}}
+  ]
+}
