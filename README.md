@@ -1,4 +1,4 @@
-# Facilita Rio — Busca Inteligente de Serviços Públicos
+# facilita Rio — Busca Inteligente de Serviços Públicos
 
 Cidadãos raramente sabem o nome exato do serviço público que precisam. A busca começa com necessidades vagas ("meu cachorro está doente"), incompletas ("IPTU"), ou ambíguas ("problema na rua"). Este sistema resolve dois problemas:
 

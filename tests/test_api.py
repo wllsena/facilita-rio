@@ -99,7 +99,7 @@ class TestWebUI:
     async def test_home_page(self, client):
         resp = await client.get("/")
         assert resp.status_code == 200
-        assert "Facilita Rio" in resp.text
+        assert "facilita Rio" in resp.text
 
     async def test_search_page(self, client):
         resp = await client.get("/search", params={"q": "escola"})

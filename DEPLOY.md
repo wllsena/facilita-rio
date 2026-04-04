@@ -72,10 +72,10 @@ O servidor EC2 tem uma deploy key SSH (`~/.ssh/deploy_key`) registrada no reposi
 curl https://facilita-rio.com/health
 
 # Status do último deploy
-gh run list --repo wllsena/facilita-rio- --limit 1
+gh run list --repo wllsena/facilita-rio --limit 1
 
 # Logs do deploy
-gh run view <run-id> --repo wllsena/facilita-rio- --log
+gh run view <run-id> --repo wllsena/facilita-rio --log
 
 # Logs do container
 ssh -i <key> ubuntu@<host> "sudo docker compose -f ~/facilita-rio/docker-compose.yml logs --tail 30"

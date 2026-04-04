@@ -89,7 +89,7 @@ async def lifespan(app: FastAPI):
 # ── App ─────────────────────────────────────────────────────────────────────
 
 app = FastAPI(
-    title="Facilita Rio",
+    title="facilita Rio",
     description="Busca inteligente de serviços públicos do município do Rio de Janeiro",
     version="0.1.0",
     lifespan=lifespan,
