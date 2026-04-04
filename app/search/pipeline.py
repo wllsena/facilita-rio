@@ -5,6 +5,7 @@ from __future__ import annotations
 import time
 
 import structlog
+from unidecode import unidecode
 
 from app.config import CONFIG
 from app.models import SearchResponse, SearchResult, Service
@@ -35,6 +36,64 @@ class SearchPipeline:
         self._reranker = reranker
         self._recommender = recommender
 
+    @staticmethod
+    def _suggest_queries(
+        query: str,
+        results: list[SearchResult],
+        low_confidence: bool,
+    ) -> list[str]:
+        """Generate query reformulation suggestions based on top results.
+
+        Suggests more specific queries when:
+        - The query is short/ambiguous (1-2 words) and top results have distinct names
+        - The query has low confidence (out-of-scope detection triggered)
+        - The top result name offers a more precise formulation
+
+        Returns up to 3 suggested queries, deduplicated and different from the original.
+        """
+        if not results:
+            return []
+
+        query_lower = unidecode(query.lower().strip())
+        query_words = set(query_lower.split())
+        suggestions: list[str] = []
+        seen_normalized: set[str] = set()
+
+        # For low-confidence queries, suggest based on top results (the system's best guesses)
+        # For short/ambiguous queries, suggest more specific alternatives
+        is_short = len(query_words) <= 2
+
+        if not low_confidence and not is_short:
+            return []
+
+        for r in results[:5]:
+            # Use the service name as a suggested query
+            name = r.service.nome
+            name_normalized = unidecode(name.lower().strip())
+
+            # Skip if too similar to original query
+            name_words = set(name_normalized.split())
+            overlap = len(query_words & name_words)
+            if overlap >= len(query_words) and not low_confidence:
+                continue
+
+            if name_normalized not in seen_normalized:
+                suggestions.append(name)
+                seen_normalized.add(name_normalized)
+
+            # Also suggest theme-based reformulation for ambiguous queries
+            if is_short and r.service.tema:
+                tema_suggestion = f"{query} ({r.service.tema.lower()})"
+                tema_norm = unidecode(tema_suggestion.lower())
+                if tema_norm not in seen_normalized:
+                    suggestions.append(tema_suggestion)
+                    seen_normalized.add(tema_norm)
+
+            if len(suggestions) >= 3:
+                break
+
+        return suggestions[:3]
+
     async def execute(self, query: str, top_k: int = 10) -> SearchResponse:
         """Run the full search pipeline.
 
@@ -62,7 +121,7 @@ class SearchPipeline:
         candidates = self._retriever.search(query, expanded_query=expanded_query, top_k=top_k * 2)
 
         # Max cosine similarity — confidence signal for out-of-scope detection
-        max_sem = max((c[3] for c in candidates if c[3] is not None), default=None)
+        max_sem = max((c.semantic_score for c in candidates if c.semantic_score is not None), default=None)
 
         # Reranking
         t_rerank = time.time()
@@ -74,16 +133,16 @@ class SearchPipeline:
 
         # Build search results
         results = []
-        for doc_id, _rrf_score, bm25_score, sem_score, reranker_score in reranked:
-            service = self._services_map.get(doc_id)
+        for r in reranked:
+            service = self._services_map.get(r.doc_id)
             if service:
                 results.append(
                     SearchResult(
                         service=service,
-                        score=round(reranker_score, 4),
-                        bm25_score=round(bm25_score, 4) if bm25_score is not None else None,
-                        semantic_score=round(sem_score, 4) if sem_score is not None else None,
-                        reranker_score=round(reranker_score, 4),
+                        score=round(r.blended_score, 4),
+                        bm25_score=round(r.bm25_score, 4) if r.bm25_score is not None else None,
+                        semantic_score=round(r.semantic_score, 4) if r.semantic_score is not None else None,
+                        reranker_score=round(r.blended_score, 4),
                     )
                 )
 
@@ -93,13 +152,17 @@ class SearchPipeline:
 
         latency_ms = (time.time() - t0) * 1000
 
-        # Flag low-confidence results — likely out-of-scope queries
+        # Flag low-confidence results �� likely out-of-scope queries
         low_conf = max_sem is not None and max_sem < CONFIG.confidence_threshold
+
+        # Query reformulation suggestions for ambiguous/low-confidence queries
+        suggested = self._suggest_queries(query, results, low_conf)
 
         response = SearchResponse(
             query=query,
             results=results,
             recommendations=recommendations,
+            suggested_queries=suggested,
             latency_ms=round(latency_ms, 1),
             rerank_ms=round(rerank_ms, 1),
             max_semantic_score=round(max_sem, 4) if max_sem is not None else None,

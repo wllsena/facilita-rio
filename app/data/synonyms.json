@@ -1,0 +1,994 @@
+{
+  "description": "Synonym expansion patterns for PT-BR colloquial queries. Each entry maps a normalized pattern to expansion terms. Anti-patterns (when present) prevent the expansion from firing when certain context words appear in the query.",
+  "expansions": [
+    {
+      "pattern": "quebrei",
+      "expansion": "hospital emergencia upa fratura atendimento medico"
+    },
+    {
+      "pattern": "fratura",
+      "expansion": "hospital emergencia upa atendimento medico"
+    },
+    {
+      "pattern": "acidente",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "machucado",
+      "expansion": "hospital emergencia upa atendimento"
+    },
+    {
+      "pattern": "machucou",
+      "expansion": "hospital emergencia upa atendimento"
+    },
+    {
+      "pattern": "machuquei",
+      "expansion": "hospital emergencia upa atendimento"
+    },
+    {
+      "pattern": "sangrando",
+      "expansion": "hospital emergencia upa atendimento"
+    },
+    {
+      "pattern": "ambulancia",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "passando mal",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "desmaio",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "desmaiou",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "infarto",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "convulsao",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "dor no peito",
+      "expansion": "hospital emergencia upa pronto atendimento cardiaco"
+    },
+    {
+      "pattern": "dor forte",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "caindo",
+      "expansion": "hospital emergencia upa pronto atendimento",
+      "anti_patterns": [
+        "barranco",
+        "morro",
+        "terra",
+        "encosta",
+        "barreira",
+        "arvore",
+        "galho"
+      ]
+    },
+    {
+      "pattern": "cai da escada",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "cai e bateu",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "bateu a cabeca",
+      "expansion": "hospital emergencia upa pronto atendimento"
+    },
+    {
+      "pattern": "atropelado",
+      "expansion": "hospital emergencia upa pronto atendimento",
+      "anti_patterns": [
+        "cachorro",
+        "gato",
+        "animal"
+      ]
+    },
+    {
+      "pattern": "febre",
+      "expansion": "upa pronto atendimento saude unidade atencao primaria"
+    },
+    {
+      "pattern": "gripado",
+      "expansion": "upa pronto atendimento saude unidade"
+    },
+    {
+      "pattern": "gripe",
+      "expansion": "upa pronto atendimento saude unidade",
+      "anti_patterns": ["vacin", "imuniz", "dose", "campanha"]
+    },
+    {
+      "pattern": "resfriado",
+      "expansion": "upa pronto atendimento saude unidade"
+    },
+    {
+      "pattern": "tosse",
+      "expansion": "upa pronto atendimento saude unidade"
+    },
+    {
+      "pattern": "vomito",
+      "expansion": "upa pronto atendimento saude unidade"
+    },
+    {
+      "pattern": "vomitou",
+      "expansion": "upa pronto atendimento saude unidade"
+    },
+    {
+      "pattern": "vomitando",
+      "expansion": "upa pronto atendimento saude unidade"
+    },
+    {
+      "pattern": "diarreia",
+      "expansion": "upa pronto atendimento saude unidade"
+    },
+    {
+      "pattern": "dor de cabeca",
+      "expansion": "upa pronto atendimento saude unidade"
+    },
+    {
+      "pattern": "dor de barriga",
+      "expansion": "upa pronto atendimento saude unidade"
+    },
+    {
+      "pattern": "doente",
+      "expansion": "upa pronto atendimento saude unidade atencao primaria",
+      "anti_patterns": [
+        "cachorro",
+        "gato",
+        "animal"
+      ]
+    },
+    {
+      "pattern": "consulta no postinho",
+      "expansion": "atencao primaria saude unidade clinica familia"
+    },
+    {
+      "pattern": "consulta no posto",
+      "expansion": "atencao primaria saude unidade clinica familia"
+    },
+    {
+      "pattern": "consulta no sus",
+      "expansion": "atencao primaria saude unidade clinica familia"
+    },
+    {
+      "pattern": "marcar consulta",
+      "expansion": "atencao primaria saude unidade clinica familia",
+      "anti_patterns": [
+        "multa",
+        "transito",
+        "emprego"
+      ]
+    },
+    {
+      "pattern": "postinho",
+      "expansion": "atencao primaria saude unidade clinica familia"
+    },
+    {
+      "pattern": "posto de saude",
+      "expansion": "atencao primaria saude unidade clinica familia"
+    },
+    {
+      "pattern": "funcionando hoje",
+      "expansion": "atencao primaria saude unidade horario atendimento",
+      "anti_patterns": [
+        "escola",
+        "comercio",
+        "loja",
+        "banco"
+      ]
+    },
+    {
+      "pattern": "vacina",
+      "expansion": "vacinacao humana imunizacao campanha dose calendario vacinal"
+    },
+    {
+      "pattern": "vacinacao",
+      "expansion": "vacinacao humana imunizacao campanha dose calendario vacinal"
+    },
+    {
+      "pattern": "imunizacao",
+      "expansion": "vacinacao humana campanha dose calendario vacinal"
+    },
+    {
+      "pattern": "febre amarela",
+      "expansion": "vacinacao humana imunizacao campanha dose vacina"
+    },
+    {
+      "pattern": "remedio",
+      "expansion": "insumos saude farmacia atendimento medicamento"
+    },
+    {
+      "pattern": "medicamento",
+      "expansion": "insumos saude farmacia atendimento"
+    },
+    {
+      "pattern": "insulina",
+      "expansion": "diabetes insumos tratamento distribuicao"
+    },
+    {
+      "pattern": "parar de fumar",
+      "expansion": "antitabagismo tratamento programa"
+    },
+    {
+      "pattern": "dentista",
+      "expansion": "atendimento saude bucal odontologico clinica"
+    },
+    {
+      "pattern": "dente",
+      "expansion": "atendimento saude bucal odontologico clinica"
+    },
+    {
+      "pattern": "dor de dente",
+      "expansion": "atendimento saude bucal odontologico clinica"
+    },
+    {
+      "pattern": "assaltado",
+      "expansion": "vitima violencia seguranca atendimento"
+    },
+    {
+      "pattern": "assalto",
+      "expansion": "vitima violencia seguranca atendimento"
+    },
+    {
+      "pattern": "roubo",
+      "expansion": "vitima violencia seguranca atendimento"
+    },
+    {
+      "pattern": "furto",
+      "expansion": "vitima violencia seguranca atendimento"
+    },
+    {
+      "pattern": "violencia domestica",
+      "expansion": "vitima violencia atendimento mulher"
+    },
+    {
+      "pattern": "agredido",
+      "expansion": "vitima violencia atendimento"
+    },
+    {
+      "pattern": "agredida",
+      "expansion": "vitima violencia atendimento"
+    },
+    {
+      "pattern": "me bateu",
+      "expansion": "vitima violencia atendimento"
+    },
+    {
+      "pattern": "apanhando",
+      "expansion": "vitima violencia domestica atendimento",
+      "anti_patterns": [
+        "cachorro",
+        "gato",
+        "animal"
+      ]
+    },
+    {
+      "pattern": "sofrendo agressao",
+      "expansion": "vitima violencia domestica atendimento"
+    },
+    {
+      "pattern": "agressao",
+      "expansion": "vitima violencia atendimento",
+      "anti_patterns": [
+        "cachorro",
+        "gato",
+        "animal"
+      ]
+    },
+    {
+      "pattern": "bate na esposa",
+      "expansion": "vitima violencia domestica atendimento mulher"
+    },
+    {
+      "pattern": "bate na mulher",
+      "expansion": "vitima violencia domestica atendimento mulher"
+    },
+    {
+      "pattern": "bate na namorada",
+      "expansion": "vitima violencia domestica atendimento mulher"
+    },
+    {
+      "pattern": "espancando",
+      "expansion": "vitima violencia domestica atendimento"
+    },
+    {
+      "pattern": "bate no cachorro",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
+      "pattern": "bate no gato",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
+      "pattern": "maltrata",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
+      "pattern": "maus tratos",
+      "expansion": "vistoria animais denuncia"
+    },
+    {
+      "pattern": "judia do animal",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
+      "pattern": "judia do cachorro",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
+      "pattern": "cachorro preso",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
+      "pattern": "animal preso",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
+      "pattern": "precisa castrar",
+      "expansion": "castracao gratuita programa bicho rio"
+    },
+    {
+      "pattern": "castrar onde",
+      "expansion": "castracao gratuita programa bicho rio"
+    },
+    {
+      "pattern": "cachorro atropelado",
+      "expansion": "clinico animais veterinario atendimento"
+    },
+    {
+      "pattern": "gato atropelado",
+      "expansion": "clinico animais veterinario atendimento"
+    },
+    {
+      "pattern": "documento pro meu cachorro",
+      "expansion": "sisbicho cadastro animais registro"
+    },
+    {
+      "pattern": "documento pro meu gato",
+      "expansion": "sisbicho cadastro animais registro"
+    },
+    {
+      "pattern": "registrar meu cachorro",
+      "expansion": "sisbicho cadastro animais registro"
+    },
+    {
+      "pattern": "registrar meu gato",
+      "expansion": "sisbicho cadastro animais registro"
+    },
+    {
+      "pattern": "arvore caiu",
+      "expansion": "remocao de arvore vias publicas"
+    },
+    {
+      "pattern": "arvore caida",
+      "expansion": "remocao de arvore vias publicas"
+    },
+    {
+      "pattern": "arvore caindo",
+      "expansion": "remocao de arvore vias publicas"
+    },
+    {
+      "pattern": "tirar arvore",
+      "expansion": "remocao de arvore vias publicas"
+    },
+    {
+      "pattern": "galho de arvore",
+      "expansion": "poda remocao arvore"
+    },
+    {
+      "pattern": "galho caiu",
+      "expansion": "remocao poda arvore vias publicas"
+    },
+    {
+      "pattern": "galho enorme",
+      "expansion": "remocao poda arvore vias publicas"
+    },
+    {
+      "pattern": "arvore bloqueando",
+      "expansion": "remocao de arvore vias publicas"
+    },
+    {
+      "pattern": "arvore no fio",
+      "expansion": "remocao poda arvore vias publicas"
+    },
+    {
+      "pattern": "arvore grande",
+      "expansion": "poda de arvore vias publicas",
+      "anti_patterns": [
+        "caiu",
+        "caida",
+        "remocao"
+      ]
+    },
+    {
+      "pattern": "arvore escura",
+      "expansion": "poda de arvore vias publicas iluminacao"
+    },
+    {
+      "pattern": "arvore tampando",
+      "expansion": "poda de arvore vias publicas"
+    },
+    {
+      "pattern": "arvore quebrando",
+      "expansion": "poda de arvore vias publicas"
+    },
+    {
+      "pattern": "arvore do vizinho",
+      "expansion": "autorizacao poda remocao arvore area particular"
+    },
+    {
+      "pattern": "arvore no meu terreno",
+      "expansion": "autorizacao poda remocao arvore area particular"
+    },
+    {
+      "pattern": "arvore no meu lote",
+      "expansion": "autorizacao poda remocao arvore area particular"
+    },
+    {
+      "pattern": "arvore muito alta",
+      "expansion": "poda de arvore vias publicas",
+      "anti_patterns": [
+        "caiu",
+        "caida",
+        "remocao"
+      ]
+    },
+    {
+      "pattern": "arvore alta",
+      "expansion": "poda de arvore vias publicas",
+      "anti_patterns": [
+        "caiu",
+        "caida",
+        "remocao"
+      ]
+    },
+    {
+      "pattern": "fiacao",
+      "expansion": "poda autorizacao arvore area particular vias publicas"
+    },
+    {
+      "pattern": "rede eletrica",
+      "expansion": "poda autorizacao arvore vias publicas",
+      "anti_patterns": [
+        "conta",
+        "tarifa"
+      ]
+    },
+    {
+      "pattern": "arborizar",
+      "expansion": "plantio voluntario arvore area publica"
+    },
+    {
+      "pattern": "mais sombra",
+      "expansion": "plantio arvore area publica"
+    },
+    {
+      "pattern": "fome",
+      "expansion": "cozinha comunitaria alimentacao refeicao"
+    },
+    {
+      "pattern": "sem dinheiro",
+      "expansion": "cozinha comunitaria alimentacao bolsa familia assistencia"
+    },
+    {
+      "pattern": "refeicao gratuita",
+      "expansion": "cozinha comunitaria"
+    },
+    {
+      "pattern": "refeicao de graca",
+      "expansion": "cozinha comunitaria alimentacao"
+    },
+    {
+      "pattern": "comer de graca",
+      "expansion": "cozinha comunitaria alimentacao"
+    },
+    {
+      "pattern": "passar fome",
+      "expansion": "cozinha comunitaria alimentacao"
+    },
+    {
+      "pattern": "refeicao barata",
+      "expansion": "cozinha comunitaria alimentacao"
+    },
+    {
+      "pattern": "restaurante popular",
+      "expansion": "cozinha comunitaria alimentacao"
+    },
+    {
+      "pattern": "cobra",
+      "expansion": "resgate animal silvestre"
+    },
+    {
+      "pattern": "serpente",
+      "expansion": "resgate animal silvestre"
+    },
+    {
+      "pattern": "lagarto",
+      "expansion": "resgate animal silvestre"
+    },
+    {
+      "pattern": "bicho silvestre",
+      "expansion": "resgate animal silvestre"
+    },
+    {
+      "pattern": "jacare",
+      "expansion": "resgate animal silvestre"
+    },
+    {
+      "pattern": "papagaio",
+      "expansion": "resgate animal silvestre ave"
+    },
+    {
+      "pattern": "passaro",
+      "expansion": "resgate animal silvestre ave"
+    },
+    {
+      "pattern": "coruja",
+      "expansion": "resgate animal silvestre ave"
+    },
+    {
+      "pattern": "tucano",
+      "expansion": "resgate animal silvestre ave"
+    },
+    {
+      "pattern": "gambazinho",
+      "expansion": "resgate animal silvestre"
+    },
+    {
+      "pattern": "gamba",
+      "expansion": "resgate animal silvestre",
+      "anti_patterns": [
+        "samba"
+      ]
+    },
+    {
+      "pattern": "macaco",
+      "expansion": "resgate animal silvestre"
+    },
+    {
+      "pattern": "alagando",
+      "expansion": "defesa civil alerta alagamento enchente"
+    },
+    {
+      "pattern": "alagamento",
+      "expansion": "defesa civil alerta deslizamento enchente"
+    },
+    {
+      "pattern": "enchente",
+      "expansion": "defesa civil alerta alagamento"
+    },
+    {
+      "pattern": "inundacao",
+      "expansion": "defesa civil alerta alagamento"
+    },
+    {
+      "pattern": "deslizamento",
+      "expansion": "defesa civil barreira vistoria"
+    },
+    {
+      "pattern": "quando vai chover",
+      "expansion": "defesa civil alerta temporal chuva sms"
+    },
+    {
+      "pattern": "chuva forte",
+      "expansion": "defesa civil alerta temporal alagamento"
+    },
+    {
+      "pattern": "dengue no bairro",
+      "expansion": "foco aedes aegypti vistoria"
+    },
+    {
+      "pattern": "morro rachando",
+      "expansion": "vistoria deslizamento barreira encosta"
+    },
+    {
+      "pattern": "rachando",
+      "expansion": "vistoria deslizamento barreira encosta",
+      "anti_patterns": [
+        "dente",
+        "osso",
+        "tela",
+        "vidro",
+        "celular"
+      ]
+    },
+    {
+      "pattern": "parede do morro",
+      "expansion": "vistoria deslizamento barreira encosta"
+    },
+    {
+      "pattern": "barranco",
+      "expansion": "deslizamento barreira vistoria encosta defesa civil"
+    },
+    {
+      "pattern": "terra descendo",
+      "expansion": "deslizamento barreira vistoria encosta defesa civil"
+    },
+    {
+      "pattern": "terra do morro",
+      "expansion": "deslizamento barreira vistoria encosta defesa civil"
+    },
+    {
+      "pattern": "encosta cedendo",
+      "expansion": "deslizamento barreira vistoria encosta defesa civil"
+    },
+    {
+      "pattern": "muro de contencao",
+      "expansion": "deslizamento barreira vistoria encosta"
+    },
+    {
+      "pattern": "moradia popular",
+      "expansion": "minha casa minha vida programa habitacional"
+    },
+    {
+      "pattern": "casa popular",
+      "expansion": "minha casa minha vida programa habitacional"
+    },
+    {
+      "pattern": "mcmv",
+      "expansion": "minha casa minha vida programa habitacional cadastro"
+    },
+    {
+      "pattern": "direito ao mcmv",
+      "expansion": "minha casa minha vida programa habitacional renda"
+    },
+    {
+      "pattern": "quanto precisa ganhar",
+      "expansion": "minha casa minha vida programa habitacional renda cadastro"
+    },
+    {
+      "pattern": "ter meu filho no hospital",
+      "expansion": "maternidade parto atendimento"
+    },
+    {
+      "pattern": "quero ter meu bebe",
+      "expansion": "maternidade parto atendimento"
+    },
+    {
+      "pattern": "desempregado",
+      "expansion": "emprego vaga trabalho encaminhamento consulta"
+    },
+    {
+      "pattern": "desempregada",
+      "expansion": "emprego vaga trabalho encaminhamento consulta"
+    },
+    {
+      "pattern": "procurando emprego",
+      "expansion": "emprego vaga trabalho encaminhamento"
+    },
+    {
+      "pattern": "carteira de trabalho",
+      "expansion": "emprego vaga trabalho"
+    },
+    {
+      "pattern": "abrir empresa",
+      "expansion": "empreendedor alvara licenca"
+    },
+    {
+      "pattern": "sem emprego",
+      "expansion": "emprego vaga trabalho encaminhamento consulta"
+    },
+    {
+      "pattern": "sine",
+      "expansion": "emprego vaga trabalho encaminhamento consulta"
+    },
+    {
+      "pattern": "onde fica o sine",
+      "expansion": "emprego vaga trabalho encaminhamento consulta"
+    },
+    {
+      "pattern": "matricular meu filho",
+      "expansion": "matricula escola municipal rede ensino"
+    },
+    {
+      "pattern": "vaga na escola",
+      "expansion": "matricula escola municipal rede ensino"
+    },
+    {
+      "pattern": "vaga em escola",
+      "expansion": "matricula escola municipal rede ensino"
+    },
+    {
+      "pattern": "escola publica",
+      "expansion": "matricula escola municipal rede ensino",
+      "anti_patterns": [
+        "merenda"
+      ]
+    },
+    {
+      "pattern": "creche",
+      "expansion": "matricula escola municipal educacao infantil"
+    },
+    {
+      "pattern": "voltar a estudar",
+      "expansion": "educacao jovens adultos eja ensino"
+    },
+    {
+      "pattern": "terminar os estudos",
+      "expansion": "educacao jovens adultos eja ensino"
+    },
+    {
+      "pattern": "supletivo",
+      "expansion": "educacao jovens adultos eja ensino"
+    },
+    {
+      "pattern": "eja",
+      "expansion": "educacao jovens adultos ensino"
+    },
+    {
+      "pattern": "reforco",
+      "expansion": "acompanhamento escolar inclusao aluno",
+      "anti_patterns": [
+        "muscular",
+        "academia",
+        "concreto"
+      ]
+    },
+    {
+      "pattern": "reprovou",
+      "expansion": "acompanhamento escolar inclusao aluno"
+    },
+    {
+      "pattern": "problema de aprendizado",
+      "expansion": "acompanhamento escolar inclusao aluno"
+    },
+    {
+      "pattern": "dificuldade na escola",
+      "expansion": "acompanhamento escolar inclusao aluno"
+    },
+    {
+      "pattern": "professor auxiliar",
+      "expansion": "acompanhamento escolar inclusao aluno"
+    },
+    {
+      "pattern": "morador de rua",
+      "expansion": "acolhimento situacao rua pessoa"
+    },
+    {
+      "pattern": "situacao de rua",
+      "expansion": "acolhimento pessoa rua"
+    },
+    {
+      "pattern": "morando debaixo",
+      "expansion": "acolhimento situacao rua pessoa"
+    },
+    {
+      "pattern": "morando na rua",
+      "expansion": "acolhimento situacao rua pessoa"
+    },
+    {
+      "pattern": "sem teto",
+      "expansion": "acolhimento situacao rua pessoa"
+    },
+    {
+      "pattern": "abrigo",
+      "expansion": "acolhimento situacao rua pessoa",
+      "anti_patterns": [
+        "animal",
+        "cachorro",
+        "gato"
+      ]
+    },
+    {
+      "pattern": "dormindo na rua",
+      "expansion": "acolhimento situacao rua pessoa"
+    },
+    {
+      "pattern": "debaixo do viaduto",
+      "expansion": "acolhimento situacao rua pessoa"
+    },
+    {
+      "pattern": "abrigo pro frio",
+      "expansion": "acolhimento situacao rua pessoa"
+    },
+    {
+      "pattern": "beneficio social",
+      "expansion": "bolsa familia bpc assistencia"
+    },
+    {
+      "pattern": "ajuda financeira",
+      "expansion": "bolsa familia bpc assistencia beneficio"
+    },
+    {
+      "pattern": "cadastro unico",
+      "expansion": "bolsa familia cadunico atualizar"
+    },
+    {
+      "pattern": "cadunico",
+      "expansion": "bolsa familia cadastro unico atualizar"
+    },
+    {
+      "pattern": "devendo imposto",
+      "expansion": "parcelamento debitos divida ativa acordo"
+    },
+    {
+      "pattern": "quero um acordo",
+      "expansion": "parcelamento debitos divida ativa",
+      "anti_patterns": [
+        "casamento",
+        "separacao",
+        "vizinho"
+      ]
+    },
+    {
+      "pattern": "nao tenho divida",
+      "expansion": "certidao negativa debito nada consta"
+    },
+    {
+      "pattern": "provar que nao devo",
+      "expansion": "certidao negativa debito nada consta"
+    },
+    {
+      "pattern": "infracao",
+      "expansion": "multa transito defesa previa recurso autuacao",
+      "anti_patterns": [
+        "sanitaria",
+        "ambiental"
+      ]
+    },
+    {
+      "pattern": "nao fui eu",
+      "expansion": "multa transito defesa previa recurso autuacao",
+      "anti_patterns": [
+        "roubo",
+        "furto",
+        "assalto"
+      ]
+    },
+    {
+      "pattern": "sou idosa",
+      "expansion": "beneficio prestacao continuada bpc idoso assistencia"
+    },
+    {
+      "pattern": "sou idoso",
+      "expansion": "beneficio prestacao continuada bpc idoso assistencia"
+    },
+    {
+      "pattern": "nao consigo trabalhar",
+      "expansion": "beneficio prestacao continuada bpc assistencia"
+    },
+    {
+      "pattern": "cadeira de rodas",
+      "expansion": "deficiencia pcd estacionamento cartao"
+    },
+    {
+      "pattern": "deficiente",
+      "expansion": "pessoa deficiencia pcd inclusao"
+    },
+    {
+      "pattern": "dinheiro do governo",
+      "expansion": "beneficio prestacao continuada bpc bolsa familia assistencia"
+    },
+    {
+      "pattern": "forro",
+      "expansion": "bailes populares danca evento gratuito cinelandia",
+      "anti_patterns": [
+        "carro",
+        "pneu"
+      ]
+    },
+    {
+      "pattern": "forro de graca",
+      "expansion": "bailes populares danca evento gratuito"
+    },
+    {
+      "pattern": "festa de graca",
+      "expansion": "bailes populares evento gratuito cinelandia"
+    },
+    {
+      "pattern": "jogo de graca",
+      "expansion": "cadeira cativa ingressos gratuitos"
+    },
+    {
+      "pattern": "ingresso gratis",
+      "expansion": "cadeira cativa ingressos gratuitos"
+    },
+    {
+      "pattern": "levar meu filho no jogo",
+      "expansion": "cadeira cativa ingressos gratuitos"
+    },
+    {
+      "pattern": "assistir jogo de graca",
+      "expansion": "cadeira cativa ingressos gratuitos"
+    },
+    {
+      "pattern": "quebrando a calcada",
+      "expansion": "poda de arvore vias publicas"
+    },
+    {
+      "pattern": "grande e escura",
+      "expansion": "poda de arvore vias publicas iluminacao"
+    },
+    {
+      "pattern": "machucada",
+      "expansion": "resgate animal silvestre atendimento",
+      "anti_patterns": [
+        "pessoa",
+        "gente",
+        "mulher",
+        "crianca"
+      ]
+    },
+    {
+      "pattern": "apareceu na",
+      "expansion": "resgate animal silvestre",
+      "anti_patterns": [
+        "pessoa",
+        "gente",
+        "policia"
+      ]
+    },
+    {
+      "pattern": "toda noite",
+      "expansion": "vitima violencia domestica denuncia",
+      "anti_patterns": [
+        "barulho",
+        "musica",
+        "som"
+      ]
+    },
+    {
+      "pattern": "gente morando",
+      "expansion": "acolhimento situacao rua pessoa"
+    },
+    {
+      "pattern": "ter meu filho",
+      "expansion": "maternidade parto hospital atendimento"
+    },
+    {
+      "pattern": "precisa de ajuda",
+      "expansion": "acompanhamento inclusao apoio",
+      "anti_patterns": [
+        "rua",
+        "fome",
+        "violencia",
+        "saude",
+        "doente",
+        "cachorro"
+      ]
+    },
+    {
+      "pattern": "metro",
+      "expansion": "transporte publico metrorio deslocamento linha"
+    },
+    {
+      "pattern": "trem",
+      "expansion": "transporte publico supervia deslocamento"
+    },
+    {
+      "pattern": "brt",
+      "expansion": "transporte publico onibus deslocamento"
+    },
+    {
+      "pattern": "vlt",
+      "expansion": "transporte publico deslocamento"
+    },
+    {
+      "pattern": "barca",
+      "expansion": "transporte publico barcas deslocamento"
+    },
+    {
+      "pattern": "onibus",
+      "expansion": "transporte publico deslocamento linha"
+    },
+    {
+      "pattern": "saude publica",
+      "expansion": "atencao primaria upa hospital vacinacao unidade clinica familia"
+    },
+    {
+      "pattern": "meio ambiente",
+      "expansion": "arvore poda plantio praia limpeza remocao area publica"
+    }
+  ]
+}

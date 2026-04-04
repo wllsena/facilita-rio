@@ -17,6 +17,16 @@
     {"id": "h13", "category": "edge", "query": "tô passando fome e não tenho dinheiro", "relevant": {"cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69": 3, "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 1}},
     {"id": "h14", "category": "ambiguous", "query": "saúde pública", "relevant": {"atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 2, "atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 2, "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2": 2, "informacoes-sobre-vacinacao-humana-728a6848": 1}},
     {"id": "h15", "category": "ambiguous", "query": "meio ambiente", "relevant": {"solicitacao-de-plantio-de-arvore-em-area-publica-7b6c060b": 2, "poda-de-arvore-em-vias-publicas-6aa2fb75": 2, "remocao-de-arvore-em-vias-publicas-54b06fd3": 1, "autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e": 1, "limpeza-de-praias-99817f98": 1}},
+    {"id": "h16", "category": "natural", "query": "meu filho vai mal na escola e precisa de reforço", "relevant": {"inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 3, "informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": 1}},
+    {"id": "h17", "category": "natural", "query": "tem rato e barata na praia perto de casa", "relevant": {"limpeza-de-praias-99817f98": 3, "vistoria-em-foco-de-aedes-aegypti-dengue-d2b9b06d": 1}},
+    {"id": "h18", "category": "natural", "query": "quero que meu filho almoce na escola", "relevant": {"informacoes-sobre-merenda-escolar-146237e8": 3}},
+    {"id": "h19", "category": "natural", "query": "minha filha é deficiente e quer trabalhar", "relevant": {"inclusao-de-pessoas-com-deficiencia-no-mercado-de-2b6c31d8": 3, "cartao-de-estacionamento-para-pessoas-com-0f8fbe95": 1}},
+    {"id": "h20", "category": "synonym", "query": "como pago meu IPTU parcelado", "relevant": {"parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 3, "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2, "emissao-de-2-via-do-iptu-ce2b748c": 1}},
+    {"id": "h21", "category": "edge", "query": "alguém machucando cachorro no bairro vizinho", "relevant": {"vistoria-tecnica-em-local-onde-ha-maus-tratos-de-235db3c2": 3}},
+    {"id": "h22", "category": "edge", "query": "vi um passaro grande ferido na calçada", "relevant": {"resgate-de-animais-silvestres-8d94d14c": 3}},
+    {"id": "h23", "category": "natural", "query": "chuva forte alagou minha rua tá perigoso", "relevant": {"mensagens-de-alerta-da-defesa-civil-d074809e": 3, "vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab": 2}},
+    {"id": "h24", "category": "ambiguous", "query": "serviço para idoso", "relevant": {"beneficio-de-prestacao-continuada-bpc-529f647a": 2, "cartao-de-estacionamento-para-idosos-20239153": 2, "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 1}},
+    {"id": "h25", "category": "natural", "query": "tô grávida e não tenho nada pro bebê", "relevant": {"distribuicao-de-kit-enxoval-do-bebe-77f09458": 3, "atendimento-em-maternidades-cffe0736": 2}},
     {"id": "h_neg01", "category": "negative", "query": "resultado do jogo do vasco ontem", "relevant": {}},
     {"id": "h_neg02", "category": "negative", "query": "como fazer bolo de cenoura", "relevant": {}}
   ]

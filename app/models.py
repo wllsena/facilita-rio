@@ -2,7 +2,28 @@
 
 from __future__ import annotations
 
+from typing import NamedTuple
+
 from pydantic import BaseModel, Field
+
+
+class RetrievalCandidate(NamedTuple):
+    """A candidate from hybrid retrieval (BM25 + semantic via RRF)."""
+
+    doc_id: str
+    rrf_score: float
+    bm25_score: float | None
+    semantic_score: float | None
+
+
+class RerankResult(NamedTuple):
+    """A reranked result with all component scores."""
+
+    doc_id: str
+    rrf_score: float
+    bm25_score: float | None
+    semantic_score: float | None
+    blended_score: float
 
 
 class Service(BaseModel):
@@ -53,6 +74,7 @@ class SearchResponse(BaseModel):
     query: str
     results: list[SearchResult]
     recommendations: list[RecommendedService]
+    suggested_queries: list[str] = Field(default_factory=list)
     latency_ms: float
     rerank_ms: float = 0.0
     max_semantic_score: float | None = None

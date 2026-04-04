@@ -5,6 +5,7 @@ from __future__ import annotations
 import structlog
 
 from app.config import CONFIG
+from app.models import RetrievalCandidate
 
 logger = structlog.get_logger()
 
@@ -30,15 +31,23 @@ def weighted_rrf(
 class HybridRetriever:
     """Combines BM25 and semantic search via Weighted RRF.
 
+    Both BM25 and semantic search use the expanded query (with synonym
+    expansions) when available. This ensures BM25 can find services even when
+    the citizen's original vocabulary has zero overlap with service names —
+    e.g., "vizinho bate na esposa" expands to include "violência doméstica
+    vítima atendimento", which BM25 can then match against the violence
+    service.
+
+    Initial approach used BM25 on the original query only, but this caused
+    BM25 to contribute noise for colloquial queries (matching common words
+    in unrelated services) while the correct service only appeared in semantic
+    results. Since RRF rewards documents appearing in both lists, the noise
+    from BM25 pushed correct results down.
+
     Semantic results get higher weight (default 2.0 vs 1.0 for BM25) because
     evaluation showed semantic search is far more accurate for natural language
-    queries, while BM25 excels at exact keyword matches. The asymmetric weighting
-    ensures BM25 boosts results that share exact terms without overriding the
-    semantic signal for conversational queries.
+    queries, while BM25 excels at exact keyword matches.
     """
-
-    SEMANTIC_WEIGHT = 2.0
-    BM25_WEIGHT = 1.0
 
     def __init__(self, bm25_index, vector_index) -> None:
         self._bm25 = bm25_index
@@ -49,19 +58,20 @@ class HybridRetriever:
         query: str,
         expanded_query: str | None = None,
         top_k: int | None = None,
-    ) -> list[tuple[str, float, float | None, float | None]]:
-        """Return (service_id, rrf_score, bm25_score, semantic_score) tuples.
+    ) -> list[RetrievalCandidate]:
+        """Return RetrievalCandidate tuples with per-component scores.
 
         Uses expanded_query for semantic search if provided (LLM enrichment).
         """
         top_k = top_k or CONFIG.rerank_top_k
 
-        # BM25 retrieval on original query
-        bm25_results = self._bm25.search(query, top_k=CONFIG.bm25_top_k)
+        # Both retrievers use expanded query when available.
+        # Expansion terms help BM25 find services whose names don't overlap
+        # with colloquial citizen vocabulary (e.g., "barranco" → "deslizamento").
+        retrieval_query = expanded_query or query
 
-        # Semantic retrieval — use expanded query if available
-        sem_query = expanded_query or query
-        semantic_results = self._vector.search(sem_query, top_k=CONFIG.semantic_top_k)
+        bm25_results = self._bm25.search(retrieval_query, top_k=CONFIG.bm25_top_k)
+        semantic_results = self._vector.search(retrieval_query, top_k=CONFIG.semantic_top_k)
 
         # Build score lookups
         bm25_scores = {doc_id: score for doc_id, score in bm25_results}
@@ -70,8 +80,8 @@ class HybridRetriever:
         # Weighted RRF: semantic gets 2x the contribution of BM25
         fused = weighted_rrf(
             [
-                (bm25_results, self.BM25_WEIGHT),
-                (semantic_results, self.SEMANTIC_WEIGHT),
+                (bm25_results, CONFIG.bm25_weight),
+                (semantic_results, CONFIG.semantic_weight),
             ],
             k=CONFIG.rrf_k,
         )
@@ -79,11 +89,11 @@ class HybridRetriever:
         # Attach individual scores
         results = []
         for doc_id, rrf_score in fused[:top_k * 2]:  # fetch extra for reranker
-            results.append((
-                doc_id,
-                rrf_score,
-                bm25_scores.get(doc_id),
-                semantic_scores.get(doc_id),
+            results.append(RetrievalCandidate(
+                doc_id=doc_id,
+                rrf_score=rrf_score,
+                bm25_score=bm25_scores.get(doc_id),
+                semantic_score=semantic_scores.get(doc_id),
             ))
 
         logger.debug(

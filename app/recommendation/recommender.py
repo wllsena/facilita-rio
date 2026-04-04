@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import structlog
 
 from app.config import CONFIG
@@ -11,76 +14,22 @@ from app.models import RecommendedService, Service
 
 logger = structlog.get_logger()
 
-# ── Citizen journey map ───────────────────────────────────────────────────
-# Hand-curated service connections that represent real citizen journeys.
-# These capture relationships that semantic similarity alone cannot:
-# e.g., "pregnant woman" needs maternity + baby kit + Bolsa Família,
-# but these services are not lexically/semantically close.
-CITIZEN_JOURNEYS: dict[str, list[tuple[str, str]]] = {
-    # Pregnancy journey
-    "atendimento-em-maternidades-cffe0736": [
-        ("distribuicao-de-kit-enxoval-do-bebe-77f09458", "jornada gestante: kit enxoval"),
-        ("informacoes-sobre-o-programa-bolsa-familia-4547c2ba", "jornada gestante: apoio financeiro"),
-        ("informacoes-sobre-vacinacao-humana-728a6848", "jornada gestante: vacinação do bebê"),
-    ],
-    "distribuicao-de-kit-enxoval-do-bebe-77f09458": [
-        ("atendimento-em-maternidades-cffe0736", "jornada gestante: maternidade"),
-        ("informacoes-sobre-o-programa-bolsa-familia-4547c2ba", "jornada gestante: apoio financeiro"),
-    ],
-    # Tax/property journey
-    "emissao-de-2-via-do-iptu-ce2b748c": [
-        ("iptu-consulta-a-pagamentos-e-debito-automatico-b175364b", "jornada tributária: consultar débitos"),
-        ("parcelamento-de-debitos-em-divida-ativa-6ba1f0f4", "jornada tributária: parcelar dívida"),
-        ("certidao-negativa-de-debito-nada-consta-439306e1", "jornada tributária: certidão negativa"),
-    ],
-    "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": [
-        ("emissao-de-2-via-do-iptu-ce2b748c", "jornada tributária: emitir boleto"),
-        ("parcelamento-de-debitos-em-divida-ativa-6ba1f0f4", "jornada tributária: parcelar dívida"),
-    ],
-    "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": [
-        ("certidao-negativa-de-debito-nada-consta-439306e1", "jornada tributária: certidão negativa"),
-        ("iptu-consulta-a-pagamentos-e-debito-automatico-b175364b", "jornada tributária: consultar pagamentos"),
-    ],
-    # Property regularization journey
-    "certidao-de-habite-se-aceitacao-df83d300": [
-        ("informacoes-sobre-cadastro-no-programa-minha-casa-401628a4", "jornada imóvel: programa habitacional"),
-        ("certidao-negativa-de-debito-nada-consta-439306e1", "jornada imóvel: certidão negativa"),
-    ],
-    # Animal care journey
-    "atendimento-clinico-em-animais-8c9a32e8": [
-        ("castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f", "jornada animal: castração"),
-        ("cadastro-de-animais-no-sisbicho-b5ad2d27", "jornada animal: cadastro SISBICHO"),
-    ],
-    "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": [
-        ("cadastro-de-animais-no-sisbicho-b5ad2d27", "jornada animal: cadastro SISBICHO"),
-        ("atendimento-clinico-em-animais-8c9a32e8", "jornada animal: atendimento clínico"),
-    ],
-    # Education journey
-    "informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": [
-        ("informacoes-sobre-merenda-escolar-146237e8", "jornada escolar: merenda"),
-        ("inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e", "jornada escolar: acompanhamento"),
-    ],
-    # Health journey
-    "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": [
-        ("atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2", "jornada saúde: UPA"),
-        ("informacoes-sobre-vacinacao-humana-728a6848", "jornada saúde: vacinação"),
-        ("distribuicao-de-insumos-para-tratamento-de-7e3ea1a4", "jornada saúde: insumos"),
-    ],
-    # Employment journey
-    "consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6": [
-        ("inclusao-de-pessoas-com-deficiencia-no-mercado-de-2b6c31d8", "jornada emprego: PcD"),
-        ("informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b", "jornada emprego: qualificação EJA"),
-    ],
-    # Vulnerability journey
-    "atendimento-para-pessoas-vitimas-de-violencia-2edbfc24": [
-        ("informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a", "jornada acolhimento: população de rua"),
-    ],
-    "informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a": [
-        ("cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69", "jornada acolhimento: alimentação"),
-        ("consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6", "jornada acolhimento: emprego"),
-    ],
-}
 
+def _load_citizen_journeys() -> dict[str, list[tuple[str, str]]]:
+    """Load citizen journey connections from JSON data file.
+
+    Separates domain data from logic — same principle as synonyms.json.
+    """
+    path = Path(__file__).parent.parent / "data" / "citizen_journeys.json"
+    with open(path) as f:
+        data = json.load(f)
+    return {
+        source_id: [(target, reason) for target, reason in links]
+        for source_id, links in data["journeys"].items()
+    }
+
+
+CITIZEN_JOURNEYS = _load_citizen_journeys()
 JOURNEY_BOOST = 0.15
 
 

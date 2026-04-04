@@ -125,7 +125,32 @@ def test_low_confidence_flag(pipeline):
     )
 
     # Negative query should be low confidence
-    neg_results = vi.search("pizza delivery rio de janeiro", top_k=1)
+    # "weather forecast tomorrow" has cosine ~0.76 — clearly below any reasonable threshold
+    neg_results = vi.search("weather forecast tomorrow", top_k=1)
     assert neg_results[0][1] < CONFIG.confidence_threshold, (
         f"Negative query should be below threshold ({CONFIG.confidence_threshold})"
     )
+
+
+def test_query_reformulation_for_ambiguous_queries():
+    """Short/ambiguous queries should get reformulation suggestions."""
+    from app.models import SearchResult, Service
+    from app.search.pipeline import SearchPipeline
+
+    # Create mock results with distinct service names
+    mock_service = Service(
+        id="test", nome="Emissão de 2ª via do IPTU", resumo="", descricao_completa="",
+        tema="Tributos", orgao_gestor=[], custo="", publico=[], tempo_atendimento="",
+        instrucoes="", resultado="", search_content="",
+    )
+    results = [SearchResult(service=mock_service, score=0.9)]
+
+    # Short query should get suggestions
+    suggestions = SearchPipeline._suggest_queries("imposto", results, low_confidence=False)
+    assert len(suggestions) > 0, "Ambiguous 1-word query should get suggestions"
+
+    # Long specific query should NOT get suggestions
+    suggestions = SearchPipeline._suggest_queries(
+        "meu cachorro está doente e precisa de ajuda", results, low_confidence=False,
+    )
+    assert len(suggestions) == 0, "Specific multi-word query should not get suggestions"

@@ -1,0 +1,222 @@
+{
+  "description": "Comprehensive recommendation QRELs for evaluating the second core deliverable. Each entry specifies a search query, the expected top search results (seeds), and which services SHOULD appear in recommendations. Covers all 12 citizen journeys, cross-category scenarios, and negative cases.",
+  "queries": [
+    {
+      "id": "rec01",
+      "query": "segunda via IPTU",
+      "journey": "tributária",
+      "expected_recs": [
+        {"id": "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b", "reason": "jornada tributária: consultar débitos"},
+        {"id": "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4", "reason": "jornada tributária: parcelar dívida"},
+        {"id": "certidao-negativa-de-debito-nada-consta-439306e1", "reason": "jornada tributária: certidão negativa"}
+      ]
+    },
+    {
+      "id": "rec02",
+      "query": "minha esposa está grávida",
+      "journey": "gestante",
+      "expected_recs": [
+        {"id": "distribuicao-de-kit-enxoval-do-bebe-77f09458", "reason": "jornada gestante: kit enxoval"},
+        {"id": "informacoes-sobre-o-programa-bolsa-familia-4547c2ba", "reason": "jornada gestante: apoio financeiro"}
+      ]
+    },
+    {
+      "id": "rec03",
+      "query": "meu cachorro está doente",
+      "journey": "animal",
+      "expected_recs": [
+        {"id": "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f", "reason": "jornada animal: castração"},
+        {"id": "cadastro-de-animais-no-sisbicho-b5ad2d27", "reason": "jornada animal: cadastro SISBICHO"}
+      ]
+    },
+    {
+      "id": "rec04",
+      "query": "pessoa morando na rua precisa de ajuda",
+      "journey": "acolhimento",
+      "expected_recs": [
+        {"id": "cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69", "reason": "jornada acolhimento: alimentação"},
+        {"id": "consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6", "reason": "jornada acolhimento: emprego"}
+      ]
+    },
+    {
+      "id": "rec05",
+      "query": "preciso de emprego",
+      "journey": "emprego",
+      "expected_recs": [
+        {"id": "informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b", "reason": "jornada emprego: qualificação EJA"}
+      ]
+    },
+    {
+      "id": "rec06",
+      "query": "matrícula escola municipal 2026",
+      "journey": "escolar",
+      "expected_recs": [
+        {"id": "informacoes-sobre-merenda-escolar-146237e8", "reason": "jornada escolar: merenda"},
+        {"id": "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e", "reason": "jornada escolar: acompanhamento"}
+      ]
+    },
+    {
+      "id": "rec07",
+      "query": "posto de saude perto de mim",
+      "journey": "saúde",
+      "expected_recs": [
+        {"id": "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2", "reason": "jornada saúde: UPA"},
+        {"id": "informacoes-sobre-vacinacao-humana-728a6848", "reason": "jornada saúde: vacinação"}
+      ]
+    },
+    {
+      "id": "rec08",
+      "query": "meu filho tem diabetes e precisa de insulina",
+      "journey": "saúde",
+      "expected_recs": [
+        {"id": "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910", "reason": "jornada saúde: atenção primária"}
+      ]
+    },
+    {
+      "id": "rec09",
+      "query": "preciso regularizar meu imóvel",
+      "journey": "imóvel",
+      "expected_recs": [
+        {"id": "informacoes-sobre-cadastro-no-programa-minha-casa-401628a4", "reason": "jornada imóvel: programa habitacional"},
+        {"id": "certidao-negativa-de-debito-nada-consta-439306e1", "reason": "jornada imóvel: certidão negativa"}
+      ]
+    },
+    {
+      "id": "rec10",
+      "query": "sofri violência doméstica",
+      "journey": "acolhimento",
+      "expected_recs": [
+        {"id": "informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a", "reason": "jornada acolhimento: serviço de acolhimento"}
+      ]
+    },
+    {
+      "id": "rec11",
+      "query": "consulta pagamentos e débitos IPTU",
+      "journey": "tributária",
+      "expected_recs": [
+        {"id": "emissao-de-2-via-do-iptu-ce2b748c", "reason": "jornada tributária: emitir boleto"},
+        {"id": "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4", "reason": "jornada tributária: parcelar dívida"}
+      ]
+    },
+    {
+      "id": "rec12",
+      "query": "quero castrar minha gata de graça",
+      "journey": "animal",
+      "expected_recs": [
+        {"id": "cadastro-de-animais-no-sisbicho-b5ad2d27", "reason": "jornada animal: cadastro SISBICHO"},
+        {"id": "atendimento-clinico-em-animais-8c9a32e8", "reason": "jornada animal: atendimento clínico"}
+      ]
+    },
+    {
+      "id": "rec13",
+      "query": "poda de árvore na rua",
+      "journey": "arborização",
+      "expected_recs": [
+        {"id": "remocao-de-arvore-em-vias-publicas-54b06fd3", "reason": "serviço complementar: remoção de árvore"},
+        {"id": "autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e", "reason": "serviço complementar: poda em área particular"}
+      ]
+    },
+    {
+      "id": "rec14",
+      "query": "cartão estacionamento idoso",
+      "journey": "transporte",
+      "expected_recs": [
+        {"id": "cartao-de-estacionamento-para-pessoas-com-0f8fbe95", "reason": "serviço similar: cartão PcD"}
+      ]
+    },
+    {
+      "id": "rec15",
+      "query": "quero voltar a estudar tenho 40 anos",
+      "journey": "emprego",
+      "expected_recs": [
+        {"id": "consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6", "reason": "jornada emprego: vagas"}
+      ]
+    },
+    {
+      "id": "rec16",
+      "query": "multa de trânsito consulta",
+      "journey": "transporte",
+      "expected_recs": [
+        {"id": "multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4", "reason": "serviço complementar: recurso de multa"}
+      ]
+    },
+    {
+      "id": "rec17",
+      "query": "enxoval bebê gestante",
+      "journey": "gestante",
+      "expected_recs": [
+        {"id": "atendimento-em-maternidades-cffe0736", "reason": "jornada gestante: maternidade"},
+        {"id": "informacoes-sobre-o-programa-bolsa-familia-4547c2ba", "reason": "jornada gestante: apoio financeiro"}
+      ]
+    },
+    {
+      "id": "rec18",
+      "query": "parcelamento dívida ativa prefeitura",
+      "journey": "tributária",
+      "expected_recs": [
+        {"id": "certidao-negativa-de-debito-nada-consta-439306e1", "reason": "jornada tributária: certidão negativa"},
+        {"id": "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b", "reason": "jornada tributária: consultar pagamentos"}
+      ]
+    },
+    {
+      "id": "rec19",
+      "query": "limpeza praça do meu bairro",
+      "journey": "cidade",
+      "expected_recs": [
+        {"id": "limpeza-de-praias-99817f98", "reason": "serviço similar: limpeza de praias"}
+      ]
+    },
+    {
+      "id": "rec20",
+      "query": "onde tem UPA aberta agora",
+      "journey": "saúde",
+      "expected_recs": [
+        {"id": "atendimento-em-hospitais-de-emergencia-e-pronto-78384051", "reason": "serviço similar: hospital de emergência"},
+        {"id": "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910", "reason": "jornada saúde: atenção primária"}
+      ]
+    },
+    {
+      "id": "rec21",
+      "query": "meu vizinho maltrata animais",
+      "journey": "animal",
+      "expected_recs": [
+        {"id": "resgate-de-animais-silvestres-8d94d14c", "reason": "serviço complementar: resgate de animais"},
+        {"id": "atendimento-clinico-em-animais-8c9a32e8", "reason": "serviço complementar: atendimento clínico"}
+      ]
+    },
+    {
+      "id": "rec22",
+      "query": "alerta defesa civil",
+      "journey": "segurança",
+      "expected_recs": [
+        {"id": "vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab", "reason": "serviço relacionado: vistoria deslizamento"}
+      ]
+    },
+    {
+      "id": "rec23",
+      "query": "Bolsa Família informações",
+      "journey": "família",
+      "expected_recs": [
+        {"id": "beneficio-de-prestacao-continuada-bpc-529f647a", "reason": "serviço similar: outro benefício social"}
+      ]
+    },
+    {
+      "id": "rec24",
+      "query": "dengue no meu bairro",
+      "journey": "saúde",
+      "expected_recs": [
+        {"id": "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910", "reason": "jornada saúde: atendimento se ficar doente"},
+        {"id": "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2", "reason": "jornada saúde: UPA para casos graves"}
+      ]
+    },
+    {
+      "id": "rec25",
+      "query": "onde posso comer de graça",
+      "journey": "acolhimento",
+      "expected_recs": [
+        {"id": "informacoes-sobre-o-programa-bolsa-familia-4547c2ba", "reason": "serviço complementar: apoio financeiro"},
+        {"id": "informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a", "reason": "serviço complementar: acolhimento"}
+      ]
+    }
+  ]
+}
