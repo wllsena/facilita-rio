@@ -343,6 +343,38 @@
       "expansion": "castracao gratuita programa bicho rio"
     },
     {
+      "pattern": "cachorro doente",
+      "expansion": "atendimento clinico animais veterinario saude animal"
+    },
+    {
+      "pattern": "gato doente",
+      "expansion": "atendimento clinico animais veterinario saude animal"
+    },
+    {
+      "pattern": "animal doente",
+      "expansion": "atendimento clinico animais veterinario saude animal"
+    },
+    {
+      "pattern": "cachorro passando mal",
+      "expansion": "atendimento clinico animais veterinario saude animal"
+    },
+    {
+      "pattern": "gato passando mal",
+      "expansion": "atendimento clinico animais veterinario saude animal"
+    },
+    {
+      "pattern": "machucando cachorro",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
+      "pattern": "machucando gato",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
+      "pattern": "machucando animal",
+      "expansion": "maus tratos animais vistoria denuncia"
+    },
+    {
       "pattern": "cachorro atropelado",
       "expansion": "clinico animais veterinario atendimento"
     },

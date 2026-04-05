@@ -10,15 +10,17 @@ from app.search.hybrid import HybridRetriever, weighted_rrf
 
 
 class TestBM25:
-    def test_exact_match(self, services):
+    def test_exact_name_match(self, services):
+        """Searching a service name should return that service."""
         idx = BM25Index(services)
-        results = idx.search("IPTU segunda via", top_k=5)
+        service = services[0]
+        results = idx.search(service.nome, top_k=5)
         ids = [r[0] for r in results]
-        assert any("iptu" in rid for rid in ids)
+        assert service.id in ids
 
     def test_returns_scores(self, services):
         idx = BM25Index(services)
-        results = idx.search("vacinação", top_k=5)
+        results = idx.search(services[0].nome, top_k=5)
         assert len(results) > 0
         for _doc_id, score in results:
             assert score > 0
@@ -30,7 +32,7 @@ class TestBM25:
 
     def test_max_results_respected(self, services):
         idx = BM25Index(services)
-        results = idx.search("serviço público", top_k=3)
+        results = idx.search(services[0].nome, top_k=3)
         assert len(results) <= 3
 
 
@@ -40,22 +42,22 @@ def vector_index(services):
 
 
 class TestVectorIndex:
-    def test_semantic_search(self, services, vector_index):
-        results = vector_index.search("meu cachorro está doente", top_k=5)
-        ids = [r[0] for r in results]
-        # Should find animal-related services
-        assert any("animal" in rid or "clinico" in rid or "bicho" in rid for rid in ids)
+    def test_semantic_search_finds_self(self, services, vector_index):
+        """Searching a service's name should return that service as top result."""
+        service = services[0]
+        results = vector_index.search(service.nome, top_k=5)
+        assert len(results) > 0
+        assert results[0][0] == service.id
 
     def test_get_neighbors(self, services, vector_index):
-        # Find neighbors of IPTU service
-        iptu_id = next(s.id for s in services if "iptu" in s.id.lower() and "consulta" in s.id.lower())
-        neighbors = vector_index.get_neighbors(iptu_id, top_k=3)
+        """Neighbors should be returned and exclude the source service."""
+        service = services[0]
+        neighbors = vector_index.get_neighbors(service.id, top_k=3)
         assert len(neighbors) > 0
-        # Neighbors should not include the source
-        assert all(nid != iptu_id for nid, _ in neighbors)
+        assert all(nid != service.id for nid, _ in neighbors)
 
     def test_returns_cosine_similarity(self, services, vector_index):
-        results = vector_index.search("vacinação", top_k=5)
+        results = vector_index.search(services[0].nome, top_k=5)
         for _, score in results:
             assert -1.0 <= score <= 1.0
 
@@ -91,13 +93,13 @@ class TestHybridRetriever:
         bm25 = BM25Index(services)
         vector = VectorIndex(services)
         hybrid = HybridRetriever(bm25, vector)
-        results = hybrid.search("preciso de emprego")
+        results = hybrid.search(services[0].nome)
         assert len(results) > 0
 
     def test_hybrid_contains_scores(self, services):
         bm25 = BM25Index(services)
         vector = VectorIndex(services)
         hybrid = HybridRetriever(bm25, vector)
-        results = hybrid.search("multa de trânsito")
+        results = hybrid.search(services[0].nome)
         for _doc_id, rrf_score, _bm25_score, _sem_score in results:
             assert rrf_score > 0

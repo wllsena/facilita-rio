@@ -82,6 +82,14 @@
     {"id": "neg04", "category": "negative", "query": "receita de bolo de chocolate", "relevant": {}},
     {"id": "neg05", "category": "negative", "query": "horário do jogo do flamengo", "relevant": {}},
     {"id": "neg06", "category": "negative", "query": "como investir na bolsa de valores", "relevant": {}},
-    {"id": "neg07", "category": "negative", "query": "alugar apartamento copacabana", "relevant": {}}
+    {"id": "neg07", "category": "negative", "query": "alugar apartamento copacabana", "relevant": {}},
+    {"id": "neg08", "category": "negative", "query": "uber preço corrida centro do rio", "relevant": {}},
+    {"id": "neg09", "category": "negative", "query": "resultado do jogo do bicho hoje", "relevant": {}},
+    {"id": "neg10", "category": "negative", "query": "Netflix não funciona no meu celular", "relevant": {}},
+    {"id": "neg11", "category": "negative", "query": "passagem de avião barata Rio São Paulo", "relevant": {}},
+    {"id": "neg12", "category": "negative", "query": "como fazer pão de queijo caseiro", "relevant": {}},
+    {"id": "neg13", "category": "negative", "query": "preço da gasolina hoje no rio de janeiro", "relevant": {}},
+    {"id": "neg14", "category": "negative", "query": "transferência Pix pelo aplicativo do banco", "relevant": {}},
+    {"id": "neg15", "category": "negative", "query": "INSS como dar entrada na aposentadoria", "relevant": {}}
   ]
 }

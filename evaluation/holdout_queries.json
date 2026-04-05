@@ -28,6 +28,9 @@
     {"id": "h24", "category": "ambiguous", "query": "serviço para idoso", "relevant": {"beneficio-de-prestacao-continuada-bpc-529f647a": 2, "cartao-de-estacionamento-para-idosos-20239153": 2, "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 1}},
     {"id": "h25", "category": "natural", "query": "tô grávida e não tenho nada pro bebê", "relevant": {"distribuicao-de-kit-enxoval-do-bebe-77f09458": 3, "atendimento-em-maternidades-cffe0736": 2}},
     {"id": "h_neg01", "category": "negative", "query": "resultado do jogo do vasco ontem", "relevant": {}},
-    {"id": "h_neg02", "category": "negative", "query": "como fazer bolo de cenoura", "relevant": {}}
+    {"id": "h_neg02", "category": "negative", "query": "como fazer bolo de cenoura", "relevant": {}},
+    {"id": "h_neg03", "category": "negative", "query": "lotérica mais perto de mim que tá aberta", "relevant": {}},
+    {"id": "h_neg04", "category": "negative", "query": "CNH renovar carteira de motorista DETRAN", "relevant": {}},
+    {"id": "h_neg05", "category": "negative", "query": "iFood cupom de desconto entrega grátis", "relevant": {}}
   ]
 }

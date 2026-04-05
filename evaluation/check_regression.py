@@ -1,17 +1,4 @@
-"""Regression check — compare evaluation results against a saved baseline.
-
-Usage:
-    # Save current results as baseline
-    python -m evaluation.evaluate
-    cp evaluation/results/evaluation_results.json evaluation/results/baseline.json
-
-    # After changes, run evaluation and check for regressions
-    python -m evaluation.evaluate
-    python -m evaluation.check_regression
-
-Exit code 0 = no regression. Exit code 1 = regression detected.
-Suitable for CI pipelines.
-"""
+"""CI regression check — exit 0 if no regression vs baseline, exit 1 otherwise."""
 
 from __future__ import annotations
 

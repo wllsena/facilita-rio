@@ -1,74 +1,61 @@
 # Deploy
 
-## Fluxo
+## Como Funciona
+
+Quando você envia para o branch `main`:
+
+1. **GitHub Actions** executa lint (`ruff check .`) e testes (`pytest`)
+2. Se passarem, faz SSH no servidor de produção
+3. Puxa o código mais recente, constrói uma nova imagem Docker (o container antigo continua servindo durante o build)
+4. Troca para o novo container
+5. Executa health check — se falhar após 5 minutos, o deploy falha
 
 ```
-Push no main
-    |
-    v
-GitHub Actions (.github/workflows/deploy.yml)
-    |
-    +-- 1. Lint (ruff check)
-    +-- 2. Testes (pytest, 73 testes)
-    |
-    v  (só se 1 e 2 passaram)
-    |
-    +-- 3. SSH na EC2
-    +-- 4. git pull
-    +-- 5. docker compose build (container antigo ainda rodando)
-    +-- 6. docker compose up -d (swap)
-    +-- 7. Health check (até 5 min)
-    +-- 8. Limpeza de imagens antigas
+Push para main → Lint + Testes → SSH no servidor → Build da imagem → Troca de container → Health check
 ```
 
-Pull requests na `main` rodam apenas lint + testes (sem deploy).
+Pull requests executam apenas lint + testes (sem deploy).
 
-## Downtime
-
-O build da imagem Docker roda **com o container antigo ainda servindo requests**. O downtime acontece apenas durante o startup do novo container (~50s na máquina atual, por causa do carregamento dos modelos ML). Não é zero-downtime, mas a janela é mínima.
-
-Se o health check falhar após 5 minutos, o deploy falha e aparece erro no GitHub Actions.
+**Indisponibilidade:** ~50 segundos enquanto os modelos de ML carregam durante a troca de container. O container antigo serve tráfego durante o build do Docker.
 
 ## Infraestrutura
 
 | Componente | Detalhe |
-|---|---|
+|-----------|---------|
 | Servidor | EC2 `t4g.micro` (ARM64, 1.8GB RAM, 2GB swap) |
 | Domínio | facilita-rio.com |
 | HTTPS | Let's Encrypt via certbot (renovação automática) |
-| Proxy reverso | nginx (80/443 para localhost:8000) |
-| Aplicação | Docker container rodando como `appuser` (non-root) |
-| CI/CD | GitHub Actions |
+| Proxy reverso | nginx (portas 80/443 → localhost:8000) |
+| Aplicação | Container Docker, usuário não-root |
+| CI/CD | GitHub Actions (`.github/workflows/deploy.yml`) |
 
 ## Configuração
 
 ### Secrets do GitHub Actions
 
-Em Settings > Secrets and variables > Actions:
+Em Settings > Secrets and variables > Actions do repositório, configure:
 
-| Secret | Descrição |
-|---|---|
-| `EC2_SSH_KEY` | Chave PEM para SSH na EC2 |
-| `EC2_HOST` | Hostname da EC2 |
-| `EC2_USER` | Usuário SSH (`ubuntu`) |
+| Secret | O que é |
+|--------|---------|
+| `EC2_SSH_KEY` | Chave PEM para acesso SSH ao servidor |
+| `EC2_HOST` | Hostname ou IP do servidor |
+| `EC2_USER` | Usuário SSH (geralmente `ubuntu`) |
 
-### Deploy key
+### Arquivos no Servidor
 
-O servidor EC2 tem uma deploy key SSH (`~/.ssh/deploy_key`) registrada no repositório para fazer `git pull` sem autenticação interativa. Configurada em `~/.ssh/config`.
-
-### Arquivos no servidor
-
-| Arquivo | Função |
-|---|---|
-| `~/deploy.sh` | Script de deploy (git pull, build, swap, health check) |
+| Caminho | Propósito |
+|---------|-----------|
+| `~/deploy.sh` | Script de deploy (pull, build, troca, health check) |
 | `~/facilita-rio/` | Clone do repositório |
 | `/etc/nginx/sites-enabled/facilita-rio.com` | Configuração nginx + SSL |
 | `/etc/letsencrypt/live/facilita-rio.com/` | Certificados SSL |
 
-## Comandos úteis
+O servidor tem uma deploy key (`~/.ssh/deploy_key`) para git pull sem autenticação interativa.
+
+## Comandos Úteis
 
 ```bash
-# Health check
+# Verificar se a aplicação está rodando
 curl https://facilita-rio.com/health
 
 # Status do último deploy
@@ -78,11 +65,11 @@ gh run list --repo wllsena/facilita-rio --limit 1
 gh run view <run-id> --repo wllsena/facilita-rio --log
 
 # Logs do container
-ssh -i <key> ubuntu@<host> "sudo docker compose -f ~/facilita-rio/docker-compose.yml logs --tail 30"
+ssh -i <chave> ubuntu@<host> "sudo docker compose -f ~/facilita-rio/docker-compose.yml logs --tail 30"
 
 # Deploy manual (sem push)
-ssh -i <key> ubuntu@<host> "bash ~/deploy.sh"
+ssh -i <chave> ubuntu@<host> "bash ~/deploy.sh"
 
 # Reiniciar sem rebuild
-ssh -i <key> ubuntu@<host> "cd ~/facilita-rio && sudo docker compose restart"
+ssh -i <chave> ubuntu@<host> "cd ~/facilita-rio && sudo docker compose restart"
 ```

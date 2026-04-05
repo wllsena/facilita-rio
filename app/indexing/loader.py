@@ -29,7 +29,6 @@ def load_services(path: Path) -> list[Service]:
             tempo_atendimento=data.get("tempo_atendimento", "") or "",
             instrucoes=data.get("instrucoes_solicitante_plaintext", "") or "",
             resultado=data.get("resultado_solicitacao_plaintext", "") or "",
-            search_content=data.get("search_content", "") or "",
         )
         services.append(service)
 

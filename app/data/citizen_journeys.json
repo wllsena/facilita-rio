@@ -48,6 +48,17 @@
       ["inclusao-de-pessoas-com-deficiencia-no-mercado-de-2b6c31d8", "jornada emprego: PcD"],
       ["informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b", "jornada emprego: qualificação EJA"]
     ],
+    "informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b": [
+      ["consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6", "jornada emprego: vagas após qualificação"]
+    ],
+    "vistoria-em-foco-de-aedes-aegypti-dengue-d2b9b06d": [
+      ["atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2", "jornada saúde: UPA para casos graves"],
+      ["atendimento-em-unidades-de-atencao-primaria-em-2f6e4910", "jornada saúde: atenção primária"]
+    ],
+    "cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69": [
+      ["informacoes-sobre-o-programa-bolsa-familia-4547c2ba", "jornada acolhimento: apoio financeiro"],
+      ["informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a", "jornada acolhimento: outros serviços sociais"]
+    ],
     "atendimento-para-pessoas-vitimas-de-violencia-2edbfc24": [
       ["informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a", "jornada acolhimento: população de rua"]
     ],

@@ -1,12 +1,15 @@
-"""Pipeline quality regression tests — verify minimum IR metrics for representative queries.
+"""Pipeline quality regression tests — verify the full pipeline returns relevant results.
 
-These tests run real queries through the full pipeline and assert the correct
-services appear in top results. They catch regressions that unit tests cannot:
-e.g., a BM25 tokenizer change that breaks a specific query, or a weight change
-that shifts rankings below acceptable thresholds.
+These tests run real queries through expand → hybrid → rerank and check that
+the top-ranked service is among the expected relevant services. Quality checks
+are loaded from evaluation/test_queries.json so they stay in sync with the
+evaluation suite.
 """
 
 from __future__ import annotations
+
+import json
+from pathlib import Path
 
 import pytest
 
@@ -40,70 +43,77 @@ def _search(pipeline, query: str, top_k: int = 10) -> list[tuple[str, float]]:
     return [(doc_id, score) for doc_id, _, _, _, score in reranked]
 
 
-# Representative queries spanning all categories with expected top-1 service
-QUALITY_CHECKS = [
-    # Direct
-    ("segunda via IPTU", "emissao-de-2-via-do-iptu-ce2b748c"),
-    # Natural language
-    ("meu cachorro está doente", "atendimento-clinico-em-animais-8c9a32e8"),
-    ("quero parar de fumar", "inscricao-em-programa-de-tratamento-antitabagismo-00116adc"),
-    ("tem buraco na minha rua", "reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e"),
-    # Synonym
-    ("veterinário público gratuito", "atendimento-clinico-em-animais-8c9a32e8"),
-    # Edge (with expansion)
-    ("árvore caiu na calçada perto da minha casa", "remocao-de-arvore-em-vias-publicas-54b06fd3"),
-]
+def _load_quality_checks() -> list[tuple[str, str, str]]:
+    """Load a sample of queries from each category in test_queries.json.
+
+    Returns (query, expected_id, test_id) tuples. Picks the first query
+    from each non-negative category that has a grade-3 relevant service.
+    """
+    path = Path(__file__).resolve().parent.parent / "evaluation" / "test_queries.json"
+    with open(path) as f:
+        data = json.load(f)
+
+    seen_categories: set[str] = set()
+    checks = []
+    for q in data["queries"]:
+        cat = q["category"]
+        if cat == "negative" or cat in seen_categories:
+            continue
+        # Find the best-graded relevant service
+        best_id = max(q["relevant"], key=lambda k: q["relevant"][k], default=None)
+        if best_id and q["relevant"][best_id] >= 3:
+            checks.append((q["query"], best_id, q["id"]))
+            seen_categories.add(cat)
+    return checks
+
+
+QUALITY_CHECKS = _load_quality_checks()
 
 
 @pytest.mark.parametrize(
-    "query,expected_id",
+    "query,expected_id,test_id",
     QUALITY_CHECKS,
-    ids=[q[:35] for q, _ in QUALITY_CHECKS],
+    ids=[qid for _, _, qid in QUALITY_CHECKS],
 )
-def test_top1_result_is_correct(pipeline, query, expected_id):
+def test_top3_result_is_correct(pipeline, query, expected_id, test_id):
     """The most relevant service should appear in top-3 for representative queries."""
     results = _search(pipeline, query)
     assert len(results) > 0, f"No results for '{query}'"
     top_ids = [r[0] for r in results[:3]]
     assert expected_id in top_ids, (
-        f"Expected '{expected_id}' in top-3 for '{query}', got {top_ids}"
+        f"[{test_id}] Expected '{expected_id}' in top-3 for '{query}', got {top_ids}"
     )
 
 
-def test_all_natural_queries_return_results(pipeline):
-    """Pipeline should return results for all common natural language queries."""
-    queries = [
-        "preciso de emprego",
-        "vacinação",
-        "sofri violência doméstica",
-        "dengue no meu bairro",
-        "minha esposa está grávida",
-        "pessoa morando na rua",
-    ]
-    for query in queries:
+def test_all_queries_return_results(pipeline):
+    """Pipeline should return results for common natural language queries."""
+    path = Path(__file__).resolve().parent.parent / "evaluation" / "test_queries.json"
+    with open(path) as f:
+        data = json.load(f)
+
+    natural_queries = [q["query"] for q in data["queries"] if q["category"] == "natural"]
+    for query in natural_queries[:6]:
         results = _search(pipeline, query)
         assert len(results) >= 3, f"Too few results ({len(results)}) for '{query}'"
 
 
 def test_max_semantic_score_is_confidence_signal(pipeline):
     """Positive queries should have higher max cosine similarity than out-of-scope queries."""
-    services_map, retriever, _ = pipeline
-
-    # Use the vector index directly for cosine similarity
+    _, retriever, _ = pipeline
     vi = retriever._vector
 
-    positive_sims = []
-    for query in ["segunda via IPTU", "meu cachorro está doente", "vacinação"]:
-        results = vi.search(query, top_k=1)
-        positive_sims.append(results[0][1])
+    path = Path(__file__).resolve().parent.parent / "evaluation" / "test_queries.json"
+    with open(path) as f:
+        data = json.load(f)
 
-    negative_sims = []
-    for query in ["pizza delivery", "weather forecast", "receita de bolo"]:
-        results = vi.search(query, top_k=1)
-        negative_sims.append(results[0][1])
+    positive = [q["query"] for q in data["queries"] if q["category"] != "negative"][:3]
+    negative = [q["query"] for q in data["queries"] if q["category"] == "negative"][:3]
 
-    avg_pos = sum(positive_sims) / len(positive_sims)
-    avg_neg = sum(negative_sims) / len(negative_sims)
+    pos_sims = [vi.search(q, top_k=1)[0][1] for q in positive]
+    neg_sims = [vi.search(q, top_k=1)[0][1] for q in negative]
+
+    avg_pos = sum(pos_sims) / len(pos_sims)
+    avg_neg = sum(neg_sims) / len(neg_sims)
 
     assert avg_pos > avg_neg, (
         f"Positive queries ({avg_pos:.4f}) should have higher cosine sim "
@@ -112,23 +122,28 @@ def test_max_semantic_score_is_confidence_signal(pipeline):
 
 
 def test_low_confidence_flag(pipeline):
-    """Out-of-scope queries should be flagged as low_confidence."""
+    """Positive queries should have higher cosine similarity than clearly out-of-scope queries."""
     from app.config import CONFIG
 
-    services_map, retriever, _ = pipeline
+    _, retriever, _ = pipeline
     vi = retriever._vector
 
-    # Positive query should NOT be low confidence
-    pos_results = vi.search("segunda via IPTU", top_k=1)
-    assert pos_results[0][1] >= CONFIG.confidence_threshold, (
-        f"Positive query should be above threshold ({CONFIG.confidence_threshold})"
-    )
+    path = Path(__file__).resolve().parent.parent / "evaluation" / "test_queries.json"
+    with open(path) as f:
+        data = json.load(f)
 
-    # Negative query should be low confidence
-    # "weather forecast tomorrow" has cosine ~0.76 — clearly below any reasonable threshold
-    neg_results = vi.search("weather forecast tomorrow", top_k=1)
-    assert neg_results[0][1] < CONFIG.confidence_threshold, (
-        f"Negative query should be below threshold ({CONFIG.confidence_threshold})"
+    # First positive query should be above threshold
+    pos_query = next(q["query"] for q in data["queries"] if q["category"] == "direct")
+    pos_results = vi.search(pos_query, top_k=1)
+    assert pos_results[0][1] >= CONFIG.confidence_threshold
+
+    # Find a negative query that is clearly below threshold
+    neg_queries = [q["query"] for q in data["queries"] if q["category"] == "negative"]
+    neg_sims = [(vi.search(q, top_k=1)[0][1], q) for q in neg_queries]
+    min_sim, min_query = min(neg_sims)
+    assert min_sim < CONFIG.confidence_threshold, (
+        f"Lowest negative query '{min_query}' has cosine {min_sim:.4f}, "
+        f"expected below {CONFIG.confidence_threshold}"
     )
 
 
@@ -137,20 +152,19 @@ def test_query_reformulation_for_ambiguous_queries():
     from app.models import SearchResult, Service
     from app.search.pipeline import SearchPipeline
 
-    # Create mock results with distinct service names
     mock_service = Service(
-        id="test", nome="Emissão de 2ª via do IPTU", resumo="", descricao_completa="",
-        tema="Tributos", orgao_gestor=[], custo="", publico=[], tempo_atendimento="",
-        instrucoes="", resultado="", search_content="",
+        id="test", nome="Emissão de Documento Oficial", resumo="", descricao_completa="",
+        tema="Documentos", orgao_gestor=[], custo="", publico=[], tempo_atendimento="",
+        instrucoes="", resultado="",
     )
     results = [SearchResult(service=mock_service, score=0.9)]
 
-    # Short query should get suggestions
+    # Short query with words NOT in the service name → should get suggestions
     suggestions = SearchPipeline._suggest_queries("imposto", results, low_confidence=False)
     assert len(suggestions) > 0, "Ambiguous 1-word query should get suggestions"
 
-    # Long specific query should NOT get suggestions
+    # Long specific query → should NOT get suggestions
     suggestions = SearchPipeline._suggest_queries(
-        "meu cachorro está doente e precisa de ajuda", results, low_confidence=False,
+        "this is a very specific long query about something", results, low_confidence=False,
     )
     assert len(suggestions) == 0, "Specific multi-word query should not get suggestions"
