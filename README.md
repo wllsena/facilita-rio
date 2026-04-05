@@ -22,15 +22,15 @@ flowchart TD
     RES --> REC[Recomendações]
 ```
 
-**Expansão de sinônimos.** Antes da busca, verifica a consulta contra padrões em `app/data/synonyms.json`. Se "febre" aparece, adiciona "hospital emergência upa". Esses padrões são específicos por catálogo — o sistema funciona sem eles, com menos precisão.
+**Expandir sinônimos.** Antes da busca, verifica a consulta contra padrões em `app/data/synonyms.json`. Se "febre" aparece, adiciona "hospital emergência upa". Esses padrões são específicos por catálogo — o sistema funciona sem eles, com menos precisão.
 
-**BM25.** Busca por palavras. Encontra documentos que contêm os mesmos termos da consulta, com *stemming* (reduz palavras à raiz: "árvores" → "árvor"). Bom para termos exatos como "IPTU", ruim para linguagem coloquial.
+**BM25 (palavras).** Busca por palavras. Encontra documentos que contêm os mesmos termos da consulta, com *stemming* (reduz palavras à raiz: "árvores" → "árvor"). Bom para termos exatos como "IPTU", ruim para linguagem coloquial.
 
-**FAISS.** Busca por sentido. Um modelo de linguagem ([E5-small](https://huggingface.co/intfloat/multilingual-e5-small)) converte textos em vetores numéricos. Textos com significado parecido ficam próximos, mesmo sem compartilhar palavras. FAISS (Meta) compara esses vetores rapidamente.
+**FAISS (sentido).** Busca por sentido. Um modelo de linguagem ([E5-small](https://huggingface.co/intfloat/multilingual-e5-small)) converte textos em vetores numéricos. Textos com significado parecido ficam próximos, mesmo sem compartilhar palavras. FAISS (Meta) compara esses vetores rapidamente.
 
-**RRF.** Combina os rankings de BM25 e FAISS por posição (não por score bruto). FAISS recebe peso 2.0 e BM25 1.0 porque o semântico lida melhor com linguagem coloquial.
+**Combinar (RRF).** Combina os rankings de BM25 e FAISS por posição (não por score bruto). FAISS recebe peso 2.0 e BM25 1.0 porque o semântico lida melhor com linguagem coloquial.
 
-**Cross-Encoder.** Um segundo modelo ([mMARCO](https://huggingface.co/cross-encoder/mmarco-mMiniLMv2-L12-H384-v1)) que lê cada par (consulta, documento) integralmente. Mais preciso, mas lento (~63ms) — só processa os 20 melhores candidatos. Peso de 0.02 no score final (desempatador).
+**Reranker.** Um segundo modelo ([mMARCO](https://huggingface.co/cross-encoder/mmarco-mMiniLMv2-L12-H384-v1)) que lê cada par (consulta, documento) integralmente. Mais preciso, mas lento (~63ms) — só processa os 20 melhores candidatos. Peso de 0.02 no score final (desempatador).
 
 **Recomendações.** Sugere serviços relacionados usando vizinhança semântica, mesma categoria, clusters temáticos, e jornadas do cidadão (conexões manuais em `app/data/citizen_journeys.json`).
 
