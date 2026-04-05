@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass, field
+from typing import Literal
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -47,10 +48,11 @@ class SearchConfig:
     confidence_threshold: float = 0.83
 
     # LLM (optional — system works fully without it)
-    openai_model: str = "gpt-4o-mini"
+    openai_model: str = "gpt-5.4-mini"
+    llm_reasoning_effort: Literal["none", "minimal", "low", "medium", "high"] = "high"
     llm_enabled: bool = field(default_factory=lambda: bool(os.getenv("OPENAI_API_KEY")))
     llm_timeout: float = 10.0
-    llm_max_tokens: int = 150
+    llm_max_tokens: int = 2048
     llm_system_prompt: str = (
         "You are an assistant that helps users find services in a catalog. "
         "Given a user query, extract:\n"

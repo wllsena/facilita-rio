@@ -77,12 +77,12 @@ async def enrich_query_with_llm(query: str) -> dict:
         client = AsyncOpenAI(api_key=api_key)
         response = await client.chat.completions.create(
             model=CONFIG.openai_model,
+            reasoning_effort=CONFIG.llm_reasoning_effort,
             messages=[
                 {"role": "system", "content": CONFIG.llm_system_prompt},
                 {"role": "user", "content": query},
             ],
-            temperature=0,
-            max_tokens=CONFIG.llm_max_tokens,
+            max_completion_tokens=CONFIG.llm_max_tokens,
             timeout=CONFIG.llm_timeout,
             response_format={"type": "json_object"},
         )

@@ -54,7 +54,7 @@ Primeiro startup: ~30s (download de modelos). Depois: ~5s. Docs da API em `/docs
 
 O catálogo fica em `servicos_selecionados.json`. Para usar outro, substitua esse arquivo — re-indexa no próximo startup.
 
-**LLM (opcional):** Com `OPENAI_API_KEY`, usa GPT-4o-mini para enriquecer queries. Sem a chave, funciona normalmente.
+**LLM (opcional):** Com `OPENAI_API_KEY`, usa GPT-5.4-mini (reasoning effort: high) para enriquecer queries. Sem a chave, funciona normalmente.
 
 ```bash
 pytest tests/ -v     # 72 testes, 96% cobertura
