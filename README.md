@@ -10,15 +10,16 @@ Além de achar o serviço certo, o sistema sugere serviços relacionados. Uma ge
 
 ## Arquitetura
 
-```
-Consulta do cidadão
-  │
-  ▼
-Expandir sinônimos ──► BM25 (palavras) ─┐
-        │                                ├─► Combinar (RRF) ─► Reranker ─► Resultados
-        └──────────► FAISS (sentido) ────┘                                     │
-                                                                               ▼
-                                                                        Recomendações
+```mermaid
+flowchart TD
+    Q[Consulta do cidadão] --> EXP[Expandir sinônimos]
+    EXP --> BM25["BM25 (palavras)"]
+    EXP --> FAISS["FAISS (sentido)"]
+    BM25 --> RRF["Combinar (RRF)"]
+    FAISS --> RRF
+    RRF --> RE[Reranker]
+    RE --> RES[Resultados]
+    RES --> REC[Recomendações]
 ```
 
 **Expansão de sinônimos.** Antes da busca, verifica a consulta contra padrões em `app/data/synonyms.json`. Se "febre" aparece, adiciona "hospital emergência upa". Esses padrões são específicos por catálogo — o sistema funciona sem eles, com menos precisão.
