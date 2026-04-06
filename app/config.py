@@ -44,8 +44,8 @@ class SearchConfig:
     openai_model: str = "gpt-5.4-mini"
     llm_reasoning_effort: Literal["none", "minimal", "low", "medium", "high"] = "low"
     llm_enabled: bool = field(default_factory=lambda: bool(os.getenv("OPENAI_API_KEY")))
-    llm_timeout: float = 10.0
-    llm_max_tokens: int = 2048
+    llm_timeout: float = 3.0
+    llm_max_tokens: int = 256
     llm_system_prompt: str = (
         "You are an assistant that helps users find services in a catalog. "
         "Given a user query, extract:\n"
