@@ -42,7 +42,7 @@ class SearchConfig:
     app_title: str = "facilita Rio"
 
     openai_model: str = "gpt-5.4-mini"
-    llm_reasoning_effort: Literal["none", "minimal", "low", "medium", "high"] = "high"
+    llm_reasoning_effort: Literal["none", "minimal", "low", "medium", "high"] = "low"
     llm_enabled: bool = field(default_factory=lambda: bool(os.getenv("OPENAI_API_KEY")))
     llm_timeout: float = 10.0
     llm_max_tokens: int = 2048
