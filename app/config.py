@@ -18,8 +18,8 @@ class SearchConfig:
     reranker_max_length: int = 512
     reranker_desc_snippet: int = 500
 
-    bm25_top_k: int = 20
-    semantic_top_k: int = 20
+    bm25_top_k: int = 10
+    semantic_top_k: int = 10
     rrf_k: int = 60
     rerank_top_k: int = 10
     semantic_weight: float = 2.0
@@ -42,10 +42,10 @@ class SearchConfig:
     app_title: str = "facilita Rio"
 
     openai_model: str = "gpt-5.4-mini"
-    llm_reasoning_effort: Literal["none", "minimal", "low", "medium", "high"] = "low"
+    llm_reasoning_effort: Literal["none", "minimal", "low", "medium", "high"] = "medium"
     llm_enabled: bool = field(default_factory=lambda: bool(os.getenv("OPENAI_API_KEY")))
-    llm_timeout: float = 3.0
-    llm_max_tokens: int = 256
+    llm_timeout: float = 5.0
+    llm_max_tokens: int = 512
     llm_system_prompt: str = (
         "You are an assistant that helps users find services in a catalog. "
         "Given a user query, extract:\n"
