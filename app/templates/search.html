@@ -60,17 +60,6 @@
 {% endif %}
 
 {% if response %}
-{% if response.debug %}
-<div class="bg-blue-50 border border-blue-200 px-4 py-3 rounded-lg mb-6 text-sm">
-    {% if response.debug.intent %}
-    <p class="text-blue-700"><strong>Intenção detectada:</strong> {{ response.debug.intent }}</p>
-    {% endif %}
-    {% if response.debug.expanded_query %}
-    <p class="text-blue-600"><strong>Busca expandida:</strong> {{ response.debug.expanded_query }}</p>
-    {% endif %}
-</div>
-{% endif %}
-
 {% if response.low_confidence %}
 <div class="bg-amber-50 border border-amber-200 text-amber-800 px-4 py-3 rounded-lg mb-4 text-sm">
     <strong>Baixa confiança:</strong> esta busca pode estar fora do escopo dos serviços cadastrados.
@@ -88,7 +77,44 @@
 
 <div class="flex items-center justify-between mb-4">
     <p class="text-sm text-gray-500">{{ response.results|length }} resultado(s) em {{ response.latency_ms }}ms</p>
+    <button id="debug-toggle" onclick="document.body.classList.toggle('debug-mode')" class="text-xs px-3 py-1 rounded border border-gray-300 text-gray-500 hover:bg-gray-100">
+        Modo inspeção
+    </button>
 </div>
+
+<div class="debug-panel bg-slate-50 border border-slate-200 rounded-lg p-4 mb-4 text-xs font-mono hidden">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-600">
+        <div><span class="text-slate-400">Latência total:</span> {{ response.latency_ms }}ms</div>
+        <div><span class="text-slate-400">Reranker:</span> {{ response.rerank_ms }}ms</div>
+        <div><span class="text-slate-400">Max similaridade:</span> {{ "%.4f"|format(response.max_semantic_score) if response.max_semantic_score is not none else "—" }}</div>
+        <div><span class="text-slate-400">Confiança:</span>
+            {% if response.low_confidence %}
+            <span class="text-amber-600">baixa</span>
+            {% else %}
+            <span class="text-green-600">ok</span>
+            {% endif %}
+        </div>
+    </div>
+    {% if response.debug %}
+    <div class="mt-2 pt-2 border-t border-slate-200">
+        {% if response.debug.intent %}
+        <div><span class="text-slate-400">Intenção (LLM):</span> <span class="text-blue-700">{{ response.debug.intent }}</span></div>
+        {% endif %}
+        {% if response.debug.expanded_query %}
+        <div class="mt-1"><span class="text-slate-400">Query expandida:</span> {{ response.debug.expanded_query }}</div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .debug-panel { display: none; }
+    .debug-mode .debug-panel { display: block; }
+    .debug-scores { display: none; }
+    .debug-mode .debug-scores { display: block; }
+    .debug-mode #debug-toggle { background: #334155; color: #f8fafc; border-color: #334155; }
+    .score-bar { height: 6px; border-radius: 3px; transition: width 0.3s; }
+</style>
 
 {% if response.results %}
 <div class="space-y-4 mb-10">
@@ -109,14 +135,45 @@
                 {% endif %}
             </div>
             <div class="ml-4 text-right flex-shrink-0">
-                <div class="text-xs text-gray-400 space-y-1">
-                    <div>Score: <span class="font-mono text-gray-600">{{ "%.3f"|format(result.score) }}</span></div>
-                    {% if result.bm25_score is not none %}
-                    <div>BM25: <span class="font-mono text-gray-500">{{ "%.3f"|format(result.bm25_score) }}</span></div>
-                    {% endif %}
-                    {% if result.semantic_score is not none %}
-                    <div>Sem: <span class="font-mono text-gray-500">{{ "%.3f"|format(result.semantic_score) }}</span></div>
-                    {% endif %}
+                <span class="font-mono text-sm text-gray-600">{{ "%.3f"|format(result.score) }}</span>
+            </div>
+        </div>
+        <div class="debug-scores mt-3 pt-3 border-t border-gray-100">
+            <div class="grid grid-cols-3 gap-4 text-xs">
+                <div>
+                    <div class="flex justify-between text-gray-400 mb-1">
+                        <span>BM25</span>
+                        <span class="font-mono">{{ "%.2f"|format(result.bm25_score) if result.bm25_score is not none else "—" }}</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full">
+                        {% if result.bm25_score is not none %}
+                        <div class="score-bar bg-orange-400" style="width: {{ [result.bm25_score / 30 * 100, 100] | min }}%"></div>
+                        {% else %}
+                        <div class="score-bar bg-gray-200" style="width: 0%"></div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-gray-400 mb-1">
+                        <span>Semântico</span>
+                        <span class="font-mono">{{ "%.3f"|format(result.semantic_score) if result.semantic_score is not none else "—" }}</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full">
+                        {% if result.semantic_score is not none %}
+                        <div class="score-bar bg-blue-400" style="width: {{ (result.semantic_score * 100) }}%"></div>
+                        {% else %}
+                        <div class="score-bar bg-gray-200" style="width: 0%"></div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-gray-400 mb-1">
+                        <span>Final</span>
+                        <span class="font-mono">{{ "%.3f"|format(result.score) }}</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full">
+                        <div class="score-bar bg-green-500" style="width: {{ (result.score * 100) }}%"></div>
+                    </div>
                 </div>
             </div>
         </div>

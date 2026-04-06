@@ -287,8 +287,10 @@ def _evaluate_rec_qrels(rec_queries, bm25_index, vector_index,
     baseline_precision = baseline_hits / baseline_total if baseline_total else 0
     lift = full_precision - baseline_precision
 
-    print(f"\n    Full recommender precision:     {full_precision:.1%} ({full_hits}/{full_total})")
-    print(f"    Rec-only precision:             {rec_only_precision:.1%} ({rec_only_hits}/{full_total})")
+    search_hits = full_hits - rec_only_hits
+    print(f"\n    Expected recs found anywhere:   {full_precision:.1%} ({full_hits}/{full_total})")
+    print(f"      ├─ found in search results:   {search_hits}/{full_total} ({search_hits/full_total:.1%})")
+    print(f"      └─ found ONLY via recs:       {rec_only_hits}/{full_total} ({rec_only_precision:.1%}) ← true rec value")
     print(f"    Category-only baseline:         {baseline_precision:.1%} ({baseline_hits}/{baseline_total})")
     print(f"    Lift over baseline:             {lift:+.1%}")
 

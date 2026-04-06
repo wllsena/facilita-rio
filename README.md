@@ -1,163 +1,225 @@
 # facilita Rio
 
-Motor de busca para serviços públicos. O cidadão descreve o que precisa em linguagem do dia a dia e o sistema encontra o serviço certo — mesmo sem nenhuma palavra em comum com o nome oficial.
+https://facilita-rio.com
 
-## O Problema
+Motor de busca que ajuda cidadaos a encontrar servicos publicos usando linguagem do dia a dia.
 
-Cidadãos não sabem o nome dos serviços. "Quero parar de fumar" precisa encontrar "Inscrição em Programa de Tratamento Antitabagismo". Uma busca por palavras-chave não resolve. E quando o sistema erra, o cidadão vai ao guichê errado e pode desistir do serviço.
+## O problema
 
-Além de achar o serviço certo, o sistema sugere serviços relacionados. Uma gestante que busca "maternidade" talvez não saiba que precisa de kit enxoval, Bolsa Família e vacinação.
+Cidadaos nao sabem o nome oficial dos servicos. Alguem que digita "quero parar de fumar" precisa encontrar "Inscricao em Programa de Tratamento Antitabagismo" — mas nenhuma palavra e igual. Busca por palavras-chave nao funciona aqui.
 
-## Arquitetura
+Quando o sistema erra, a pessoa vai ao guiche errado, perde um dia de trabalho e pode desistir de um beneficio a que tem direito. Busca que entende linguagem coloquial e questao de acesso.
+
+## Como funciona
 
 ```mermaid
 flowchart TD
-    Q[Consulta do cidadão] --> EXP[Expandir sinônimos]
-    EXP --> BM25["BM25 (palavras)"]
-    EXP --> FAISS["FAISS (sentido)"]
-    BM25 --> RRF["Combinar (RRF)"]
-    FAISS --> RRF
-    RRF --> RE[Reranker]
-    RE --> RES[Resultados]
-    RES --> REC[Recomendações]
+    Q[Consulta do cidadao] --> EXP[1. Expandir sinonimos]
+    EXP --> BM25["2a. Busca por palavras (BM25)"]
+    EXP --> SEM["2b. Busca por sentido (FAISS)"]
+    BM25 --> RRF[3. Combinar rankings]
+    SEM --> RRF
+    RRF --> RE["4. Reordenar (cross-encoder)"]
+    RE --> RES[5. Resultados]
+    RES --> REC[6. Recomendar servicos relacionados]
 ```
 
-**Expandir sinônimos.** Antes da busca, verifica a consulta contra padrões em `app/data/synonyms.json`. Se "febre" aparece, adiciona "hospital emergência upa". Esses padrões são específicos por catálogo — o sistema funciona sem eles, com menos precisão.
+O pipeline tem 6 etapas. Cada uma resolve um pedaco do problema:
 
-**BM25 (palavras).** Busca por palavras. Encontra documentos que contêm os mesmos termos da consulta, com *stemming* (reduz palavras à raiz: "árvores" → "árvor"). Bom para termos exatos como "IPTU", ruim para linguagem coloquial.
+**1. Expandir sinonimos.** Antes de buscar, o sistema procura padroes na consulta. "Febre" vira "febre hospital emergencia UPA". Esses padroes ficam em `app/data/synonyms.json` — sao opcionais e especificos do catalogo.
 
-**FAISS (sentido).** Busca por sentido. Um modelo de linguagem ([E5-small](https://huggingface.co/intfloat/multilingual-e5-small)) converte textos em vetores numéricos. Textos com significado parecido ficam próximos, mesmo sem compartilhar palavras. FAISS (Meta) compara esses vetores rapidamente.
+**2a. Busca por palavras (BM25).** BM25 (Best Match 25) e o algoritmo classico de busca por palavras: pontua documentos que contem as mesmas palavras da consulta. Usa *stemming* em portugues — "arvores" e "arvore" sao tratados como a mesma palavra. Funciona bem para termos exatos como "IPTU", mas falha quando o cidadao usa linguagem diferente do cadastro.
 
-**Combinar (RRF).** Combina os rankings de BM25 e FAISS por posição (não por score bruto). FAISS recebe peso 2.0 e BM25 1.0 porque o semântico lida melhor com linguagem coloquial.
+**2b. Busca por sentido (FAISS + embeddings).** Um modelo de IA transforma textos em *embeddings* — listas de numeros que representam o significado. Textos com significado parecido geram embeddings proximos, mesmo sem compartilhar palavras. FAISS (biblioteca da Meta para busca vetorial) compara esses embeddings rapidamente. E assim que "quero parar de fumar" encontra "tratamento antitabagismo". O modelo usado e o [E5-small](https://huggingface.co/intfloat/multilingual-e5-small) (multilingual, 384 dimensoes).
 
-**Reranker.** Um segundo modelo ([mMARCO](https://huggingface.co/cross-encoder/mmarco-mMiniLMv2-L12-H384-v1)) que lê cada par (consulta, documento) integralmente. Mais preciso, mas lento (~63ms) — só processa os 20 melhores candidatos. Peso de 0.02 no score final (desempatador).
+**3. Combinar rankings (RRF).** As duas buscas produzem rankings diferentes. RRF (Reciprocal Rank Fusion) combina por posicao: cada resultado recebe `1/(60 + posicao)` pontos de cada busca, ponderados por peso. Se um servico aparece em 1o na busca por sentido e 5o na busca por palavras, recebe um score alto. A busca por sentido tem peso 2x (consultas coloquiais sao o caso mais comum).
 
-**Recomendações.** Sugere serviços relacionados usando vizinhança semântica, mesma categoria, clusters temáticos, e jornadas do cidadão (conexões manuais em `app/data/citizen_journeys.json`).
+**4. Reordenar (cross-encoder).** Um *cross-encoder* e um modelo de IA que le a consulta e o documento juntos (nao separados como na busca vetorial). O modelo [mMARCO](https://huggingface.co/cross-encoder/mmarco-mMiniLMv2-L12-H384-v1) le cada par (consulta, servico) inteiro. E mais preciso, mas mais lento (~80ms). Processa apenas os 20 melhores candidatos.
 
-**Detecção fora-do-escopo.** Se a maior similaridade semântica (FAISS) fica abaixo de 0.83, sinaliza que a consulta pode estar fora do catálogo.
+**5. Resultados.** Os servicos mais relevantes, ordenados pelo score final.
 
-## Início Rápido
+**6. Recomendacoes.** Sugere servicos relacionados combinando: proximidade semantica, mesma categoria, agrupamentos tematicos e "jornadas do cidadao" — conexoes manuais entre servicos que costumam ser necessarios juntos (exemplo: maternidade -> kit enxoval -> Bolsa Familia).
+
+## Inicio rapido
 
 Requer **Python 3.11+**.
 
-```bash
-# Docker
-docker compose up --build       # http://localhost:8000
+### Opcao 1: Docker (recomendado)
 
-# Ou local
+```bash
+docker compose up --build
+# Abra http://localhost:8000
+```
+
+### Opcao 2: Instalacao local
+
+```bash
 pip install ".[test]"
-python -c "import nltk; nltk.download('rslp')"   # stemmer português
-uvicorn app.main:app --reload   # http://localhost:8000
+python -c "import nltk; nltk.download('rslp')"
+uvicorn app.main:app --reload
+# Abra http://localhost:8000
 ```
 
-Primeiro startup: ~30s (download de modelos). Depois: ~5s. Docs da API em `/docs`.
+O primeiro startup demora ~30s (download de modelos de IA). Depois, ~5s.
 
-O catálogo fica em `servicos_selecionados.json`. Para usar outro, substitua esse arquivo — re-indexa no próximo startup.
+### O que voce vai ver
 
-**LLM (opcional):** Com `OPENAI_API_KEY`, usa GPT-5.4-mini (reasoning effort: high) para enriquecer queries. Sem a chave, funciona normalmente.
+- **http://localhost:8000** — Interface de busca
+- **http://localhost:8000/docs** — Documentacao interativa da API
+- **http://localhost:8000/health** — Status do sistema
+
+Experimente: "meu cachorro esta doente", "preciso de emprego", "quero parar de fumar".
+
+### Usando outro catalogo
+
+O catalogo fica em `servicos_selecionados.json`. Substitua por outro com a mesma estrutura e reinicie. Os arquivos em `app/data/` (sinonimos e jornadas) sao opcionais — o sistema funciona sem eles.
+
+### LLM (opcional)
+
+```
+OPENAI_API_KEY=sk-...   # Ativa enriquecimento de query via LLM
+```
+
+Sem essa chave, o sistema funciona normalmente.
+
+## Testes
 
 ```bash
-pytest tests/ -v     # 72 testes, 96% cobertura
+pytest tests/ -v            # 72 testes, 96% de cobertura
+ruff check app/ evaluation/ # lint
 ```
 
-## Avaliação
+## Avaliacao de qualidade
+
+A avaliacao mede se o sistema retorna bons resultados. Temos consultas de teste com respostas corretas anotadas, e metricas que calculam quao bom e o ranking.
+
+### Rodando
 
 ```bash
-python -m evaluation.evaluate          # suíte completa (~3 min)
-python -m evaluation.check_regression  # gate CI: exit 0 = ok
+python -m evaluation.evaluate          # suite completa (~3 min)
+python -m evaluation.check_regression  # verifica se nada piorou (CI)
 ```
 
-Roda 8 análises: ablação (6 variantes), significância estatística (Fisher), recomendações, holdout (30 queries pós-tuning), 500 queries coloquiais, latência, análise de falhas, sweep do cross-encoder.
+### Metricas principais
 
-### Resultados
+| Metrica | O que mede | Valor |
+|---------|-----------|-------|
+| nDCG@5 (Normalized Discounted Cumulative Gain) | Os 5 primeiros resultados estao na ordem certa? (1.0 = perfeito) | 0.964 |
+| MRR@10 (Mean Reciprocal Rank) | O resultado correto aparece em que posicao? (1.0 = sempre em #1) | 1.000 |
+| Holdout nDCG@5 | Mesmo, em 25 consultas nao vistas durante o desenvolvimento | 0.898 |
+| Holdout MRR@10 | Posicao do primeiro correto em consultas nao vistas | 0.960 |
+| Latencia p50 | Tempo mediano de resposta | ~91ms |
 
-| Métrica | Valor |
-|---------|-------|
-| nDCG@5 (tuning / holdout) | 0.939 / 0.889 |
-| MRR@10 | 0.985 |
-| Top-3 accuracy (500 queries) | 100% |
-| Latência p50 | ~74ms |
+**Sobre o holdout:** A diferenca de 0.066 entre o nDCG do conjunto principal (0.964) e do holdout (0.898) indica algum overfitting — as 147 consultas do conjunto principal foram construidas durante o desenvolvimento. O holdout e mais representativo da performance real.
 
-**nDCG@5** mede qualidade do ranking (resultado certo em #1 = score alto). **MRR@10** mede a posição do primeiro resultado correto. Gap tuning→holdout de 0.050 indica leve overfitting; nenhuma query do holdout tem MRR < 0.5.
+### O que a avaliacao faz (8 analises)
 
-### QRELs
+- **Ablacao** — remove um componente de cada vez para provar que cada um melhora o resultado
+- **Holdout** — 30 consultas criadas *depois* de todo tuning
+- **Significancia estatistica** — teste de Fisher para confirmar que as diferencas nao sao acaso
+- **Analise de falhas** — classifica *por que* cada erro acontece
+- **Recomendacoes** — mede precisao das sugestoes de servicos relacionados
+- **Latencia** — benchmark por componente
+- **Sweep do cross-encoder** — testa pesos de 0% a 30%
+- **Sweep do peso semantico** — testa pesos de 0.5x a 3.0x
+- **500 queries coloquiais** — consultas informais geradas por LLM
 
-Cada query de teste tem serviços anotados com grau 1–3 (marginal → perfeito). 83 queries de tuning (68 positivas + 15 negativas), 30 de holdout (25 + 5), 500 coloquiais (geradas por LLM — otimistas), 25 para recomendações. Anotador único — limitação reconhecida.
+### Dados de avaliacao
 
-## Decisões
+| Arquivo | Conteudo |
+|---------|---------|
+| `evaluation/test_queries.json` | 147 consultas de teste com respostas anotadas |
+| `evaluation/holdout_queries.json` | 30 consultas de validacao (nunca vistas no desenvolvimento) |
+| `evaluation/rec_queries.json` | 25 consultas para testar recomendacoes |
+| `evaluation/queries_populares.json` | 500 consultas coloquiais |
 
-| Decisão | Evidência |
-|---------|-----------|
-| Busca híbrida | BM25: 0.80 → semântico: 0.90 → híbrido: 0.94. Significância confirmada (Fisher). |
-| Semântico 2× | Lida melhor com linguagem coloquial. Validado por ablação. |
-| Cross-encoder (peso 0.02) | Não significativo em nDCG@5 vs. híbrido sem CE (0.939 vs 0.937). Melhora MRR (0.985 vs 0.978). Mantido para escala futura. |
-| Sem LLM ranqueador | $0.01–0.10/query, 500ms–2s. ROI negativo com nDCG em 0.94. |
-| Threshold 0.83 | 0.82 detecta 53% negativas/0% FP; 0.83 detecta 80%/4.4% FP (alerta, não bloqueio). |
+Esses dados sao especificos do catalogo atual. Para outro catalogo, crie novas consultas.
 
-### Alternativas Consideradas
+## Decisoes tecnicas
 
-**Elasticsearch/OpenSearch:** Complexidade operacional sem benefício com 50 serviços. BM25+FAISS em memória atinge <100ms até 1000+.
+Cada decisao tem um numero que a justifica:
 
-**Embeddings fine-tuned:** Melhoraria PT-BR coloquial, mas requer pares rotulados que não temos. E5-small já atinge 0.90 nDCG.
+| Decisao | Justificativa |
+|---------|--------------|
+| Busca hibrida (BM25 + semantico) | BM25 sozinho = 0.81, semantico sozinho = 0.91, juntos = 0.96. Confirmado por teste estatistico. |
+| Semantico com peso 2x | Sweep testou 0.5x-3.0x. Pesos 1.5x e 2.0x sao equivalentes (0.9634 vs 0.9625 no principal, 0.8977 vs 0.8979 no holdout). 2.0x favorece linguagem coloquial. |
+| Cross-encoder com peso 8% | Melhora MRR de 0.996 para 1.000. Sweep testou 0%-30%. |
+| Sem LLM para reranking | Custaria $0.01-0.10/busca e adicionaria 500ms-2s. Com nDCG em 0.96, nao justifica. |
+| Threshold de confianca 0.83 | Detecta 68% das consultas fora-do-escopo com 6.2% de falsos positivos. |
 
-**LLM como reranker:** GPT-4 poderia desambiguar, mas $0.01–0.10/query a 500ms–2s. Não justifica nesta escala.
+### Alternativas descartadas
 
-**ColBERT:** Mais preciso para matching fino, mas ~10× armazenamento. Excessivo para 50 serviços.
+- **Elasticsearch**: complexidade desnecessaria para 50 servicos. BM25+FAISS em memoria responde em <100ms.
+- **Fine-tuning de embeddings**: precisa de pares (consulta, servico correto) que nao temos.
+- **LLM como reranker**: mais preciso, mas caro e lento demais para esta escala.
+- **ColBERT**: mais preciso para matching fino, mas muito mais complexo operacionalmente para 50 servicos.
 
-## Escalabilidade (50 → 1200)
+## Escalabilidade (50 -> 1200 servicos)
 
-Latência medida com catálogos sintéticos:
+### Latencia
 
-| Serviços | p50 | Reranker | BM25 |
-|----------|-----|----------|------|
-| 50 | 72ms | 61ms | 0.14ms |
-| 500 | 74ms | 62ms | 1.0ms |
-| 1000 | 75ms | 63ms | 2.1ms |
+Testada com catalogos sinteticos:
 
-Estável — o reranker sempre processa 20 candidatos.
+| Servicos | Tempo medio | Gargalo |
+|----------|------------|---------|
+| 50 | 72ms | Reranker (61ms) |
+| 500 | 74ms | Reranker (62ms) |
+| 1000 | 75ms | Reranker (63ms) |
 
-**O que quebra:** A 200+, sinônimos manuais interferem → substituir por LLM. A 500+, E5-small confunde serviços parecidos → E5-base (768d). Threshold precisa recalibrar. CE se torna mais valioso (15–30%).
+A latencia nao cresce porque o reranker sempre processa 20 candidatos, nao o catalogo inteiro.
 
-**Avaliação em escala:** Active learning para QRELs. Regressão por amostragem. 2–3 anotadores com concordância medida. Sinais implícitos (reformulação, cliques).
+### Memoria
 
-**Infraestrutura:** 50 → container único. 500+ → Redis cache, LLM para reescrita. 1200+ → FAISS aproximado ou banco vetorial.
+~12MB para 1200 servicos. Cabe em qualquer servidor.
 
-### Plano Operacional
+### O que muda com mais servicos
 
-| O que muda | Quem | Cadência |
-|-----------|------|----------|
-| Catálogo | Equipe do portal | Contínua — atualiza JSON, sistema re-indexa no deploy |
-| Sinônimos | Engenheiro de busca | Mensal → trimestral. A 500+ serviços, substituir por LLM |
-| Jornadas | Analista + engenheiro | Trimestral. A 200+ serviços, minerar co-cliques |
-| QRELs | 2–3 anotadores | A cada mudança grande. Active learning prioriza baixa confiança |
+| Escala | O que quebra | Solucao |
+|--------|-------------|---------|
+| 200+ | Sinonimos manuais nao cobrem tudo | Substituir por LLM para expansao automatica |
+| 500+ | Mais servicos com nomes parecidos — cross-encoder precisa discriminar melhor | Aumentar peso do CE (sweep mostra que com mais candidatos similares, CE ganha importancia) |
+| 500+ | Threshold de confianca precisa recalibrar | Com mais servicos, scores sobem — recalibrar |
+| 1200+ | Recall@20 pode cair para ~85-90% | Aumentar candidatos para top-40 (+20ms de reranker) |
+| 1200+ | **Avaliacao** e o gargalo real | Instrumentar logs de clique/reformulacao para feedback implicito |
 
-**Primeiras 4 semanas com 1200 serviços:**
-1. Deploy genérico (sem sinônimos/jornadas). Baseline com 50 queries anotadas.
-2. Instrumentar logs. Identificar 100 queries frequentes + 50 de baixa confiança.
-3. Anotar QRELs para as 100 top. Criar sinônimos a partir de padrões de reformulação.
-4. Avaliação formal. Baselines de nDCG/MRR. Regression gate. 5–10 jornadas de co-cliques.
+### Plano operacional
 
-## Limitações
+| O que muda | Quem faz | Quando |
+|-----------|---------|--------|
+| Catalogo de servicos | Equipe do portal | Continua — atualiza JSON, re-indexa no deploy |
+| Sinonimos | Engenheiro de busca | Mensal. A partir de 500 servicos, substituir por LLM |
+| Jornadas do cidadao | Analista + engenheiro | Trimestral. A partir de 200 servicos, minerar padroes de uso |
+| Consultas de teste | 2-3 anotadores | A cada mudanca grande |
 
-- **Anotador único.** Não distingue erro do sistema de ambiguidade genuína.
-- **500 queries coloquiais sintéticas** (LLM). O 100% top-3 é otimista.
-- **Sinônimos e jornadas** específicos deste catálogo. Pipeline funciona sem eles.
-- **Consultas genéricas** ("saúde pública") são genuinamente ambíguas — nDCG cai para 0.75.
+**Primeiras 4 semanas com 1200 servicos:**
+1. Deploy sem sinonimos/jornadas. Baseline com 50 consultas anotadas.
+2. Instrumentar logs. Identificar 100 consultas mais frequentes.
+3. Anotar respostas corretas. Criar sinonimos a partir de padroes de reformulacao.
+4. Avaliacao formal. Baselines de nDCG/MRR. Regression gate no CI.
 
-## Estrutura
+## Limitacoes
+
+- **Anotador unico.** Consultas anotadas por uma pessoa. Inter-rater agreement fortaleceria a avaliacao.
+- **Overfitting ao conjunto de tuning.** Holdout mostra nDCG 0.898 vs 0.964 — parte da performance reflete ajuste ao conjunto de desenvolvimento.
+- **500 queries coloquiais sao sinteticas** (geradas por LLM). O 99.6% de acerto e otimista.
+- **Recomendacoes.** Nas consultas de teste dedicadas, 81% dos servicos esperados aparecem nos resultados de busca, nao na secao de recomendacoes. A contribuicao genuina das recomendacoes e ~19%.
+- **Sinonimos e jornadas** sao especificos deste catalogo. O pipeline funciona sem eles.
+- **Consultas genericas** ("saude") sao genuinamente ambiguas — nDCG cai porque varios servicos sao igualmente validos.
+
+## Estrutura do projeto
 
 ```
 app/
-├── main.py              # FastAPI, startup, cache LRU
-├── config.py            # Parâmetros ajustáveis
-├── models.py            # Service, SearchResult, SearchResponse
-├── search/              # Pipeline, RRF, reranker, expansão de query
-├── indexing/            # BM25, FAISS, clusters, loader
-├── recommendation/      # Recomendações (semântica + jornadas)
-├── routers/             # API JSON + páginas HTML
-├── templates/           # Jinja2 + Tailwind CSS
-├── data/                # synonyms.json, citizen_journeys.json (opcionais)
-└── observability/       # structlog + Prometheus
-evaluation/              # Ablação, holdout, falhas, latência, sweep CE
-tests/                   # 72 testes (pytest + Hypothesis)
+  main.py              # FastAPI: startup, cache, rotas
+  config.py            # Todos os parametros num unico lugar
+  models.py            # Tipos de dados
+  search/              # Pipeline, fusao RRF, reranker, expansao de query
+  indexing/             # BM25, FAISS, clusters, carregador do catalogo
+  recommendation/      # Motor de recomendacoes
+  routers/             # Endpoints da API e paginas web
+  templates/           # Interface web (Jinja2 + Tailwind)
+  data/                # Sinonimos e jornadas (opcionais)
+  observability/       # Logging estruturado + metricas Prometheus
+evaluation/            # Suite de avaliacao
+tests/                 # 72 testes (pytest + Hypothesis)
 ```

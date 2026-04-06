@@ -14,12 +14,18 @@ def load_services(path: Path) -> list[Service]:
         raw = json.load(f)
 
     services: list[Service] = []
+    seen_names: set[str] = set()
     for entry in raw:
         data = json.loads(entry["data"]) if "data" in entry else entry
 
+        nome = data.get("nome_servico", "")
+        if nome in seen_names:
+            continue
+        seen_names.add(nome)
+
         service = Service(
             id=data.get("slug", ""),
-            nome=data.get("nome_servico", ""),
+            nome=nome,
             resumo=data.get("resumo_plaintext", "") or "",
             descricao_completa=data.get("descricao_completa_plaintext", "") or "",
             tema=data.get("tema_geral", "") or "",

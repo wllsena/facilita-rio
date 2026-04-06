@@ -1,95 +1,1243 @@
 {
-  "description": "Comprehensive test queries with graded relevance (3=perfect, 2=relevant, 1=marginal, 0=irrelevant). 75 queries across 6 types: direct (10), natural (20), synonym (10), ambiguous (13), edge (15, including typos/slang/multi-intent), negative (7, out-of-scope).",
+  "description": "Comprehensive test queries with graded relevance (3=perfect, 2=relevant, 1=marginal, 0=irrelevant). 147 queries across 6 types: direct (10), natural (46), synonym (35), ambiguous (13), edge (24, including typos/slang/multi-intent), negative (19, out-of-scope).",
   "queries": [
-    {"id": "d01", "category": "direct", "query": "alerta defesa civil", "relevant": {"mensagens-de-alerta-da-defesa-civil-d074809e": 3}},
-    {"id": "d02", "category": "direct", "query": "segunda via IPTU", "relevant": {"emissao-de-2-via-do-iptu-ce2b748c": 3, "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2}},
-    {"id": "d03", "category": "direct", "query": "Bolsa Família informações", "relevant": {"informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 3, "informacoes-sobre-o-programa-bolsa-familia-5e7c3de3": 3}},
-    {"id": "d04", "category": "direct", "query": "castração de cães e gatos", "relevant": {"castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 3, "cadastro-de-animais-no-sisbicho-b5ad2d27": 1}},
-    {"id": "d05", "category": "direct", "query": "nota fiscal eletrônica ISS", "relevant": {"iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 3}},
-    {"id": "d06", "category": "direct", "query": "matrícula escola municipal 2026", "relevant": {"informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": 3, "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 1}},
-    {"id": "d07", "category": "direct", "query": "multa de trânsito consulta", "relevant": {"multa-de-transito-consulta-de-multa-1d76fc90": 3, "multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4": 2}},
-    {"id": "d08", "category": "direct", "query": "poda de árvore", "relevant": {"poda-de-arvore-em-vias-publicas-6aa2fb75": 3, "autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e": 2, "remocao-de-arvore-em-vias-publicas-54b06fd3": 2, "solicitacao-de-plantio-de-arvore-em-area-publica-7b6c060b": 1}},
-    {"id": "d09", "category": "direct", "query": "vacinação", "relevant": {"informacoes-sobre-vacinacao-humana-728a6848": 3}},
-    {"id": "d10", "category": "direct", "query": "parcelamento dívida ativa", "relevant": {"parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 3, "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 1}},
-
-    {"id": "n01", "category": "natural", "query": "meu cachorro está doente", "relevant": {"atendimento-clinico-em-animais-8c9a32e8": 3, "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 1, "cadastro-de-animais-no-sisbicho-b5ad2d27": 1}},
-    {"id": "n02", "category": "natural", "query": "tem buraco na minha rua", "relevant": {"reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e": 3}},
-    {"id": "n03", "category": "natural", "query": "quero parar de fumar", "relevant": {"inscricao-em-programa-de-tratamento-antitabagismo-00116adc": 3}},
-    {"id": "n04", "category": "natural", "query": "preciso de emprego", "relevant": {"consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6": 3, "inclusao-de-pessoas-com-deficiencia-no-mercado-de-2b6c31d8": 2}},
-    {"id": "n05", "category": "natural", "query": "minha esposa está grávida", "relevant": {"atendimento-em-maternidades-cffe0736": 3, "distribuicao-de-kit-enxoval-do-bebe-77f09458": 3}},
-    {"id": "n06", "category": "natural", "query": "estou com dengue no meu bairro", "relevant": {"vistoria-em-foco-de-aedes-aegypti-dengue-d2b9b06d": 3}},
-    {"id": "n07", "category": "natural", "query": "árvore caiu na calçada perto da minha casa", "relevant": {"remocao-de-arvore-em-vias-publicas-54b06fd3": 3, "poda-de-arvore-em-vias-publicas-6aa2fb75": 2}},
-    {"id": "n08", "category": "natural", "query": "meu vizinho maltrata animais", "relevant": {"vistoria-tecnica-em-local-onde-ha-maus-tratos-de-235db3c2": 3, "resgate-de-animais-silvestres-8d94d14c": 1}},
-    {"id": "n09", "category": "natural", "query": "onde posso comer de graça", "relevant": {"cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69": 3}},
-    {"id": "n10", "category": "natural", "query": "pessoa morando na rua precisa de ajuda", "relevant": {"informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a": 3, "atendimento-para-pessoas-vitimas-de-violencia-2edbfc24": 1}},
-    {"id": "n11", "category": "natural", "query": "meu filho tem diabetes e precisa de insulina", "relevant": {"distribuicao-de-insumos-para-tratamento-de-7e3ea1a4": 3, "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 2}},
-    {"id": "n12", "category": "natural", "query": "quero plantar uma árvore na praça do meu bairro", "relevant": {"solicitacao-de-plantio-de-arvore-em-area-publica-7b6c060b": 3, "autorizacao-para-plantio-voluntario-de-arvore-em-87f4b222": 3}},
-    {"id": "n13", "category": "natural", "query": "preciso estacionar perto do hospital sou idoso", "relevant": {"cartao-de-estacionamento-para-idosos-20239153": 3, "cartao-de-estacionamento-para-pessoas-com-0f8fbe95": 1}},
-    {"id": "n14", "category": "natural", "query": "sofri violência doméstica", "relevant": {"atendimento-para-pessoas-vitimas-de-violencia-2edbfc24": 3}},
-    {"id": "n15", "category": "natural", "query": "como funciona transporte público no rio", "relevant": {"informacoes-sobre-transporte-publico-b42ba94d": 3}},
-    {"id": "n16", "category": "natural", "query": "encontrei um bicho silvestre no quintal", "relevant": {"resgate-de-animais-silvestres-8d94d14c": 3}},
-    {"id": "n17", "category": "natural", "query": "meu idoso pai precisa de benefício", "relevant": {"beneficio-de-prestacao-continuada-bpc-529f647a": 3, "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 1}},
-    {"id": "n18", "category": "natural", "query": "onde tem UPA aberta agora", "relevant": {"atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2": 3, "atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 2}},
-    {"id": "n19", "category": "natural", "query": "quero voltar a estudar tenho 40 anos", "relevant": {"informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b": 3}},
-    {"id": "n20", "category": "natural", "query": "preciso cortar árvore no meu terreno", "relevant": {"autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e": 3, "poda-de-arvore-em-vias-publicas-6aa2fb75": 1}},
-
-    {"id": "s01", "category": "synonym", "query": "boleto IPTU", "relevant": {"emissao-de-2-via-do-iptu-ce2b748c": 3, "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2}},
-    {"id": "s02", "category": "synonym", "query": "veterinário público gratuito", "relevant": {"atendimento-clinico-em-animais-8c9a32e8": 3, "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 2}},
-    {"id": "s03", "category": "synonym", "query": "receber SMS de chuva forte", "relevant": {"mensagens-de-alerta-da-defesa-civil-d074809e": 3}},
-    {"id": "s04", "category": "synonym", "query": "contestar multa de carro", "relevant": {"multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4": 3, "multa-de-transito-consulta-de-multa-1d76fc90": 2}},
-    {"id": "s05", "category": "synonym", "query": "refeição gratuita para quem passa fome", "relevant": {"cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69": 3}},
-    {"id": "s06", "category": "synonym", "query": "nota carioca emitir NFS-e", "relevant": {"iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 3}},
-    {"id": "s07", "category": "synonym", "query": "chipagem e registro de animal", "relevant": {"cadastro-de-animais-no-sisbicho-b5ad2d27": 3, "atendimento-clinico-em-animais-8c9a32e8": 1}},
-    {"id": "s08", "category": "synonym", "query": "risco de desmoronamento no morro", "relevant": {"vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab": 3, "mensagens-de-alerta-da-defesa-civil-d074809e": 1}},
-    {"id": "s09", "category": "synonym", "query": "habite-se certidão imóvel legalizado", "relevant": {"certidao-de-habite-se-aceitacao-df83d300": 3}},
-    {"id": "s10", "category": "synonym", "query": "ingresso grátis show teatro", "relevant": {"programa-cadeira-cativa-ingressos-gratuitos-db108a0c": 3}},
-
-    {"id": "a01", "category": "ambiguous", "query": "ajuda financeira", "relevant": {"informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 2, "informacoes-sobre-o-programa-bolsa-familia-5e7c3de3": 2, "beneficio-de-prestacao-continuada-bpc-529f647a": 2, "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 1}},
-    {"id": "a02", "category": "ambiguous", "query": "problema na rua", "relevant": {"reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e": 2, "limpeza-de-pracas-e-parques-0ecf3e30": 1, "remocao-de-arvore-em-vias-publicas-54b06fd3": 1, "poda-de-arvore-em-vias-publicas-6aa2fb75": 1, "informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a": 1}},
-    {"id": "a03", "category": "ambiguous", "query": "documentos da prefeitura", "relevant": {"certidao-de-habite-se-aceitacao-df83d300": 2, "certidao-negativa-de-debito-nada-consta-439306e1": 2, "iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 1, "emissao-de-2-via-do-iptu-ce2b748c": 1}},
-    {"id": "a04", "category": "ambiguous", "query": "emergência saúde", "relevant": {"atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 3, "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2": 3, "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 2}},
-    {"id": "a05", "category": "ambiguous", "query": "animal na rua", "relevant": {"resgate-de-animais-silvestres-8d94d14c": 2, "vistoria-tecnica-em-local-onde-ha-maus-tratos-de-235db3c2": 1, "atendimento-clinico-em-animais-8c9a32e8": 1, "cadastro-de-animais-no-sisbicho-b5ad2d27": 1}},
-    {"id": "a06", "category": "ambiguous", "query": "imposto", "relevant": {"iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2, "emissao-de-2-via-do-iptu-ce2b748c": 2, "iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 2, "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 2, "certidao-negativa-de-debito-nada-consta-439306e1": 1}},
-    {"id": "a07", "category": "ambiguous", "query": "escola para criança", "relevant": {"informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": 3, "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 2, "informacoes-sobre-merenda-escolar-146237e8": 2, "informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b": 1}},
-    {"id": "a08", "category": "ambiguous", "query": "limpeza da cidade", "relevant": {"limpeza-de-praias-99817f98": 2, "limpeza-de-pracas-e-parques-0ecf3e30": 2, "reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e": 1}},
-    {"id": "a09", "category": "ambiguous", "query": "minha casa", "relevant": {"informacoes-sobre-cadastro-no-programa-minha-casa-401628a4": 3, "vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab": 1}},
-    {"id": "a10", "category": "ambiguous", "query": "cultura e lazer", "relevant": {"informacoes-sobre-bailes-populares-e-baile-da-011ce275": 2, "programa-cadeira-cativa-ingressos-gratuitos-db108a0c": 2}},
-
-    {"id": "e01", "category": "edge", "query": "carnaval rio de janeiro", "relevant": {"informacoes-sobre-bailes-populares-e-baile-da-011ce275": 3}},
-    {"id": "e02", "category": "edge", "query": "como consigo moradia popular", "relevant": {"informacoes-sobre-cadastro-no-programa-minha-casa-401628a4": 3}},
-    {"id": "e03", "category": "edge", "query": "preciso regularizar meu imóvel e pagar débitos", "relevant": {"certidao-de-habite-se-aceitacao-df83d300": 3, "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 2, "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 1}},
-    {"id": "e04", "category": "edge", "query": "praia suja lixo na areia", "relevant": {"limpeza-de-praias-99817f98": 3}},
-    {"id": "e05", "category": "edge", "query": "boletim escolar do meu filho", "relevant": {"inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 3}},
-    {"id": "e06", "category": "edge", "query": "posto de saude perto de mim", "relevant": {"atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 3, "informacoes-sobre-vacinacao-humana-728a6848": 1}},
-    {"id": "e07", "category": "edge", "query": "enxoval bebe gestante", "relevant": {"distribuicao-de-kit-enxoval-do-bebe-77f09458": 3, "atendimento-em-maternidades-cffe0736": 2}},
-    {"id": "e08", "category": "edge", "query": "ônibus metrô BRT como pagar", "relevant": {"informacoes-sobre-transporte-publico-b42ba94d": 3}},
-    {"id": "e09", "category": "edge", "query": "parquinho praça publica sujo", "relevant": {"limpeza-de-pracas-e-parques-0ecf3e30": 3}},
-    {"id": "e10", "category": "edge", "query": "nada consta servidor municipal", "relevant": {"certidao-negativa-de-debito-nada-consta-439306e1": 3}},
-
-    {"id": "e11", "category": "edge", "query": "vacianção criança", "relevant": {"informacoes-sobre-vacinacao-humana-728a6848": 3}},
-    {"id": "e12", "category": "edge", "query": "multta transito como recorrer", "relevant": {"multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4": 3, "multa-de-transito-consulta-de-multa-1d76fc90": 2}},
-    {"id": "e13", "category": "edge", "query": "tá caindo barreira no morro perto de casa", "relevant": {"vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab": 3, "mensagens-de-alerta-da-defesa-civil-d074809e": 1}},
-    {"id": "e14", "category": "edge", "query": "preciso de médico e remédio pra diabetes", "relevant": {"distribuicao-de-insumos-para-tratamento-de-7e3ea1a4": 3, "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 2}},
-    {"id": "e15", "category": "edge", "query": "minha gata tá prenha quero castrar ela", "relevant": {"castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 3, "atendimento-clinico-em-animais-8c9a32e8": 1}},
-
-    {"id": "a11", "category": "ambiguous", "query": "diabetes", "relevant": {"distribuicao-de-insumos-para-tratamento-de-7e3ea1a4": 3, "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 1}},
-    {"id": "a12", "category": "ambiguous", "query": "BPC", "relevant": {"beneficio-de-prestacao-continuada-bpc-529f647a": 3}},
-    {"id": "a13", "category": "ambiguous", "query": "cadê o postinho de saúde", "relevant": {"atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 3, "informacoes-sobre-vacinacao-humana-728a6848": 1}},
-
-    {"id": "neg01", "category": "negative", "query": "pizza delivery rio de janeiro", "relevant": {}},
-    {"id": "neg02", "category": "negative", "query": "weather forecast tomorrow", "relevant": {}},
-    {"id": "neg03", "category": "negative", "query": "comprar ingresso cinema shopping", "relevant": {}},
-    {"id": "neg04", "category": "negative", "query": "receita de bolo de chocolate", "relevant": {}},
-    {"id": "neg05", "category": "negative", "query": "horário do jogo do flamengo", "relevant": {}},
-    {"id": "neg06", "category": "negative", "query": "como investir na bolsa de valores", "relevant": {}},
-    {"id": "neg07", "category": "negative", "query": "alugar apartamento copacabana", "relevant": {}},
-    {"id": "neg08", "category": "negative", "query": "uber preço corrida centro do rio", "relevant": {}},
-    {"id": "neg09", "category": "negative", "query": "resultado do jogo do bicho hoje", "relevant": {}},
-    {"id": "neg10", "category": "negative", "query": "Netflix não funciona no meu celular", "relevant": {}},
-    {"id": "neg11", "category": "negative", "query": "passagem de avião barata Rio São Paulo", "relevant": {}},
-    {"id": "neg12", "category": "negative", "query": "como fazer pão de queijo caseiro", "relevant": {}},
-    {"id": "neg13", "category": "negative", "query": "preço da gasolina hoje no rio de janeiro", "relevant": {}},
-    {"id": "neg14", "category": "negative", "query": "transferência Pix pelo aplicativo do banco", "relevant": {}},
-    {"id": "neg15", "category": "negative", "query": "INSS como dar entrada na aposentadoria", "relevant": {}}
+    {
+      "id": "d01",
+      "category": "direct",
+      "query": "alerta defesa civil",
+      "relevant": {
+        "mensagens-de-alerta-da-defesa-civil-d074809e": 3
+      }
+    },
+    {
+      "id": "d02",
+      "category": "direct",
+      "query": "segunda via IPTU",
+      "relevant": {
+        "emissao-de-2-via-do-iptu-ce2b748c": 3,
+        "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2
+      }
+    },
+    {
+      "id": "d03",
+      "category": "direct",
+      "query": "Bolsa Família informações",
+      "relevant": {
+        "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 3
+      }
+    },
+    {
+      "id": "d04",
+      "category": "direct",
+      "query": "castração de cães e gatos",
+      "relevant": {
+        "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 3,
+        "cadastro-de-animais-no-sisbicho-b5ad2d27": 1
+      }
+    },
+    {
+      "id": "d05",
+      "category": "direct",
+      "query": "nota fiscal eletrônica ISS",
+      "relevant": {
+        "iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 3
+      }
+    },
+    {
+      "id": "d06",
+      "category": "direct",
+      "query": "matrícula escola municipal 2026",
+      "relevant": {
+        "informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": 3,
+        "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 1
+      }
+    },
+    {
+      "id": "d07",
+      "category": "direct",
+      "query": "multa de trânsito consulta",
+      "relevant": {
+        "multa-de-transito-consulta-de-multa-1d76fc90": 3,
+        "multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4": 2
+      }
+    },
+    {
+      "id": "d08",
+      "category": "direct",
+      "query": "poda de árvore",
+      "relevant": {
+        "poda-de-arvore-em-vias-publicas-6aa2fb75": 3,
+        "autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e": 2,
+        "remocao-de-arvore-em-vias-publicas-54b06fd3": 2,
+        "solicitacao-de-plantio-de-arvore-em-area-publica-7b6c060b": 1
+      }
+    },
+    {
+      "id": "d09",
+      "category": "direct",
+      "query": "vacinação",
+      "relevant": {
+        "informacoes-sobre-vacinacao-humana-728a6848": 3
+      }
+    },
+    {
+      "id": "d10",
+      "category": "direct",
+      "query": "parcelamento dívida ativa",
+      "relevant": {
+        "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 3,
+        "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 1
+      }
+    },
+    {
+      "id": "n01",
+      "category": "natural",
+      "query": "meu cachorro está doente",
+      "relevant": {
+        "atendimento-clinico-em-animais-8c9a32e8": 3,
+        "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 1,
+        "cadastro-de-animais-no-sisbicho-b5ad2d27": 1
+      }
+    },
+    {
+      "id": "n02",
+      "category": "natural",
+      "query": "tem buraco na minha rua",
+      "relevant": {
+        "reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e": 3
+      }
+    },
+    {
+      "id": "n03",
+      "category": "natural",
+      "query": "quero parar de fumar",
+      "relevant": {
+        "inscricao-em-programa-de-tratamento-antitabagismo-00116adc": 3
+      }
+    },
+    {
+      "id": "n04",
+      "category": "natural",
+      "query": "preciso de emprego",
+      "relevant": {
+        "consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6": 3,
+        "inclusao-de-pessoas-com-deficiencia-no-mercado-de-2b6c31d8": 2
+      }
+    },
+    {
+      "id": "n05",
+      "category": "natural",
+      "query": "minha esposa está grávida",
+      "relevant": {
+        "atendimento-em-maternidades-cffe0736": 3,
+        "distribuicao-de-kit-enxoval-do-bebe-77f09458": 3
+      }
+    },
+    {
+      "id": "n06",
+      "category": "natural",
+      "query": "estou com dengue no meu bairro",
+      "relevant": {
+        "vistoria-em-foco-de-aedes-aegypti-dengue-d2b9b06d": 3
+      }
+    },
+    {
+      "id": "n07",
+      "category": "natural",
+      "query": "árvore caiu na calçada perto da minha casa",
+      "relevant": {
+        "remocao-de-arvore-em-vias-publicas-54b06fd3": 3,
+        "poda-de-arvore-em-vias-publicas-6aa2fb75": 2
+      }
+    },
+    {
+      "id": "n08",
+      "category": "natural",
+      "query": "meu vizinho maltrata animais",
+      "relevant": {
+        "vistoria-tecnica-em-local-onde-ha-maus-tratos-de-235db3c2": 3,
+        "resgate-de-animais-silvestres-8d94d14c": 1
+      }
+    },
+    {
+      "id": "n09",
+      "category": "natural",
+      "query": "onde posso comer de graça",
+      "relevant": {
+        "cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69": 3
+      }
+    },
+    {
+      "id": "n10",
+      "category": "natural",
+      "query": "pessoa morando na rua precisa de ajuda",
+      "relevant": {
+        "informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a": 3,
+        "atendimento-para-pessoas-vitimas-de-violencia-2edbfc24": 1
+      }
+    },
+    {
+      "id": "n11",
+      "category": "natural",
+      "query": "meu filho tem diabetes e precisa de insulina",
+      "relevant": {
+        "distribuicao-de-insumos-para-tratamento-de-7e3ea1a4": 3,
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 2
+      }
+    },
+    {
+      "id": "n12",
+      "category": "natural",
+      "query": "quero plantar uma árvore na praça do meu bairro",
+      "relevant": {
+        "solicitacao-de-plantio-de-arvore-em-area-publica-7b6c060b": 3,
+        "autorizacao-para-plantio-voluntario-de-arvore-em-87f4b222": 3
+      }
+    },
+    {
+      "id": "n13",
+      "category": "natural",
+      "query": "preciso estacionar perto do hospital sou idoso",
+      "relevant": {
+        "cartao-de-estacionamento-para-idosos-20239153": 3,
+        "cartao-de-estacionamento-para-pessoas-com-0f8fbe95": 1
+      }
+    },
+    {
+      "id": "n14",
+      "category": "natural",
+      "query": "sofri violência doméstica",
+      "relevant": {
+        "atendimento-para-pessoas-vitimas-de-violencia-2edbfc24": 3
+      }
+    },
+    {
+      "id": "n15",
+      "category": "natural",
+      "query": "como funciona transporte público no rio",
+      "relevant": {
+        "informacoes-sobre-transporte-publico-b42ba94d": 3
+      }
+    },
+    {
+      "id": "n16",
+      "category": "natural",
+      "query": "encontrei um bicho silvestre no quintal",
+      "relevant": {
+        "resgate-de-animais-silvestres-8d94d14c": 3
+      }
+    },
+    {
+      "id": "n17",
+      "category": "natural",
+      "query": "meu idoso pai precisa de benefício",
+      "relevant": {
+        "beneficio-de-prestacao-continuada-bpc-529f647a": 3,
+        "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 1
+      }
+    },
+    {
+      "id": "n18",
+      "category": "natural",
+      "query": "onde tem UPA aberta agora",
+      "relevant": {
+        "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2": 3,
+        "atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 2
+      }
+    },
+    {
+      "id": "n19",
+      "category": "natural",
+      "query": "quero voltar a estudar tenho 40 anos",
+      "relevant": {
+        "informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b": 3
+      }
+    },
+    {
+      "id": "n20",
+      "category": "natural",
+      "query": "preciso cortar árvore no meu terreno",
+      "relevant": {
+        "autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e": 3,
+        "poda-de-arvore-em-vias-publicas-6aa2fb75": 1
+      }
+    },
+    {
+      "id": "s01",
+      "category": "synonym",
+      "query": "boleto IPTU",
+      "relevant": {
+        "emissao-de-2-via-do-iptu-ce2b748c": 3,
+        "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2
+      }
+    },
+    {
+      "id": "s02",
+      "category": "synonym",
+      "query": "veterinário público gratuito",
+      "relevant": {
+        "atendimento-clinico-em-animais-8c9a32e8": 3,
+        "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 2
+      }
+    },
+    {
+      "id": "s03",
+      "category": "synonym",
+      "query": "receber SMS de chuva forte",
+      "relevant": {
+        "mensagens-de-alerta-da-defesa-civil-d074809e": 3
+      }
+    },
+    {
+      "id": "s04",
+      "category": "synonym",
+      "query": "contestar multa de carro",
+      "relevant": {
+        "multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4": 3,
+        "multa-de-transito-consulta-de-multa-1d76fc90": 2
+      }
+    },
+    {
+      "id": "s05",
+      "category": "synonym",
+      "query": "refeição gratuita para quem passa fome",
+      "relevant": {
+        "cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69": 3
+      }
+    },
+    {
+      "id": "s06",
+      "category": "synonym",
+      "query": "nota carioca emitir NFS-e",
+      "relevant": {
+        "iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 3
+      }
+    },
+    {
+      "id": "s07",
+      "category": "synonym",
+      "query": "chipagem e registro de animal",
+      "relevant": {
+        "cadastro-de-animais-no-sisbicho-b5ad2d27": 3,
+        "atendimento-clinico-em-animais-8c9a32e8": 1
+      }
+    },
+    {
+      "id": "s08",
+      "category": "synonym",
+      "query": "risco de desmoronamento no morro",
+      "relevant": {
+        "vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab": 3,
+        "mensagens-de-alerta-da-defesa-civil-d074809e": 1
+      }
+    },
+    {
+      "id": "s09",
+      "category": "synonym",
+      "query": "habite-se certidão imóvel legalizado",
+      "relevant": {
+        "certidao-de-habite-se-aceitacao-df83d300": 3
+      }
+    },
+    {
+      "id": "s10",
+      "category": "synonym",
+      "query": "ingresso grátis show teatro",
+      "relevant": {
+        "programa-cadeira-cativa-ingressos-gratuitos-db108a0c": 3
+      }
+    },
+    {
+      "id": "a01",
+      "category": "ambiguous",
+      "query": "ajuda financeira",
+      "relevant": {
+        "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 2,
+        "beneficio-de-prestacao-continuada-bpc-529f647a": 2,
+        "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 1
+      }
+    },
+    {
+      "id": "a02",
+      "category": "ambiguous",
+      "query": "problema na rua",
+      "relevant": {
+        "reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e": 2,
+        "limpeza-de-pracas-e-parques-0ecf3e30": 1,
+        "remocao-de-arvore-em-vias-publicas-54b06fd3": 1,
+        "poda-de-arvore-em-vias-publicas-6aa2fb75": 1,
+        "informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a": 1
+      }
+    },
+    {
+      "id": "a03",
+      "category": "ambiguous",
+      "query": "documentos da prefeitura",
+      "relevant": {
+        "certidao-de-habite-se-aceitacao-df83d300": 2,
+        "certidao-negativa-de-debito-nada-consta-439306e1": 2,
+        "iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 1,
+        "emissao-de-2-via-do-iptu-ce2b748c": 1
+      }
+    },
+    {
+      "id": "a04",
+      "category": "ambiguous",
+      "query": "emergência saúde",
+      "relevant": {
+        "atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 3,
+        "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2": 3,
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 2
+      }
+    },
+    {
+      "id": "a05",
+      "category": "ambiguous",
+      "query": "animal na rua",
+      "relevant": {
+        "resgate-de-animais-silvestres-8d94d14c": 2,
+        "vistoria-tecnica-em-local-onde-ha-maus-tratos-de-235db3c2": 1,
+        "atendimento-clinico-em-animais-8c9a32e8": 1,
+        "cadastro-de-animais-no-sisbicho-b5ad2d27": 1
+      }
+    },
+    {
+      "id": "a06",
+      "category": "ambiguous",
+      "query": "imposto",
+      "relevant": {
+        "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2,
+        "emissao-de-2-via-do-iptu-ce2b748c": 2,
+        "iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 2,
+        "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 2,
+        "certidao-negativa-de-debito-nada-consta-439306e1": 1
+      }
+    },
+    {
+      "id": "a07",
+      "category": "ambiguous",
+      "query": "escola para criança",
+      "relevant": {
+        "informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": 3,
+        "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 2,
+        "informacoes-sobre-merenda-escolar-146237e8": 2,
+        "informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b": 1
+      }
+    },
+    {
+      "id": "a08",
+      "category": "ambiguous",
+      "query": "limpeza da cidade",
+      "relevant": {
+        "limpeza-de-praias-99817f98": 2,
+        "limpeza-de-pracas-e-parques-0ecf3e30": 2,
+        "reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e": 1
+      }
+    },
+    {
+      "id": "a09",
+      "category": "ambiguous",
+      "query": "minha casa",
+      "relevant": {
+        "informacoes-sobre-cadastro-no-programa-minha-casa-401628a4": 3,
+        "vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab": 1
+      }
+    },
+    {
+      "id": "a10",
+      "category": "ambiguous",
+      "query": "cultura e lazer",
+      "relevant": {
+        "informacoes-sobre-bailes-populares-e-baile-da-011ce275": 2,
+        "programa-cadeira-cativa-ingressos-gratuitos-db108a0c": 2
+      }
+    },
+    {
+      "id": "e01",
+      "category": "edge",
+      "query": "carnaval rio de janeiro",
+      "relevant": {
+        "informacoes-sobre-bailes-populares-e-baile-da-011ce275": 3
+      }
+    },
+    {
+      "id": "e02",
+      "category": "edge",
+      "query": "como consigo moradia popular",
+      "relevant": {
+        "informacoes-sobre-cadastro-no-programa-minha-casa-401628a4": 3
+      }
+    },
+    {
+      "id": "e03",
+      "category": "edge",
+      "query": "preciso regularizar meu imóvel e pagar débitos",
+      "relevant": {
+        "certidao-de-habite-se-aceitacao-df83d300": 3,
+        "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 2,
+        "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 1
+      }
+    },
+    {
+      "id": "e04",
+      "category": "edge",
+      "query": "praia suja lixo na areia",
+      "relevant": {
+        "limpeza-de-praias-99817f98": 3
+      }
+    },
+    {
+      "id": "e05",
+      "category": "edge",
+      "query": "boletim escolar do meu filho",
+      "relevant": {
+        "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 3
+      }
+    },
+    {
+      "id": "e06",
+      "category": "edge",
+      "query": "posto de saude perto de mim",
+      "relevant": {
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 3,
+        "informacoes-sobre-vacinacao-humana-728a6848": 1
+      }
+    },
+    {
+      "id": "e07",
+      "category": "edge",
+      "query": "enxoval bebe gestante",
+      "relevant": {
+        "distribuicao-de-kit-enxoval-do-bebe-77f09458": 3,
+        "atendimento-em-maternidades-cffe0736": 2
+      }
+    },
+    {
+      "id": "e08",
+      "category": "edge",
+      "query": "ônibus metrô BRT como pagar",
+      "relevant": {
+        "informacoes-sobre-transporte-publico-b42ba94d": 3
+      }
+    },
+    {
+      "id": "e09",
+      "category": "edge",
+      "query": "parquinho praça publica sujo",
+      "relevant": {
+        "limpeza-de-pracas-e-parques-0ecf3e30": 3
+      }
+    },
+    {
+      "id": "e10",
+      "category": "edge",
+      "query": "nada consta servidor municipal",
+      "relevant": {
+        "certidao-negativa-de-debito-nada-consta-439306e1": 3
+      }
+    },
+    {
+      "id": "e11",
+      "category": "edge",
+      "query": "vacianção criança",
+      "relevant": {
+        "informacoes-sobre-vacinacao-humana-728a6848": 3
+      }
+    },
+    {
+      "id": "e12",
+      "category": "edge",
+      "query": "multta transito como recorrer",
+      "relevant": {
+        "multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4": 3,
+        "multa-de-transito-consulta-de-multa-1d76fc90": 2
+      }
+    },
+    {
+      "id": "e13",
+      "category": "edge",
+      "query": "tá caindo barreira no morro perto de casa",
+      "relevant": {
+        "vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab": 3,
+        "mensagens-de-alerta-da-defesa-civil-d074809e": 1
+      }
+    },
+    {
+      "id": "e14",
+      "category": "edge",
+      "query": "preciso de médico e remédio pra diabetes",
+      "relevant": {
+        "distribuicao-de-insumos-para-tratamento-de-7e3ea1a4": 3,
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 2
+      }
+    },
+    {
+      "id": "e15",
+      "category": "edge",
+      "query": "minha gata tá prenha quero castrar ela",
+      "relevant": {
+        "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 3,
+        "atendimento-clinico-em-animais-8c9a32e8": 1
+      }
+    },
+    {
+      "id": "a11",
+      "category": "ambiguous",
+      "query": "diabetes",
+      "relevant": {
+        "distribuicao-de-insumos-para-tratamento-de-7e3ea1a4": 3,
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 1
+      }
+    },
+    {
+      "id": "a12",
+      "category": "ambiguous",
+      "query": "BPC",
+      "relevant": {
+        "beneficio-de-prestacao-continuada-bpc-529f647a": 3
+      }
+    },
+    {
+      "id": "a13",
+      "category": "ambiguous",
+      "query": "cadê o postinho de saúde",
+      "relevant": {
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 3,
+        "informacoes-sobre-vacinacao-humana-728a6848": 1
+      }
+    },
+    {
+      "id": "neg01",
+      "category": "negative",
+      "query": "pizza delivery rio de janeiro",
+      "relevant": {}
+    },
+    {
+      "id": "neg02",
+      "category": "negative",
+      "query": "weather forecast tomorrow",
+      "relevant": {}
+    },
+    {
+      "id": "neg03",
+      "category": "negative",
+      "query": "comprar ingresso cinema shopping",
+      "relevant": {}
+    },
+    {
+      "id": "neg04",
+      "category": "negative",
+      "query": "receita de bolo de chocolate",
+      "relevant": {}
+    },
+    {
+      "id": "neg05",
+      "category": "negative",
+      "query": "horário do jogo do flamengo",
+      "relevant": {}
+    },
+    {
+      "id": "neg06",
+      "category": "negative",
+      "query": "como investir na bolsa de valores",
+      "relevant": {}
+    },
+    {
+      "id": "neg07",
+      "category": "negative",
+      "query": "alugar apartamento copacabana",
+      "relevant": {}
+    },
+    {
+      "id": "neg08",
+      "category": "negative",
+      "query": "uber preço corrida centro do rio",
+      "relevant": {}
+    },
+    {
+      "id": "neg09",
+      "category": "negative",
+      "query": "resultado do jogo do bicho hoje",
+      "relevant": {}
+    },
+    {
+      "id": "neg10",
+      "category": "negative",
+      "query": "Netflix não funciona no meu celular",
+      "relevant": {}
+    },
+    {
+      "id": "neg11",
+      "category": "negative",
+      "query": "passagem de avião barata Rio São Paulo",
+      "relevant": {}
+    },
+    {
+      "id": "neg12",
+      "category": "negative",
+      "query": "como fazer pão de queijo caseiro",
+      "relevant": {}
+    },
+    {
+      "id": "neg13",
+      "category": "negative",
+      "query": "preço da gasolina hoje no rio de janeiro",
+      "relevant": {}
+    },
+    {
+      "id": "neg14",
+      "category": "negative",
+      "query": "transferência Pix pelo aplicativo do banco",
+      "relevant": {}
+    },
+    {
+      "id": "neg15",
+      "category": "negative",
+      "query": "INSS como dar entrada na aposentadoria",
+      "relevant": {}
+    },
+    {
+      "id": "x01",
+      "category": "natural",
+      "query": "cachorro precisa de vacina",
+      "relevant": {
+        "atendimento-clinico-em-animais-8c9a32e8": 3,
+        "cadastro-de-animais-no-sisbicho-b5ad2d27": 1
+      }
+    },
+    {
+      "id": "x02",
+      "category": "synonym",
+      "query": "onde castrar gato de graça",
+      "relevant": {
+        "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 3,
+        "cadastro-de-animais-no-sisbicho-b5ad2d27": 1
+      }
+    },
+    {
+      "id": "x03",
+      "category": "natural",
+      "query": "denunciar vizinho que bate no cachorro",
+      "relevant": {
+        "vistoria-tecnica-em-local-onde-ha-maus-tratos-de-235db3c2": 3
+      }
+    },
+    {
+      "id": "x04",
+      "category": "synonym",
+      "query": "quero registrar meu pet",
+      "relevant": {
+        "cadastro-de-animais-no-sisbicho-b5ad2d27": 3
+      }
+    },
+    {
+      "id": "x05",
+      "category": "synonym",
+      "query": "clinica veterinaria da prefeitura",
+      "relevant": {
+        "atendimento-clinico-em-animais-8c9a32e8": 3,
+        "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 1
+      }
+    },
+    {
+      "id": "x06",
+      "category": "natural",
+      "query": "to com febre e dor de garganta",
+      "relevant": {
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 3,
+        "atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 2,
+        "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2": 2
+      }
+    },
+    {
+      "id": "x07",
+      "category": "natural",
+      "query": "preciso de insulina urgente",
+      "relevant": {
+        "distribuicao-de-insumos-para-tratamento-de-7e3ea1a4": 3,
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 1
+      }
+    },
+    {
+      "id": "x08",
+      "category": "natural",
+      "query": "minha mae precisa de hospital de emergencia",
+      "relevant": {
+        "atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 3,
+        "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2": 2
+      }
+    },
+    {
+      "id": "x09",
+      "category": "natural",
+      "query": "onde tomar vacina de covid no rio",
+      "relevant": {
+        "informacoes-sobre-vacinacao-humana-728a6848": 3,
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 1
+      }
+    },
+    {
+      "id": "x10",
+      "category": "synonym",
+      "query": "quero largar o cigarro",
+      "relevant": {
+        "inscricao-em-programa-de-tratamento-antitabagismo-00116adc": 3
+      }
+    },
+    {
+      "id": "x11",
+      "category": "synonym",
+      "query": "enxoval gratuito pra gestante",
+      "relevant": {
+        "distribuicao-de-kit-enxoval-do-bebe-77f09458": 3,
+        "atendimento-em-maternidades-cffe0736": 2
+      }
+    },
+    {
+      "id": "x12",
+      "category": "synonym",
+      "query": "clinica da familia mais perto",
+      "relevant": {
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 3
+      }
+    },
+    {
+      "id": "x13",
+      "category": "synonym",
+      "query": "upa aberta de madrugada",
+      "relevant": {
+        "atendimento-em-unidades-de-pronto-atendimento-upa-362ec1a2": 3,
+        "atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 2
+      }
+    },
+    {
+      "id": "x14",
+      "category": "natural",
+      "query": "tem dengue no meu quintal",
+      "relevant": {
+        "vistoria-em-foco-de-aedes-aegypti-dengue-d2b9b06d": 3
+      }
+    },
+    {
+      "id": "x15",
+      "category": "natural",
+      "query": "matricular meu filho na escola publica",
+      "relevant": {
+        "informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": 3,
+        "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 1
+      }
+    },
+    {
+      "id": "x16",
+      "category": "synonym",
+      "query": "merenda escola municipal cardapio",
+      "relevant": {
+        "informacoes-sobre-merenda-escolar-146237e8": 3
+      }
+    },
+    {
+      "id": "x17",
+      "category": "synonym",
+      "query": "boletim notas aluno escola",
+      "relevant": {
+        "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 3
+      }
+    },
+    {
+      "id": "x18",
+      "category": "synonym",
+      "query": "supletivo para adulto",
+      "relevant": {
+        "informacoes-sobre-educacao-de-jovens-e-adultos-eja-901bf85b": 3
+      }
+    },
+    {
+      "id": "x19",
+      "category": "synonym",
+      "query": "imprimir carnê do IPTU",
+      "relevant": {
+        "emissao-de-2-via-do-iptu-ce2b748c": 3,
+        "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 1
+      }
+    },
+    {
+      "id": "x20",
+      "category": "synonym",
+      "query": "parcelar divida com a prefeitura",
+      "relevant": {
+        "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 3
+      }
+    },
+    {
+      "id": "x21",
+      "category": "synonym",
+      "query": "consultar pagamento IPTU",
+      "relevant": {
+        "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 3,
+        "emissao-de-2-via-do-iptu-ce2b748c": 1
+      }
+    },
+    {
+      "id": "x22",
+      "category": "synonym",
+      "query": "emitir nota fiscal serviço",
+      "relevant": {
+        "iss-emissao-de-nota-fiscal-eletronica-nota-carioca-ae26465c": 3
+      }
+    },
+    {
+      "id": "x23",
+      "category": "synonym",
+      "query": "como contestar multa de transito",
+      "relevant": {
+        "multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4": 3,
+        "multa-de-transito-consulta-de-multa-1d76fc90": 2
+      }
+    },
+    {
+      "id": "x24",
+      "category": "natural",
+      "query": "vaga de estacionamento pra idoso",
+      "relevant": {
+        "cartao-de-estacionamento-para-idosos-20239153": 3,
+        "cartao-de-estacionamento-para-pessoas-com-0f8fbe95": 1
+      }
+    },
+    {
+      "id": "x25",
+      "category": "synonym",
+      "query": "cartao pcd estacionamento",
+      "relevant": {
+        "cartao-de-estacionamento-para-pessoas-com-0f8fbe95": 3,
+        "cartao-de-estacionamento-para-idosos-20239153": 1
+      }
+    },
+    {
+      "id": "x26",
+      "category": "natural",
+      "query": "como funciona o BRT VLT no rio",
+      "relevant": {
+        "informacoes-sobre-transporte-publico-b42ba94d": 3
+      }
+    },
+    {
+      "id": "x27",
+      "category": "natural",
+      "query": "multa radar velocidade",
+      "relevant": {
+        "multa-de-transito-consulta-de-multa-1d76fc90": 3,
+        "multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4": 2
+      }
+    },
+    {
+      "id": "x28",
+      "category": "natural",
+      "query": "minha rua ta cheia de buraco",
+      "relevant": {
+        "reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e": 3
+      }
+    },
+    {
+      "id": "x29",
+      "category": "natural",
+      "query": "lixo na praia de copacabana",
+      "relevant": {
+        "limpeza-de-praias-99817f98": 3
+      }
+    },
+    {
+      "id": "x30",
+      "category": "synonym",
+      "query": "terra cedendo no morro",
+      "relevant": {
+        "vistoria-em-ameaca-de-deslizamento-de-barreira-79fd0aab": 3,
+        "mensagens-de-alerta-da-defesa-civil-d074809e": 1
+      }
+    },
+    {
+      "id": "x31",
+      "category": "synonym",
+      "query": "habite-se do meu predio",
+      "relevant": {
+        "certidao-de-habite-se-aceitacao-df83d300": 3
+      }
+    },
+    {
+      "id": "x32",
+      "category": "natural",
+      "query": "como entrar no minha casa minha vida",
+      "relevant": {
+        "informacoes-sobre-cadastro-no-programa-minha-casa-401628a4": 3
+      }
+    },
+    {
+      "id": "x33",
+      "category": "natural",
+      "query": "praça suja cheia de mato",
+      "relevant": {
+        "limpeza-de-pracas-e-parques-0ecf3e30": 3
+      }
+    },
+    {
+      "id": "x34",
+      "category": "natural",
+      "query": "to desempregado preciso de trabalho",
+      "relevant": {
+        "consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6": 3,
+        "inclusao-de-pessoas-com-deficiencia-no-mercado-de-2b6c31d8": 1
+      }
+    },
+    {
+      "id": "x35",
+      "category": "synonym",
+      "query": "emprego pra deficiente",
+      "relevant": {
+        "inclusao-de-pessoas-com-deficiencia-no-mercado-de-2b6c31d8": 3,
+        "consulta-e-encaminhamento-para-vagas-de-emprego-a8a12ae6": 2
+      }
+    },
+    {
+      "id": "x36",
+      "category": "natural",
+      "query": "morador de rua sem abrigo",
+      "relevant": {
+        "informacoes-sobre-acoes-de-acolhimento-a-pessoas-8aaba05a": 3,
+        "cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69": 1
+      }
+    },
+    {
+      "id": "x37",
+      "category": "synonym",
+      "query": "comida de graça pra quem precisa",
+      "relevant": {
+        "cadastro-para-acesso-as-cozinhas-comunitarias-042e8b69": 3,
+        "informacoes-sobre-merenda-escolar-146237e8": 1
+      }
+    },
+    {
+      "id": "x38",
+      "category": "natural",
+      "query": "apanho do meu marido preciso de ajuda",
+      "relevant": {
+        "atendimento-para-pessoas-vitimas-de-violencia-2edbfc24": 3
+      }
+    },
+    {
+      "id": "x39",
+      "category": "synonym",
+      "query": "como pedir o BPC LOAS",
+      "relevant": {
+        "beneficio-de-prestacao-continuada-bpc-529f647a": 3
+      }
+    },
+    {
+      "id": "x40",
+      "category": "synonym",
+      "query": "bolsa familia como cadastrar",
+      "relevant": {
+        "informacoes-sobre-o-programa-bolsa-familia-4547c2ba": 3
+      }
+    },
+    {
+      "id": "x41",
+      "category": "natural",
+      "query": "arvore quebrando a calçada quero remover",
+      "relevant": {
+        "remocao-de-arvore-em-vias-publicas-54b06fd3": 3,
+        "poda-de-arvore-em-vias-publicas-6aa2fb75": 2,
+        "autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e": 1
+      }
+    },
+    {
+      "id": "x42",
+      "category": "natural",
+      "query": "quero plantar arvore na minha calçada",
+      "relevant": {
+        "solicitacao-de-plantio-de-arvore-em-area-publica-7b6c060b": 3,
+        "autorizacao-para-plantio-voluntario-de-arvore-em-87f4b222": 2
+      }
+    },
+    {
+      "id": "x43",
+      "category": "natural",
+      "query": "poda de arvore no meu quintal",
+      "relevant": {
+        "autorizacao-de-poda-ou-remocao-de-arvore-em-area-cf2c193e": 3,
+        "poda-de-arvore-em-vias-publicas-6aa2fb75": 1
+      }
+    },
+    {
+      "id": "x44",
+      "category": "natural",
+      "query": "cobra no quintal bicho silvestre",
+      "relevant": {
+        "resgate-de-animais-silvestres-8d94d14c": 3
+      }
+    },
+    {
+      "id": "x45",
+      "category": "natural",
+      "query": "ingresso teatro de graça pra escola",
+      "relevant": {
+        "programa-cadeira-cativa-ingressos-gratuitos-db108a0c": 3
+      }
+    },
+    {
+      "id": "x46",
+      "category": "synonym",
+      "query": "baile de carnaval da prefeitura",
+      "relevant": {
+        "informacoes-sobre-bailes-populares-e-baile-da-011ce275": 3
+      }
+    },
+    {
+      "id": "x47",
+      "category": "synonym",
+      "query": "alerta de chuva forte temporal",
+      "relevant": {
+        "mensagens-de-alerta-da-defesa-civil-d074809e": 3
+      }
+    },
+    {
+      "id": "x48",
+      "category": "synonym",
+      "query": "certidao nada consta servidor publico",
+      "relevant": {
+        "certidao-negativa-de-debito-nada-consta-439306e1": 3
+      }
+    },
+    {
+      "id": "x49",
+      "category": "edge",
+      "query": "castrasão de gato",
+      "relevant": {
+        "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 3,
+        "cadastro-de-animais-no-sisbicho-b5ad2d27": 1
+      }
+    },
+    {
+      "id": "x50",
+      "category": "edge",
+      "query": "segunnda via iptu",
+      "relevant": {
+        "emissao-de-2-via-do-iptu-ce2b748c": 3,
+        "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2
+      }
+    },
+    {
+      "id": "x51",
+      "category": "edge",
+      "query": "matrcula escola muncipal",
+      "relevant": {
+        "informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": 3,
+        "informacoes-sobre-merenda-escolar-146237e8": 1
+      }
+    },
+    {
+      "id": "x52",
+      "category": "edge",
+      "query": "boleto do iptu atrazado",
+      "relevant": {
+        "emissao-de-2-via-do-iptu-ce2b748c": 3,
+        "iptu-consulta-a-pagamentos-e-debito-automatico-b175364b": 2,
+        "parcelamento-de-debitos-em-divida-ativa-6ba1f0f4": 1
+      }
+    },
+    {
+      "id": "x53",
+      "category": "edge",
+      "query": "muulta de transito",
+      "relevant": {
+        "multa-de-transito-consulta-de-multa-1d76fc90": 3,
+        "multa-de-transito-defesa-previa-de-autuacao-1ea5bbe4": 2
+      }
+    },
+    {
+      "id": "x54",
+      "category": "edge",
+      "query": "preciso de hospital e remedio pra diabetes",
+      "relevant": {
+        "distribuicao-de-insumos-para-tratamento-de-7e3ea1a4": 3,
+        "atendimento-em-hospitais-de-emergencia-e-pronto-78384051": 2,
+        "atendimento-em-unidades-de-atencao-primaria-em-2f6e4910": 1
+      }
+    },
+    {
+      "id": "x55",
+      "category": "edge",
+      "query": "quero castrar meu cachorro e registrar ele",
+      "relevant": {
+        "castracao-gratuita-de-caes-e-gatos-programa-bicho-797d5e5f": 3,
+        "cadastro-de-animais-no-sisbicho-b5ad2d27": 3
+      }
+    },
+    {
+      "id": "x56",
+      "category": "edge",
+      "query": "matricula da escola e merenda do meu filho",
+      "relevant": {
+        "informacoes-sobre-matricula-na-rede-municipal-2026-6c635361": 3,
+        "informacoes-sobre-merenda-escolar-146237e8": 3,
+        "inclusao-de-aluno-para-acompanhamento-escolar-b1ed4c9e": 1
+      }
+    },
+    {
+      "id": "x57",
+      "category": "edge",
+      "query": "pqp tem um buraco enorme na minha rua",
+      "relevant": {
+        "reparo-de-buraco-deformacao-ou-afundamento-na-0a5c9f7e": 3
+      }
+    },
+    {
+      "id": "x58",
+      "category": "natural",
+      "query": "quem que eu ligo pra chuva forte",
+      "relevant": {
+        "mensagens-de-alerta-da-defesa-civil-d074809e": 3
+      }
+    },
+    {
+      "id": "x59",
+      "category": "natural",
+      "query": "cadê a vaga pra velho estacionar",
+      "relevant": {
+        "cartao-de-estacionamento-para-idosos-20239153": 3,
+        "cartao-de-estacionamento-para-pessoas-com-0f8fbe95": 1
+      }
+    },
+    {
+      "id": "x60",
+      "category": "natural",
+      "query": "to grávida de 8 meses",
+      "relevant": {
+        "atendimento-em-maternidades-cffe0736": 3,
+        "distribuicao-de-kit-enxoval-do-bebe-77f09458": 2
+      }
+    },
+    {
+      "id": "xn01",
+      "category": "negative",
+      "query": "como abrir conta no nubank",
+      "relevant": {}
+    },
+    {
+      "id": "xn02",
+      "category": "negative",
+      "query": "resultado do enem 2025",
+      "relevant": {}
+    },
+    {
+      "id": "xn03",
+      "category": "negative",
+      "query": "plano de saude unimed",
+      "relevant": {}
+    },
+    {
+      "id": "xn04",
+      "category": "negative",
+      "query": "reserva hotel copacabana",
+      "relevant": {}
+    }
   ]
 }

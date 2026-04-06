@@ -39,7 +39,6 @@ class SearchResult(BaseModel):
     score: float
     bm25_score: float | None = None
     semantic_score: float | None = None
-    reranker_score: float | None = None
     match_reason: str | None = None
 
 

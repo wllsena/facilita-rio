@@ -8,8 +8,7 @@ import structlog
 from unidecode import unidecode
 
 from app.config import CONFIG
-from app.indexing.bm25_index import PT_STOPWORDS
-from app.models import RerankResult, SearchResponse, SearchResult, Service
+from app.models import SearchResponse, SearchResult, Service
 from app.recommendation.recommender import Recommender
 from app.search.hybrid import HybridRetriever
 from app.search.query_processor import enrich_query_with_llm, expand_query
@@ -36,76 +35,45 @@ class SearchPipeline:
     def _suggest_queries(
         query: str, results: list[SearchResult], low_confidence: bool,
     ) -> list[str]:
-        if not results:
+        if not results or (not low_confidence and len(query.split()) > 2):
             return []
-
-        query_lower = unidecode(query.lower().strip())
-        query_words = set(query_lower.split())
-        is_short = len(query_words) <= 2
-
-        if not low_confidence and not is_short:
-            return []
-
-        suggestions: list[str] = []
         seen: set[str] = set()
-
+        suggestions: list[str] = []
         for r in results[:5]:
-            name_norm = unidecode(r.service.nome.lower().strip())
-            if len(query_words & set(name_norm.split())) >= len(query_words) and not low_confidence:
-                continue
-            if name_norm not in seen:
-                suggestions.append(r.service.nome)
-                seen.add(name_norm)
-            if is_short and r.service.tema:
-                cat_suggestion = f"{query} ({r.service.tema.lower()})"
-                cat_norm = unidecode(cat_suggestion.lower())
-                if cat_norm not in seen:
-                    suggestions.append(cat_suggestion)
-                    seen.add(cat_norm)
+            name = r.service.nome
+            if unidecode(name.lower()) not in seen:
+                seen.add(unidecode(name.lower()))
+                suggestions.append(name)
             if len(suggestions) >= 3:
                 break
-
-        return suggestions[:3]
+        return suggestions
 
     @staticmethod
-    def _explain_match(r: RerankResult, service: Service, query: str) -> str:
-        query_words = set(unidecode(query.lower()).split())
-        name_words = set(unidecode(service.nome.lower()).split())
-
+    def _explain_match(service: Service, semantic_score: float | None) -> str:
         parts = []
-        overlap = query_words & name_words - PT_STOPWORDS
-        if overlap:
-            parts.append(f"nome contém '{' '.join(sorted(overlap))}'")
-
-        semantic = r.semantic_score or 0
-        if semantic >= 0.90:
-            parts.append(f"similaridade semântica alta ({semantic:.0%})")
-        elif semantic >= 0.85:
-            parts.append(f"similaridade semântica ({semantic:.0%})")
-
-        if (r.bm25_score or 0) > 0 and not overlap:
-            parts.append("palavras-chave encontradas na descrição")
-
+        if semantic_score and semantic_score >= 0.85:
+            parts.append(f"similaridade {semantic_score:.0%}")
         if service.tema:
-            parts.append(f"categoria: {service.tema}")
-
-        return "; ".join(parts) if parts else "serviço relacionado à busca"
+            parts.append(service.tema)
+        return " · ".join(parts) if parts else ""
 
     async def execute(self, query: str, top_k: int = 10) -> SearchResponse:
         t0 = time.time()
         debug_info: dict = {}
 
         expanded_query = expand_query(query)
+        if expanded_query != query:
+            debug_info["expanded_query"] = expanded_query
 
         intent = ""
         if CONFIG.llm_enabled:
             enrichment = await enrich_query_with_llm(query)
             if enrichment["expanded"] != query:
                 expanded_query = enrichment["expanded"]
+                debug_info["expanded_query"] = expanded_query
             intent = enrichment["intent"]
             if intent:
                 debug_info["intent"] = intent
-                debug_info["expanded_query"] = expanded_query
 
         candidates = self._retriever.search(query, expanded_query=expanded_query, top_k=top_k * 2)
         max_sem = max((c.semantic_score for c in candidates if c.semantic_score is not None), default=None)
@@ -126,8 +94,7 @@ class SearchPipeline:
                     score=round(r.blended_score, 4),
                     bm25_score=round(r.bm25_score, 4) if r.bm25_score is not None else None,
                     semantic_score=round(r.semantic_score, 4) if r.semantic_score is not None else None,
-                    reranker_score=round(r.blended_score, 4),
-                    match_reason=self._explain_match(r, service, query),
+                    match_reason=self._explain_match(service, r.semantic_score),
                 ))
 
         result_ids = [r.service.id for r in results]

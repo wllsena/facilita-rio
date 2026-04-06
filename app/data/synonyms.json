@@ -190,11 +190,13 @@
     },
     {
       "pattern": "vacina",
-      "expansion": "vacinacao humana imunizacao campanha dose calendario vacinal"
+      "expansion": "vacinacao humana imunizacao campanha dose calendario vacinal",
+      "anti_patterns": ["cachorro", "gato", "animal", "pet", "cao", "caes", "veterinari"]
     },
     {
       "pattern": "vacinacao",
-      "expansion": "vacinacao humana imunizacao campanha dose calendario vacinal"
+      "expansion": "vacinacao humana imunizacao campanha dose calendario vacinal",
+      "anti_patterns": ["cachorro", "gato", "animal", "pet", "cao", "caes", "veterinari"]
     },
     {
       "pattern": "imunizacao",
@@ -884,7 +886,8 @@
     },
     {
       "pattern": "sou idoso",
-      "expansion": "beneficio prestacao continuada bpc idoso assistencia"
+      "expansion": "beneficio prestacao continuada bpc idoso assistencia",
+      "anti_patterns": ["estacionar", "estacionamento", "carro", "vaga", "transporte", "onibus"]
     },
     {
       "pattern": "nao consigo trabalhar",
@@ -1021,6 +1024,87 @@
     {
       "pattern": "meio ambiente",
       "expansion": "arvore poda plantio praia limpeza remocao area publica"
+    },
+    {
+      "pattern": "gravida",
+      "expansion": "maternidade parto pre-natal gestante atendimento",
+      "anti_patterns": ["animal", "gata", "cadela"]
+    },
+    {
+      "pattern": "gravidez",
+      "expansion": "maternidade parto pre-natal gestante atendimento"
+    },
+    {
+      "pattern": "gestante",
+      "expansion": "maternidade parto pre-natal atendimento"
+    },
+    {
+      "pattern": "desmoronamento",
+      "expansion": "deslizamento barreira encosta vistoria defesa civil"
+    },
+    {
+      "pattern": "desmoronar",
+      "expansion": "deslizamento barreira encosta vistoria defesa civil"
+    },
+    {
+      "pattern": "desabamento",
+      "expansion": "deslizamento barreira encosta vistoria defesa civil"
+    },
+    {
+      "pattern": "vacianc",
+      "expansion": "vacinacao vacina saude"
+    },
+    {
+      "pattern": "parquinho",
+      "expansion": "praca parque limpeza"
+    },
+    {
+      "pattern": "carnaval",
+      "expansion": "baile popular cinelandia evento riotur"
+    },
+    {
+      "pattern": "terra cedendo",
+      "expansion": "deslizamento barreira encosta vistoria defesa civil"
+    },
+    {
+      "pattern": "comida de graca",
+      "expansion": "cozinha comunitaria alimentacao refeicao"
+    },
+    {
+      "pattern": "comida gratuita",
+      "expansion": "cozinha comunitaria alimentacao refeicao"
+    },
+    {
+      "pattern": "apanho",
+      "expansion": "violencia vitima atendimento mulher agressao"
+    },
+    {
+      "pattern": "espancamento",
+      "expansion": "violencia vitima atendimento agressao"
+    },
+    {
+      "pattern": "agredida",
+      "expansion": "violencia vitima atendimento mulher"
+    },
+    {
+      "pattern": "agredido",
+      "expansion": "violencia vitima atendimento"
+    },
+    {
+      "pattern": "me bate",
+      "expansion": "violencia vitima atendimento mulher agressao"
+    },
+    {
+      "pattern": "cachorro vacina",
+      "expansion": "atendimento clinico animais veterinario"
+    },
+    {
+      "pattern": "gato vacina",
+      "expansion": "atendimento clinico animais veterinario"
+    },
+    {
+      "pattern": "pet vacina",
+      "expansion": "atendimento clinico animais veterinario"
     }
   ]
 }

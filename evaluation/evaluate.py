@@ -7,7 +7,7 @@ from pathlib import Path
 
 from ranx import compare
 
-from app.observability.logging import setup_logging
+from app.observability import setup_logging
 
 from .ce_sweep import sweep_ce_weight
 from .failure_analysis import analyze_failures
@@ -15,6 +15,7 @@ from .holdout import evaluate_holdout
 from .latency import benchmark_latency
 from .popular import evaluate_popular_queries
 from .recommendations import evaluate_recommendations
+from .semantic_weight_sweep import sweep_semantic_weight
 from .shared import build_shared_components
 from .variants import METRICS, evaluate_variant
 
@@ -65,6 +66,9 @@ def main():
 
     ce_sweep_results = sweep_ce_weight(shared=shared)
     all_results["ce_sweep"] = ce_sweep_results
+
+    sem_sweep_results = sweep_semantic_weight(shared=shared)
+    all_results["semantic_weight_sweep"] = sem_sweep_results
 
     # Save results
     results_path = Path(__file__).parent / "results" / "evaluation_results.json"

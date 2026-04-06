@@ -12,20 +12,20 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from prometheus_fastapi_instrumentator import Instrumentator
 
-from app.config import DATA_PATH
+from app.config import CONFIG, DATA_PATH
 from app.indexing.bm25_index import BM25Index
 from app.indexing.cluster_builder import ClusterIndex
 from app.indexing.loader import load_services
 from app.indexing.vector_index import VectorIndex
 from app.models import SearchResponse
-from app.observability.logging import setup_logging
-from app.observability.metrics import (
+from app.observability import (
     CACHE_HITS,
     INDEX_SIZE,
     RERANKER_LATENCY,
     SEARCH_LATENCY,
     SEARCH_REQUESTS,
     SEARCH_RESULT_COUNT,
+    setup_logging,
 )
 from app.recommendation.recommender import Recommender
 from app.search.hybrid import HybridRetriever
@@ -63,7 +63,7 @@ async def lifespan(app: FastAPI):
     logger.info("shutdown")
 
 
-app = FastAPI(title="facilita Rio", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title=CONFIG.app_title, version="0.1.0", lifespan=lifespan)
 Instrumentator().instrument(app).expose(app)
 
 static_dir = Path(__file__).parent / "static"
