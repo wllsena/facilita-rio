@@ -27,6 +27,10 @@ jobs:
       - name: Tests
         run: pytest tests/ -x -q --timeout=120
 
+  # Legacy EC2 deploy via SSH. Kept until the Hostinger cutover is verified
+  # stable, then drop this job (and the EC2_* secrets, ~/deploy.sh on the
+  # box, /etc/nginx/sites-enabled/facilita-rio.com, certbot certs) per the
+  # decommission steps in deployer/docs/adding-a-project.md.
   deploy:
     needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -39,3 +43,65 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: bash ~/deploy.sh
+
+  # Hostinger publish via GHCR. The deployer (~/Code/deployer, also at
+  # github.com/wllsena/deployer) is the local-shell equivalent: same
+  # buildx flags, same `:main` + `:<sha>` tag pair, same `:buildcache`
+  # registry cache. CI here exists so a `git push origin main` cuts a
+  # fresh image without keeping the laptop busy for ~13 min on QEMU.
+  hostinger-publish:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build + push to GHCR (linux/amd64, registry cache)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/wllsena/facilita-rio:${{ github.sha }}
+            ghcr.io/wllsena/facilita-rio:main
+          cache-from: type=registry,ref=ghcr.io/wllsena/facilita-rio:buildcache
+          # mode=max keeps every intermediate stage cacheable so a code-only
+          # change skips `pip install` (~263s on QEMU) and the model download
+          # (~65s) on the next push to main.
+          cache-to: type=registry,ref=ghcr.io/wllsena/facilita-rio:buildcache,mode=max
+
+      - name: Comment commit with Hostinger deploy hint
+        uses: actions/github-script@v7
+        env:
+          IMAGE_REGISTRY: ghcr.io/wllsena/facilita-rio
+        with:
+          script: |
+            const sha = context.sha;
+            const reg = process.env.IMAGE_REGISTRY;
+            const body = [
+              `**hostinger:** pushed \`${reg}:${sha}\`.`,
+              ``,
+              `Hostinger Gerenciador → \`facilita-rio\` stack → Ambiente,`,
+              `set \`IMAGE_TAG=${sha}\`, save, click Implantar.`,
+            ].join("\n");
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body,
+            });
