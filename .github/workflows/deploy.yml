@@ -6,6 +6,14 @@ on:
   pull_request:
     branches: [main]
 
+# Workflow-level permissions match lifttally's pattern. `contents: write`
+# is required so `hostinger-publish` can post a commit comment with the
+# deploy hint; `packages: write` is required so the GITHUB_TOKEN-backed
+# docker login can push to ghcr.io/wllsena/facilita-rio.
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -44,18 +52,16 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: bash ~/deploy.sh
 
-  # Hostinger publish via GHCR. The deployer (~/Code/deployer, also at
-  # github.com/wllsena/deployer) is the local-shell equivalent: same
-  # buildx flags, same `:main` + `:<sha>` tag pair, same `:buildcache`
-  # registry cache. CI here exists so a `git push origin main` cuts a
-  # fresh image without keeping the laptop busy for ~13 min on QEMU.
+  # Hostinger publish via GHCR. Mirrors lifttally/.github/workflows/deploy.yml's
+  # publish-images job: GITHUB_TOKEN-backed docker login, type=gha buildx
+  # cache (NOT type=registry — registry-cache `cache-from` against a
+  # not-yet-existing :buildcache tag returns 403 from GHCR for unauthenticated
+  # reads, killing the build on a fresh repo). Local `make ship` from the
+  # deployer can keep using registry cache because it has a long-lived PAT.
   hostinger-publish:
     needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -69,7 +75,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build + push to GHCR (linux/amd64, registry cache)
+      - name: Build + push to GHCR (linux/amd64, GHA cache)
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -79,11 +85,11 @@ jobs:
           tags: |
             ghcr.io/wllsena/facilita-rio:${{ github.sha }}
             ghcr.io/wllsena/facilita-rio:main
-          cache-from: type=registry,ref=ghcr.io/wllsena/facilita-rio:buildcache
-          # mode=max keeps every intermediate stage cacheable so a code-only
-          # change skips `pip install` (~263s on QEMU) and the model download
-          # (~65s) on the next push to main.
-          cache-to: type=registry,ref=ghcr.io/wllsena/facilita-rio:buildcache,mode=max
+          # type=gha keeps unchanged layers (apt install, pip install, model
+          # download) cacheable across runs without requiring a registry
+          # round-trip. Scoped per project so other repos don't evict this one.
+          cache-from: type=gha,scope=prod-facilita-rio
+          cache-to: type=gha,mode=max,scope=prod-facilita-rio
 
       - name: Comment commit with Hostinger deploy hint
         uses: actions/github-script@v7
