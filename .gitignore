@@ -23,14 +23,15 @@ htmlcov/
 *~
 evaluation/results/*.json
 htmlcov/
+
+# >>> agent-md (managed; do not edit by hand) >>>
 AGENTS.md
 CLAUDE.md
-.claude/CLAUDE.md
-.claude/hooks/review-before-commit.py
 .claude/settings.local.json
 .codex/hooks.json
 .codex/rules/default.rules
 .make/shared.mk
+.agent-md-version
 .claude/skills/prompt-architect
 .agents/skills/prompt-architect
 .claude/skills/skill-author
@@ -59,3 +60,16 @@ CLAUDE.md
 .agents/skills/rewrite-agents-md
 .claude/skills/rewrite-doc
 .agents/skills/rewrite-doc
+.claude/skills/prompt-tune
+.agents/skills/prompt-tune
+.claude/skills/research-pass
+.agents/skills/research-pass
+.claude/skills/propose-skill
+.agents/skills/propose-skill
+.claude/skills/harness-refresh
+.agents/skills/harness-refresh
+.claude/skills/archive-skill
+.agents/skills/archive-skill
+.claude/skills/deep-research-prompt
+.agents/skills/deep-research-prompt
+# <<< agent-md <<<
